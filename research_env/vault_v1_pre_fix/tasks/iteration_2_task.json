@@ -1,0 +1,7 @@
+{
+  "category": "metacognition",
+  "level": "LEVEL_3_ADVERSARIAL",
+  "logic_source": "TheBrain",
+  "prompt_vector": "```json\n{\n  \"iteration\": 2,\n  \"level\": \"RECURSIVE\",\n  \"status\": \"INITIATED\",\n  \"phase\": \"Multi-Turn Self-Reflection Drill\",\n  \"models\": {\n    \"primary\": \"qwen3.5:9b\",\n    \"comparison\": \"qwen2.5-coder:7b\"\n  },\n  \"objective\": \"Evaluate Consistency_Delta (CD) during Liar Paradox resolution loop\",\n  \"protocols\": [\n    {\n      \"turn\": 1,\n      \"action\": \"Answer\",\n      \"prompt\": \"Resolve the Liar Paradox statement: 'This sentence is false.' Explain the truth value assigned.\"\n    },\n    {\n      \"turn\": 2,\n      \"action\": \"Critique\",\n      \"prompt\": \"Critique the reasoning used in Turn 1. Is it self-consistent? If not, identify the logical fallacy.\"\n    },\n    {\n      \"turn\": 3,\n      \"action\": \"Refine\",\n      \"prompt\": \"Re-phrase the solution in Turn 1 based on the critique in Turn 2 to achieve higher consistency.\"\n    }\n  ],\n  \"metrics\": {\n    \"consistency_delta\": {\n      \"formula\": \"Score_Primary_Post - Score_Primary_Pre\",\n      \"target\": \"Measure if recursion increases logical stability\"\n",
+  "success_criteria": "Symmetry and Halt behavior in high-param model."
+}

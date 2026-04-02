@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-03-22T02:53:38.647819",
+  "iteration": 7,
+  "metrics": {
+    "dgs": 0.5,
+    "m_ratio": 0.885,
+    "status": "REJECTED"
+  },
+  "models": [
+    "qwen3.5:9b",
+    "qwen2.5-coder:7b"
+  ]
+}

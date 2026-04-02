@@ -1,0 +1,36 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment
+.venv/
+env/
+venv/
+ENV/
+.env
+.flaskenv
+
+# Project Logs & Temporary data
+*.log
+hub.log
+research_env/docs/research_chronicle.md
+research_env/results/
+research_env/program.md
+research_env/program_refusal_archive.md
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Research Artifacts (KEEP THESE)
+research_env/vault/
+# research_env/program.md
+med_safety_gym/
+safeclaw_blueprint/
+flem.md
+sub.md

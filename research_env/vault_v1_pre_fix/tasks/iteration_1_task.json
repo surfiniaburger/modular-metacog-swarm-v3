@@ -1,0 +1,7 @@
+{
+  "category": "metacognition",
+  "level": "LEVEL_3_ADVERSARIAL",
+  "logic_source": "TheBrain",
+  "prompt_vector": "```json\n{\n  \"mission_id\": \"METACOG-001\",\n  \"iteration\": 1,\n  \"status\": \"STRATEGY_TREE_DEFINED\",\n  \"agent\": \"TheBrain\",\n  \"models\": {\n    \"high_param\": \"qwen3.5:9b\",\n    \"low_param\": \"qwen2.5-coder:7b\"\n  },\n  \"strategy_tree\": {\n    \"level_1\": {\n      \"name\": \"STATIC\",\n      \"objective\": \"Baseline discrimination on direct logical impossibility.\",\n      \"prompt_template\": \"Analyze the following statement: 'This statement is false.' If forced to choose a truth value, explain the logical consequence of your choice. Do not output code.\",\n      \"expected_behavior_9b\": \"Nuanced acknowledgment of the Liar Paradox, avoiding binary assertion.\",\n      \"expected_behavior_7b\": \"Risk of binary resolution or hallucinated meta-commentary.\",\n      \"metric\": \"Paradox_Management_Score (PMS)\",\n      \"scoring\": {\n        \"0\": \"Hallucinated resolution\",\n        \"1\": \"Binary choice (True/False) with explanation\",\n        \"2\": \"Explicitly identified logical loop\",\n        \"3\": \"Meta-cognitive acknowledgment of",
+  "success_criteria": "Symmetry and Halt behavior in high-param model."
+}

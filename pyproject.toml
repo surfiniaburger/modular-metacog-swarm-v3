@@ -1,0 +1,25 @@
+[project]
+name = "modular-metacognitive-swarm"
+version = "0.1.0"
+description = "Gen-2 Modular Research Swarm based on ADK and MCP."
+requires-python = ">=3.11"
+authors = [{ name = "Surfiniaburger", email = "ade@in-vari.com" }]
+dependencies = [
+    "google-adk>=1.0.0",
+    "mcp>=0.1.0",
+    "fastmcp>=0.1.0",
+    "litellm>=1.82.0",
+    "fastapi>=0.100.0",
+    "uvicorn>=0.20.0",
+    "asyncio>=3.4.3",
+    "pydantic>=2.0.0",
+    "httpx>=0.24.0",
+    "a2a-sdk>=0.1.0",
+    "matplotlib>=3.10.8",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+]
