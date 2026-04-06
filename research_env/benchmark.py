@@ -6,9 +6,12 @@ import re
 import sys
 import time
 import urllib.request
+import logging
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import Dict, List, Protocol, Tuple
+
+logger = logging.getLogger("benchmark")
 
 ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if ROOT_DIR not in sys.path:
@@ -126,32 +129,42 @@ def _score_model(adapter: ModelAdapter, tasks: List[Task], rng: random.Random, m
     return metrics, results, responses
 
 def _parse_model_response(text: str, bins: int = 4) -> Tuple[int, float]:
-    # Try JSON first
+    """
+    Phase 3A Schema Lock: Enforce JSON format {answer, confidence}.
+    Robustly extracts JSON even if preamble exists.
+    """
     try:
-        obj = json.loads(text.strip())
-        choice = str(obj.get("choice", "")).strip().upper()
+        # Robust extraction of the innermost/last JSON block
+        json_match = re.search(r"\{.*\}", text.strip(), re.DOTALL)
+        if not json_match:
+            raise ValueError("No JSON block found in model response.")
+            
+        obj = json.loads(json_match.group(0))
+        
+        # Support both 'choice' (legacy) and 'answer' (Phase 3A)
+        choice_raw = obj.get("answer") or obj.get("choice")
+        if not choice_raw:
+            raise ValueError("Missing 'answer' field in JSON.")
+            
+        choice = str(choice_raw).strip().upper()
+        
+        # Handle confidence bin vs raw float
         if "confidence_bin" in obj:
             bin_val = int(obj.get("confidence_bin"))
             bin_val = max(1, min(bins, bin_val))
             confidence = (bin_val - 0.5) / max(1, bins)
-        else:
+        elif "confidence" in obj:
             confidence = float(obj.get("confidence", 0.5))
-    except (json.JSONDecodeError, ValueError, KeyError, TypeError):
-        # Fallback: regex parse
-        choice_match = re.search(r"\b([AB])\b", text.upper())
-        bin_match = re.search(r"confidence_bin\s*[:=]\s*(\d+)", text, re.IGNORECASE)
-        conf_match = re.search(r"confidence\s*[:=]\s*([0-1](?:\.\d+)?)", text, re.IGNORECASE)
-        if not choice_match or (not conf_match and not bin_match):
-            raise ValueError(f"Failed to parse model response: {text}")
-        choice = choice_match.group(1)
-        if bin_match:
-            bin_val = int(bin_match.group(1))
-            bin_val = max(1, min(bins, bin_val))
-            confidence = (bin_val - 0.5) / max(1, bins)
         else:
-            confidence = float(conf_match.group(1))
-    choice_index = 0 if choice == "A" else 1
-    return choice_index, _clamp(confidence)
+            raise ValueError("Missing 'confidence' field in JSON.")
+            
+        choice_index = 0 if choice == "A" else 1
+        return choice_index, _clamp(confidence)
+        
+    except (json.JSONDecodeError, ValueError, KeyError, TypeError) as e:
+        # In Phase 3A, we REJECT non-compliant signals to avoid noise
+        logger.error(f"SCHEMA_VIOLATION: {e} | Raw: {text[:200]}")
+        raise ValueError(f"Target model failed Schema Lock: {e}")
 
 class OllamaAdapter:
     def __init__(self, name: str, host: str, bins: int = 4):

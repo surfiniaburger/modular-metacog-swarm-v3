@@ -23,6 +23,12 @@ async def main():
     # 2. Initialize the Meta-Mediator (The Agent)
     mediator = ResearchMediator()
     
+    # 3. Extract Sovereign Identity for attributed logging
+    mediator_id = getattr(mediator.brain_guard, 'agent_id', 'mediator-unknown')
+    token_id = getattr(mediator.brain_guard, 'token_id', 'NO_TOKEN')
+    manifest_id = getattr(mediator.brain_guard, 'manifest_id', 'NO_MANIFEST')
+    session_id = "research_run_01"
+    
     # 3. Initialize ADK Services for the Runner
     session_service = InMemorySessionService()
     memory_service = InMemoryMemoryService()
@@ -56,7 +62,7 @@ async def main():
         })
         async with bench_lock:
             logger.info(f"Scheduling A2A benchmark for iteration {iteration} (tasks={bench_tasks})")
-            await hub.log_event("BENCHMARK_A2A_SCHEDULED", f"iter={iteration} tasks={bench_tasks}")
+            await hub.log_event("BENCHMARK_A2A_SCHEDULED", f"iter={iteration} tasks={bench_tasks}", agent_id=mediator_id, profile="orchestrator", session_id=session_id, token_id=token_id, manifest_id=manifest_id)
             await asyncio.sleep(bench_sleep)
             last_err = None
             for attempt in range(bench_retries + 1):
@@ -66,14 +72,14 @@ async def main():
                         base_url=bench_url,
                         timeout=bench_timeout,
                     )
-                    await hub.log_event("BENCHMARK_A2A", response.get("response", ""))
+                    await hub.log_event("BENCHMARK_A2A", response.get("response", ""), agent_id=mediator_id, profile="orchestrator", session_id=session_id, token_id=token_id, manifest_id=manifest_id)
                     logger.info(f"A2A benchmark completed for iteration {iteration}")
-                    await hub.log_event("BENCHMARK_A2A_DONE", f"iter={iteration}")
+                    await hub.log_event("BENCHMARK_A2A_DONE", f"iter={iteration}", agent_id=mediator_id, profile="orchestrator", session_id=session_id, token_id=token_id, manifest_id=manifest_id)
                     return
                 except Exception as e:
                     last_err = e
                     logger.error(f"A2A benchmark failed (attempt {attempt+1}): {e}")
-                    await hub.log_event("BENCHMARK_A2A_ERROR", f"iter={iteration} err={e}")
+                    await hub.log_event("BENCHMARK_A2A_ERROR", f"iter={iteration} err={e}", agent_id=mediator_id, profile="orchestrator", session_id=session_id, token_id=token_id, manifest_id=manifest_id)
                     await asyncio.sleep(2 * (attempt + 1))
             logger.error(f"A2A benchmark failed after retries: {last_err}")
 
@@ -91,28 +97,37 @@ async def main():
             from tools import benchmark_summary as bs
             summary = bs.write_summary_outputs()
             if summary:
-                await hub.log_event("BENCHMARK_SUMMARY", json.dumps(summary))
+                await hub.log_event("BENCHMARK_SUMMARY", json.dumps(summary), agent_id=mediator_id, profile="orchestrator", session_id=session_id, token_id=token_id, manifest_id=manifest_id)
         except Exception as e:
             logger.error(f"Benchmark summary failed: {e}")
-            await hub.log_event("BENCHMARK_SUMMARY_ERROR", str(e))
+            await hub.log_event("BENCHMARK_SUMMARY_ERROR", str(e), agent_id=mediator_id, profile="orchestrator", session_id=session_id, token_id=token_id, manifest_id=manifest_id)
 
     for i in range(1, total_iterations + 1):
         logger.info(f"--- Iteration {i} ---")
         try:
-            # Kick off the Mediator via runner.run_async
-            # This handles all InvocationContext creation internally.
+            prompt_text = (
+                f"Start research iteration {i}.\n"
+                "Review the prior Critic feedback and benchmark results. "
+                "You MUST generate a completely new, improved Strategy Tree for this iteration. "
+                "Do not yield an empty response."
+            )
+            
+            # Using a unique session_id completely purges ADK chat history, 
+            # guaranteeing that open-weights Ollama models never hit context-truncation!
+            fresh_session_id = f"research_run_iter_{i}"
+            
             async for event in runner.run_async(
                 user_id="surfiniaburger",
-                session_id="research_run_01",
-                new_message=types.Content(role="user", parts=[types.Part(text=f"Start research iteration {i}.")])
+                session_id=fresh_session_id,
+                new_message=types.Content(role="user", parts=[types.Part(text=prompt_text)])
             ):
                 if event.content:
                     logger.info(f"Mediator Output: {event.content}")
-                    await hub.log_event("MEDIATOR_PULSE", str(event.content))
+                    await hub.log_event("MEDIATOR_PULSE", str(event.content), agent_id=mediator_id, profile="orchestrator", session_id=fresh_session_id, token_id=token_id, manifest_id=manifest_id)
                     
         except Exception as e:
             logger.error(f"Iteration {i} failed: {e}")
-            await hub.log_event("ERROR", str(e))
+            await hub.log_event("ERROR", str(e), agent_id=mediator_id, profile="orchestrator", session_id=session_id, token_id=token_id, manifest_id=manifest_id)
 
         # Optional A2A benchmark every N iterations (queued/awaited)
         if os.getenv("USE_A2A_BENCHMARK", "0") == "1":

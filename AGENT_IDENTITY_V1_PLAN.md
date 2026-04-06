@@ -148,6 +148,9 @@ Example log payload:
 - Interceptor blocks undeclared tools
 - Discovery responses hide disallowed tools
 
+**Implementation Note (Local Swarm Stability):**  
+For the current Qwen/Ollama workflow, we intentionally **do not bind Python tool functions to the ADK Agent constructor**. This avoids OpenAI-style function-calling payloads that can cause blank responses in local models. Discovery blindness is therefore enforced **by context exposure**: the Guard filters the tool list and injects only the allowed tool names into the agent’s `<identity>` block. The agent never sees the forbidden tool strings and cannot invoke them in-session. The Mediator remains the execution layer for JSON patches. This preserves strict *knowledge-level* blindness while keeping the system stable.
+
 ## 10) Rollout Plan
 Phase 0: Document + design review
 Phase 1: Hub endpoints + session record
