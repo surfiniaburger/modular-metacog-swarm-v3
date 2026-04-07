@@ -173,7 +173,8 @@ class SovereignIdentityGuard:
                     "token_id": self.token_id,
                     "manifest_id": self.manifest_id,
                     "data": data
-                }
+                },
+                timeout=5
             )
         except Exception:
             pass # Non-blocking log failure

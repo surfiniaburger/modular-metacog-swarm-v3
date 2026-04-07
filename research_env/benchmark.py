@@ -134,12 +134,17 @@ def _parse_model_response(text: str, bins: int = 4) -> Tuple[int, float]:
     Robustly extracts JSON even if preamble exists.
     """
     try:
-        # Robust extraction of the innermost/last JSON block
-        json_match = re.search(r"\{.*\}", text.strip(), re.DOTALL)
-        if not json_match:
+        # Robust extraction: try the last valid JSON object in the response
+        candidates = list(re.finditer(r"\{.*?\}", text.strip(), re.DOTALL))
+        obj = None
+        for match in reversed(candidates):
+            try:
+                obj = json.loads(match.group(0))
+                break
+            except Exception:
+                continue
+        if obj is None:
             raise ValueError("No JSON block found in model response.")
-            
-        obj = json.loads(json_match.group(0))
         
         # Support both 'choice' (legacy) and 'answer' (Phase 3A)
         choice_raw = obj.get("answer") or obj.get("choice")
@@ -150,7 +155,9 @@ def _parse_model_response(text: str, bins: int = 4) -> Tuple[int, float]:
         
         # Handle confidence bin vs raw float
         if "confidence_bin" in obj:
-            bin_val = int(obj.get("confidence_bin"))
+            bin_val = int(obj.get("confidence_bin") or 0)
+            if bin_val <= 0:
+                raise ValueError("Missing 'confidence_bin' field in JSON.")
             bin_val = max(1, min(bins, bin_val))
             confidence = (bin_val - 0.5) / max(1, bins)
         elif "confidence" in obj:

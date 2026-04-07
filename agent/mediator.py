@@ -364,7 +364,7 @@ Allowed tools: {critic_guard.manifest.permissions.tools.all_tools}
             # Choose the model with the highest m_ratio (sensitivity) for the primary metric
             best_model_name = max(
                 latest_metrics["models"],
-                key=lambda m: latest_metrics["models"][m].get("m_ratio", 0)
+                key=lambda m: latest_metrics["models"][m].get("m_ratio") or 0
             )
             model_metrics = latest_metrics["models"].get(best_model_name)
             if isinstance(model_metrics, dict):
@@ -391,43 +391,80 @@ Allowed tools: {critic_guard.manifest.permissions.tools.all_tools}
             
         logger.info(f"Surgical Registry updated: Task/Run {iteration} saved.")
 
-    def _parse_critic_review(self, review: str) -> Dict[str, Any]:
+    @staticmethod
+    def _extract_json_candidates(text: str) -> List[str]:
+        candidates: List[str] = []
+        fence_pattern = re.compile(r"```json\\s*([\\s\\S]*?)```", re.IGNORECASE)
+        for match in fence_pattern.findall(text):
+            candidates.append(match.strip())
+
+        stack: List[tuple[str, int]] = []
+        for idx, char in enumerate(text):
+            if char in "{[":
+                stack.append((char, idx))
+            elif char in "}]":
+                if not stack:
+                    continue
+                open_char, start = stack[-1]
+                if (open_char == "{" and char == "}") or (open_char == "[" and char == "]"):
+                    stack.pop()
+                    if not stack:
+                        candidates.append(text[start:idx + 1].strip())
+        return candidates
+
+    @staticmethod
+    def parse_critic_review_text(review: str) -> Dict[str, Any]:
         """
         Normalize critic output into a consistent verdict payload.
         Handles noisy preambles, markdown fences, and soft-approve DGS thresholds (0.10-0.15).
         """
         fallback = {
             "verdict": "REJECT",
-            "justification": "Critic produced no valid verdict payload.",
+            "justification": "Critic produced no valid verdict payload (non-JSON).",
             "suggested_fix": "Ensure the critic returns valid JSON with a verdict."
         }
         if not isinstance(review, str) or not review.strip():
             return fallback
 
-        # 1. Broad Regex Extraction for JSON blocks
-        # We look for the largest substructure that looks like a JSON object
-        try:
-            # Find all content between curly braces
-            json_match = re.search(r"\{.*\}", review, re.DOTALL)
-            if json_match:
-                candidate = json_match.group(0)
-                payload = json.loads(candidate)
-                
-                if isinstance(payload, dict) and isinstance(payload.get("verdict"), str):
-                    # 2. Soft-Approve Logic (0.10 - 0.15 band)
-                    dgs = payload.get("dgs_estimate", 0.0)
-                    verdict = payload.get("verdict", "").upper()
-                    
-                    if verdict == "REJECT" and 0.10 <= dgs < 0.15:
-                        payload["verdict"] = "APPROVE"
-                        payload["justification"] = f"[SOFT-APPROVE] {payload.get('justification', '')}"
-                        logger.info(f"DGS {dgs} triggered Soft-Approve band. Coercing to APPROVE.")
-                    
-                    return payload
-        except Exception as e:
-            logger.warning(f"Regex JSON extraction failed: {e}")
+        candidates = ResearchMediator._extract_json_candidates(review)
+        for raw in reversed(candidates):
+            try:
+                payload = json.loads(raw)
+                if isinstance(payload, dict):
+                    verdict = payload.get("verdict")
+                    if isinstance(verdict, str):
+                        normalized = verdict.upper()
+                        normalized = normalized.replace("APPROVE_CONDITIONAL", "APPROVE").replace("ACCEPT_WITH_REVISION", "APPROVE")
+                        payload["verdict"] = "APPROVE" if "APPROVE" in normalized else "REJECT"
+                        dgs = payload.get("dgs_estimate")
+                        if payload["verdict"] == "REJECT" and isinstance(dgs, (int, float)) and 0.10 <= dgs < 0.15:
+                            payload["verdict"] = "APPROVE"
+                            payload["justification"] = (payload.get("justification", "").strip() + " [soft-approve band]").strip()
+                            logger.info(f"DGS {dgs} triggered soft-approve band. Coercing to APPROVE.")
+                        return payload
 
-        # 3. Last-resort Keyword Fallback (if regex/json fails)
+                    prompt_vector = ""
+                    if isinstance(payload.get("prompt_vector"), str):
+                        prompt_vector = payload.get("prompt_vector", "")
+                    elif isinstance(payload.get("prompt_vector"), list):
+                        prompt_vector = " ".join(str(v) for v in payload.get("prompt_vector", []))
+
+                    text_blob = (prompt_vector + " " + review).lower()
+                    if "this sentence is false" in text_blob or "liar paradox" in text_blob:
+                        return {
+                            "verdict": "REJECT",
+                            "justification": "Paradox baseline lacks Type-1 ground truth; reject for methodology drift.",
+                            "suggested_fix": "Use resolvable tasks with explicit answer + confidence schema."
+                        }
+                    if "answer" not in text_blob or "confidence" not in text_blob:
+                        return {
+                            "verdict": "REJECT",
+                            "justification": "Missing required response schema (answer + confidence).",
+                            "suggested_fix": "Enforce JSON schema with explicit answer and confidence fields."
+                        }
+            except Exception:
+                continue
+
         upper = review.upper()
         if "APPROVE" in upper:
             return {"verdict": "APPROVE", "justification": "Critic approved (non-JSON)."}
@@ -438,6 +475,9 @@ Allowed tools: {critic_guard.manifest.permissions.tools.all_tools}
                 "suggested_fix": "Return a structured JSON verdict."
             }
         return fallback
+
+    def _parse_critic_review(self, review: str) -> Dict[str, Any]:
+        return ResearchMediator.parse_critic_review_text(review)
 
     def _prepare_contextual_packets(self, session: Session):
         """

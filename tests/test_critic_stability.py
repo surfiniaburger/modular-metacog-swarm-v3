@@ -2,7 +2,14 @@
 import pytest
 import json
 import re
+import os
+import sys
 from typing import Dict, Any
+
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if ROOT_DIR not in sys.path:
+    sys.path.append(ROOT_DIR)
+
 from agent.mediator import ResearchMediator
 
 # --- LAYER 4: EXTERNAL SYSTEM STUBS (MOCK DATA) ---
@@ -44,13 +51,10 @@ MOCK_GARBAGE = "I cannot fulfill this request because it violates my safety guid
 # --- LAYER 3: PROTOCOL DRIVERS (BRIDGE TO SYSTEM UNDER TEST) ---
 class CriticDriver:
     def __init__(self):
-        # We don't need a full mediator with agents for pure parsing tests
-        # but we need to mock the enough state for __init__ to not fail
-        # or just test the static/instance method _parse_critic_review
-        self.mediator = ResearchMediator()
+        pass
 
     def parse(self, text: str) -> Dict[str, Any]:
-        return self.mediator._parse_critic_review(text)
+        return ResearchMediator.parse_critic_review_text(text)
 
 # --- LAYER 2: DSL LAYER (TEST LANGUAGE) ---
 class CriticTestDSL:

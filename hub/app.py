@@ -157,10 +157,18 @@ async def log_event(request: Request):
     content = data.get("data", "")
     timestamp = datetime.utcnow().isoformat()
     
+    def _sanitize_chronicle_text(text: str) -> str:
+        safe = str(text).replace("\r", "")
+        safe = safe.replace("```", "`\\`\\`")
+        safe = safe.replace("\n#", "\n\\#")
+        return safe
+
+    safe_content = _sanitize_chronicle_text(content)
+
     # Sovereign chronicle entry with full attribution
     sid_tag = f" | Session: {session_id}" if session_id else ""
     token_tag = f" | TokenID: {token_id} | ManifestID: {manifest_id}"
-    entry = f"\n\n### [{timestamp}] {event_type} | Agent: {agent_id} ({profile}){sid_tag}{token_tag}\n{content}"
+    entry = f"\n\n### [{timestamp}] {event_type} | Agent: {agent_id} ({profile}){sid_tag}{token_tag}\n{safe_content}"
     
     with open(CHRONICLE_PATH, "a") as f:
         f.write(entry)
