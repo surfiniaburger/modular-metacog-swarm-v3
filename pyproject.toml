@@ -21,6 +21,7 @@ dependencies = [
     "cryptography>=43.0.0",
     "PyJWT[crypto]>=2.8.0",
     "keyring>=24.0.0",
+    "deepeval>=3.9.6",
 ]
 
 [tool.uv]
