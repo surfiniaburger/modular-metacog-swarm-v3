@@ -670,3 +670,466 @@ sequenceDiagram
     Agent->>Tool: Execute with Temp Credential
     Tool-->>Agent: Result
 ```
+
+
+0 notifications total
+
+Skip to search
+
+Skip to main content
+
+Keyboard shortcuts
+Close jump menu
+Search
+new feed updates notifications
+Home
+My Network
+Jobs
+Messaging
+9
+9 new notifications
+Notifications
+Adedoyinsola Ogungbesan
+Me
+
+For Business
+Reactivate Premium: 50% Off
+
+Determinism - “It Works Everywhere, Every Time”
+Dave Farley
+Dave Farley
+Independent Software Developer and Consultant, Founder and Director of Continuous Delivery Ltd.
+
+
+March 27, 2026
+Most software systems fail for one very boring reason.
+
+Not microservices. Not monoliths. Not agile. They fail because they're unpredictable. If I make a change and I can't reliably determine the impact of that change, then I can't safely evolve my system. And if I can't evolve my system, then it's already a legacy system.
+
+I think that a lot of people miss the importance of this: determinism. Not as some academic ideal, but as the bridge between "it works on my machine" and "it works every time, everywhere."
+
+The Trust Problem
+
+There's a chain of facts: You can't evolve what you can't measure. You can't measure what you can't repeat. And you can't repeat something that isn't deterministic.
+
+That leaves the determinism of our systems as a key attribute that enables us to improve them.
+
+If our tests are flaky, if our builds sometimes fail "for reasons," if concurrency randomly breaks things — then our delivery pipeline stops being a learning system. It becomes a form of release theatre instead. Our tests lie to us. Our pipeline lies to us and our architecture rots quietly in the background.
+
+Time Is the First Trap
+
+If your code calls datetime.now directly, you've just injected nondeterminism into your system. The same input tomorrow produces a different output. That's not testable. That's not reproducible.
+
+The fix is simple: inject a clock. Pass time as data. Treat "now" as an input. Suddenly you can freeze time, fast-forward it, reproduce production bugs by replaying timestamps. You've turned the universe into a parameter — and that's a pretty powerful tool.
+
+Separate What Decides from What Acts
+
+If you take one idea from this, take this one: separate the code that decides from the code that acts.
+
+A deterministic core — pure logic, state in, decision out, no database, no clock, no randomness. And an imperative shell — the messy part that talks to the real world.
+
+This is really just hexagonal architecture, ports and adapters, but framed around evolutionary capability. When the core is pure, you don't need mocks. You don't need frameworks. You don't need complex test scaffolding. You pass in state, you assert on output, and you can run thousands of tests in milliseconds. These tests are your fitness functions, that guide the evolution of your design and system.
+
+It's a Systems Property, Not a Coding Trick
+
+This goes beyond code. Hermetic builds. Pinned dependencies. Idempotent deployments all help us to grow our systems. If applying your deployment twice changes the result, your infrastructure is non-deterministic — and your production environment is a mystery wrapped in an enigma.
+
+Most organisations optimise for features. But the best organisations optimise for speed of learning. Deterministic systems shorten feedback loops, reduce cognitive load, make debugging reproducible. They enable aggressive experimentation.
+
+This is why continuous delivery works — not because of pipelines, but because of determinism. The pipeline is just an amplifier that helps us see more easily how close we are to our target.
+
+Learn more with my free course:
+
+https://courses.cd.training/courses/design-to-manage-complexity
+
+#SoftwareEngineering #ContinuousDelivery #SoftwareArchitecture #Determinism #HexagonalArchitecture #EvolutionaryArchitecture
+
+Comments
+likeinsightfulcelebrate
+120
+15 comments
+8 reposts
+
+Photo of Adedoyinsola Ogungbesan
+
+like
+Like
+
+Comment
+
+Share
+
+
+Add a comment…
+Open Emoji Keyboard
+
+Current selected sort order is Most recent
+Most recent
+View James Galyen’s  graphic link
+James Galyen
+   • 3rd+
+Application Developer at Press Ganey LLC
+1w
+
+AI nondeterminism: 60% of the time, it works every time. It's illegal in nine countries... Yep, it's made with bits of other people's code, so you know it's good.
+
+"The code smells like a diaper filled with Indian food!" and "like Bigfoot rolled around in a garbage dump"
+
+AI: "I don't know how to put this, but I'm kind of a big deal. People know me."
+…more
+
+Like
+funny
+4
+
+Reply
+5 replies
+5 Replies on James Galyen’s comment
+
+See previous replies
+View James Galyen’s  graphic link
+James Galyen
+   • 3rd+
+Application Developer at Press Ganey LLC
+1w
+
+Stijn Dejongh "The Developers" instead of "The Expendables" would be a great movie too
+
+Much of the best open source software was written by Chuck Norris, blindfolded, with only his pinky as he slept. No test, no syntax errors, no bugs
+
+"Chuck Noris saves the World" documentary is awesome, btw. His movies being translated into Russian and smuggled in brought about the end of the cold war and peace agreement on nuclear armaments. He really did save the world
+…more
+Comment image, no alternative text available
+
+Like
+like
+1
+
+Reply
+View Peter Gillard-Moss’  graphic link
+Peter Gillard-Moss
+   • 3rd+
+Technology leader | QCon, GOTO, Conference speaker | Gousto, ex-DeepL, ex-Thoughtworks
+1w
+
+Eliminating unwanted or unnecessary variation is key and definitely puts engineers on a spectrum of how they see this.
+
+Years ago everyone got shiny Macs including my team. But we dual booted into RH Linux. This wasn’t popular with many of the engineers. I had to explain that we were deploying to RHL so we developed on RHL. We minimised the variance as much as we could.
+
+This meant taking on a lot of pain. MacOS was a much better environment, IDEs were better, RHL was often behind on package versions that would be helpful.
+
+But our software was rock solid, easy to debug and predictable.
+
+When learning Clojure I remeber having the same Aha! Around keeping functions side effect free as much as possible
+…more
+
+Like
+like
+4
+
+Reply
+View Tomasz Borzyszkowski’s  graphic link
+Tomasz Borzyszkowski
+   • 3rd+
+Software Architect & Lecturer
+1w
+
+Excellent framing. "Deterministic Core vs. Imperative Shell" is the perfect modern evolution of Dijkstra’s 1974 Separation of Concerns.
+If "you can’t evolve what you can’t repeat," then determinism is our most valuable asset. This is especially true today with GenAI:
+
+- AI belongs in the Shell: Treat LLMs as volatile, non-deterministic I/O
+
+- The Core stays pure: Your logic shouldn't "vibe": it should be predictable and testable
+
+Building on top of unpredictable components (AI/Time/IO) requires a "thick" shell and a "pure" core. Great read!
+…more
+
+Like
+like
+4
+
+Reply
+View Simon Jones’  graphic link
+Simon Jones
+   • 3rd+
+I test and Eval AI | Senior SDET 12+years | Automation Testing · LLM Evaluation · Hallucination Detection · Adversarial Prompting · Agentic AI Testing · Prompt Injection Auditing · AI Safety Testing · Red Teaming
+1w
+
+Be interested in your thoughts on how we build systems at the point where determinsm & non determinism collide for example in an AI agent that must do its job repeatedly & to a standard. ?
+
+Like
+like
+1
+
+Reply
+3 replies
+3 Replies on Simon Jones’ comment
+
+See previous replies
+View Simon Jones’  graphic link
+Simon Jones
+   • 3rd+
+I test and Eval AI | Senior SDET 12+years | Automation Testing · LLM Evaluation · Hallucination Detection · Adversarial Prompting · Agentic AI Testing · Prompt Injection Auditing · AI Safety Testing · Red Teaming
+1w
+
+Ian Letourneau thanks for the reply . More fascinating concepts to learn . 👍
+
+Like
+
+Reply
+View Jim McMullen’s open to work graphic link
+Jim McMullen
+   • 3rd+
+Head of Engineering | Building Data-Driven SaaS Platforms | Health-Tech & Data SaaS | Startup Technical Leadership
+1w
+
+After writing code for decades, I thought I understood determinism. The concepts aren't new to me. But this article reframed something I hadn't fully articulated: I've been treating determinism as a property my code happens to have - not as a design discipline I actively enforce. I'm thinking back through some of my work asking 'is this deterministic by design?'
+…more
+
+Like
+
+Reply
+View Ken Pugh’s  graphic link
+Ken Pugh
+   • 3rd+
+Build-in Quality with BDD/ATDD | Technical Agility, Technical Excellence | Co-creator SAFe Agile Software Engineering | Effective Software Development (Design Patterns, Lean, Agile, Scrum, Kanban) | TBR-CT | Training
+1w
+
+Being able to set the date to test programs has been around since Cobol in the 60's😀
+
+Like
+
+Reply
+View Rodo P’s  graphic link
+Rodo P
+ • 3rd+
+Software Engineer | Full Stack, Python,FastAPI ,Django, React,JavaScript,CSS ,HTML, GCP ,Docker Kuberentes
+1d
+
+you will get that with physics and math 
+
+Like
+
+Reply
+Dave Farley
+Dave Farley
+
+Independent Software Developer and Consultant, Founder and Director of Continuous Delivery Ltd.
+
+
+Following
+About
+Accessibility
+Talent Solutions
+Professional Community Policies
+Careers
+Marketing Solutions
+
+Privacy & Terms 
+Ad Choices
+Advertising
+Sales Solutions
+Mobile
+Small Business
+Safety Center
+Questions?
+Visit our Help Center.
+
+Manage your account and privacy
+Go to your Settings.
+
+Recommendation transparency
+Learn more about Recommended Content.
+
+Select Language
+
+English (English)
+LinkedIn Corporation © 2026
+
+Adedoyinsola OgungbesanStatus is online
+MessagingYou are on the messaging overlay. Press enter to open the list of conversations.
+
+Compose message
+You are on the messaging overlay. Press enter to open the list of conversations.
+
+
+
+
+
+
+
+-----------------------------------------------------------------------harness-----------------------------
+
+
+You have 3 new messages.
+
+Skip to content Using Gmail with screen readers 1 of 3,653 The Anatomy of an Agent Harness Inbox
+
+Daily Dose of DS avi@dailydoseofds.com Unsubscribe 10:11 PM (15 hours ago) to me
+
+​Master Full-stack AI Engineering​
+
+In today's newsletter: The Canvas Framework: A structured approach to building production Agents. The Anatomy of an Agent Harness. TODAY'S ISSUE
+
+together with MongoDB​The Canvas Framework: A structured approach to building production Agents​Before foundation models, building an AI feature involved collecting and labeling training data, training a custom model from scratch, and only then integrating it into a product. This took months and a massive compute investment before teams could even test whether users wanted the feature.
+
+Foundation models removed that bottleneck because they come pre-trained and accessible via API. Teams can now call GPT-4 or Claude with zero-shot or few-shot prompts, ship an MVP in days, validate user demand first, and only then invest in curating data for RAG or fine-tuning.
+
+But for agentic systems, there’s a missing layer.
+
+Agent design needs to come right after defining the product, because the agent’s capabilities, workflows, and memory requirements are what determine what knowledge it needs and which model providers make sense downstream.
+
+MongoDB published a detailed breakdown of the Canvas Framework built around this exact sequence. It uses two planning canvases.
+
+The POC canvas has 8 squares covering product validation, agent design (capabilities, autonomy boundaries, memory requirements), data requirements (knowledge sources, update frequency, feedback loops), and model integration (provider selection, prompt strategy, cost validation) The production canvas adds 11 squares for scaling, including fault tolerance, multi-agent coordination, unified data architecture across application storage, vector search, and agent memory, plus security hardening and governance.​You can read the full breakdown here →​
+
+Claude The Anatomy of an Agent Harness A ReAct loop, a couple of tools, and a well-written system prompt can get surprisingly far in a demo.
+
+But the moment the task requires 10+ steps, things fall apart like the model forgets what it did three steps ago, tool calls fail silently, and the context window fills up with garbage.
+
+The problem isn't the model. It's everything around the model.
+
+LangChain proved this when they changed only the infrastructure wrapping their LLM (same model, same weights) and jumped from outside the top 30 to rank 5 on TerminalBench 2.0.
+
+A separate research project hit a 76.4% pass rate by having an LLM optimize the infrastructure itself, surpassing hand-designed systems.
+
+That infrastructure has a name now: the agent harness.
+
+What is Agent Harness? The term was formalized in early 2026, but the concept existed long before.
+
+The harness is the complete software infrastructure wrapping an LLM, including the orchestration loop, tools, memory, context management, state persistence, error handling, and guardrails.
+
+Anthropic’s Claude Code documentation puts it simply: the SDK is “the agent harness that powers Claude Code.“
+
+We really liked the canonical formula, from LangChain’s Vivek Trivedy: “If you’re not the model, you’re the harness.”
+
+To put it another way, the “agent” is the emergent behavior: the goal-directed, tool-using, self-correcting entity the user interacts with. The harness is the machinery producing that behavior. When someone says “I built an agent,” they mean they built a harness and pointed it at a model.
+
+Beren Millidge made this analogy precise in his 2023 essay:
+
+A raw LLM is a CPU with no RAM, no disk, and no I/O. The context window serves as RAM (fast but limited). External databases function as disk storage (large but slow). Tool integrations act as device drivers. The harness is the operating system.
+
+Three levels of engineering Three concentric levels of engineering surround the model:
+
+Prompt engineering crafts the instructions the model receives. Context engineering manages what the model sees and when. Harness engineering encompasses both, plus the entire application infrastructure: tool orchestration, state persistence, error recovery, verification loops, safety enforcement, and lifecycle management. The harness is not a wrapper around a prompt. It is the complete system that makes autonomous agent behavior possible.
+
+The 11 components of a production Harness Synthesizing across Anthropic, OpenAI, LangChain, and the broader practitioner community, a production agent harness has eleven distinct components. Let’s walk through each one.
+
+The Orchestration Loop This is the heartbeat. It implements the Thought-Action-Observation (TAO) cycle, also called the ReAct loop. The loop runs: assemble prompt, call LLM, parse output, execute any tool calls, feed results back, repeat until done.
+Mechanically, it’s often just a while loop. The complexity lives in everything the loop manages, not the loop itself. Anthropic describes their runtime as a “dumb loop” where all intelligence lives in the model. The harness just manages turns.
+
+Tools Tools are the agent’s hands. They’re defined as schemas (name, description, parameter types) injected into the LLM’s context so the model knows what’s available. The tool layer handles registration, schema validation, argument extraction, sandboxed execution, result capture, and formatting results back into LLM-readable observations.
+Claude Code provides tools across six categories: file operations, search, execution, web access, code intelligence, and subagent spawning. OpenAI’s Agents SDK supports function tools (via function_tool), hosted tools (WebSearch, CodeInterpreter, FileSearch), and MCP server tools.
+
+Memory Memory operates at multiple timescales. Short-term memory is the conversation history within a single session. Long-term memory persists across sessions: Anthropic uses CLAUDE.md project files and auto-generated MEMORY.md files; LangGraph uses namespace-organized JSON Stores; OpenAI supports Sessions backed by SQLite or Redis.
+Claude Code implements a three-tier hierarchy: a lightweight index (~150 characters per entry, always loaded), detailed topic files pulled in on demand, and raw transcripts accessed via search only.
+
+Context management This is where many agents fail silently. The core problem is context rot: model performance degrades 30%+ when key content falls in mid-window positions.
+Even million-token windows suffer from instruction-following degradation as context grows.
+
+Production strategies include:
+
+Compaction: summarizing conversation history when approaching limits (Claude Code preserves architectural decisions and unresolved bugs while discarding redundant tool outputs) Observation masking: JetBrains’ Junie hides old tool outputs while keeping tool calls visible Just-in-time retrieval: maintaining lightweight identifiers and loading data dynamically (Claude Code uses grep, glob, head, tail rather than loading full files) Sub-agent delegation: each subagent explores extensively but returns only 1,000 to 2,000 token condensed summaries Anthropic’s context engineering guide states the goal: find the smallest possible set of high-signal tokens that maximize likelihood of the desired outcome.
+
+Prompt construction This assembles what the model actually sees at each step. It’s hierarchical with system prompt, tool definitions, memory files, conversation history, and the current user message.
+OpenAI’s Codex uses a strict priority stack: server-controlled system message (highest priority), tool definitions, developer instructions, user instructions (cascading AGENTS.md files, 32 KiB limit), then conversation history.
+
+Output parsing Modern harnesses rely on native tool calling, where the model returns structured tool_calls objects rather than free-text that must be parsed.
+The harness checks if there are any tool calls? If yes, it executes them and loops. If not, it gives the final answer.
+
+For structured outputs, both OpenAI and LangChain support schema-constrained responses via Pydantic models.
+
+Legacy approaches like RetryWithErrorOutputParser (which feeds the original prompt, the failed completion, and the parsing error back to the model) remain available for edge cases.
+
+State management LangGraph models state as typed dictionaries flowing through graph nodes, with reducers merging updates.
+Checkpointing happens at super-step boundaries, enabling resumption after interruptions and time-travel debugging.
+
+OpenAI offers four mutually exclusive strategies: application memory, SDK sessions, server-side Conversations API, or lightweight previous_response_id chaining. Claude Code takes a different approach: git commits as checkpoints and progress files as structured scratchpads.
+
+Error handling Here’s why this matters: a 10-step process with 99% per-step success still has only ~90.4% end-to-end success due to compounding.
+LangGraph distinguishes four error types: transient (retry with backoff), LLM-recoverable (return error as ToolMessage so the model can adjust), user-fixable (interrupt for human input), and unexpected (bubble up for debugging). Anthropic catches failures within tool handlers and returns them as error results to keep the loop running. Stripe’s production harness caps retry attempts at two.
+
+Guardrails and safety OpenAI’s SDK implements three levels: input guardrails (run on the first agent), output guardrails (run on the final output), and tool guardrails (run on every tool invocation).
+A “tripwire” mechanism halts the agent immediately when triggered.
+
+Anthropic separates permission enforcement from model reasoning architecturally. The model decides what to attempt; the tool system decides what’s allowed. Claude Code gates ~40 discrete tool capabilities independently, with three stages: trust establishment at project load, permission check before each tool call, and explicit user confirmation for high-risk operations.
+
+Verification loops This is what separates toy demos from production agents. Anthropic recommends three approaches: rules-based feedback (tests, linters, type checkers), visual feedback (screenshots via Playwright for UI tasks), and LLM-as-judge (a separate subagent evaluates output).
+Boris Cherny, creator of Claude Code, noted that giving the model a way to verify its work improves quality by 2 to 3x.
+
+Subagent orchestration Claude Code supports three execution models: Fork (byte-identical copy of parent context), Teammate (separate terminal pane with file-based mailbox communication), and Worktree (own git worktree, isolated branch per agent).
+OpenAI’s SDK supports agents-as-tools (specialist handles bounded subtask) and handoffs (specialist takes full control). LangGraph implements subagents as nested state graphs.
+
+A step-by-step walkthrough
+
+Now that you know the components, let’s trace how they work together in a single cycle.
+
+Step 1 (Prompt Assembly): The harness constructs the full input: system prompt + tool schemas + memory files + conversation history + current user message. Important context is positioned at the beginning and end of the prompt (the “Lost in the Middle” finding). Step 2 (LLM Inference): The assembled prompt goes to the model API. The model generates output tokens: text, tool call requests, or both. Step 3 (Output Classification): If the model produced text with no tool calls, the loop ends. If it requested tool calls, proceed to execution. If a handoff was requested, update the current agent and restart. Step 4 (Tool Execution): For each tool call, the harness validates arguments, checks permissions, executes in a sandboxed environment, and captures results. Read-only operations can run concurrently; mutating operations run serially. Step 5 (Result Packaging): Tool results are formatted as LLM-readable messages. Errors are caught and returned as error results so the model can self-correct. Step 6 (Context Update): Results are appended to the conversation history. If approaching the context window limit, the harness triggers compaction. Step 7 (Loop): Return to Step 1. Repeat until termination. Termination conditions are layered: the model produces a response with no tool calls, the maximum turn limit is exceeded, the token budget is exhausted, a guardrail tripwire fires, the user interrupts, or a safety refusal is returned. A simple question might take 1 to 2 turns. A complex refactoring task can chain dozens of tool calls across many turns.
+
+For long-running tasks spanning multiple context windows, Anthropic developed a two-phase “Ralph Loop” pattern.
+
+It uses an Initializer Agent that sets up the environment (init script, progress file, feature list, initial git commit), then a Coding Agent in every subsequent session reads git logs and progress files to orient itself, picks the highest-priority incomplete feature, works on it, commits, and writes summaries.
+
+The filesystem provides continuity across context windows.
+
+How frameworks implement the pattern
+
+Anthropic’s Claude Agent SDK exposes the harness through a single query() function that creates the agentic loop and returns an async iterator streaming messages.
+
+The runtime is a “dumb loop.” All intelligence lives in the model. Claude Code uses a Gather-Act-Verify cycle: gather context (search files, read code), take action (edit files, run commands), verify results (run tests, check output), repeat.
+
+OpenAI’s Agents SDK implements the harness through the Runner class with three modes: async, sync, and streamed.
+
+The SDK is “code-first”: workflow logic is expressed in native Python rather than graph DSLs. The Codex harness extends this with a three-layer architecture: Codex Core (agent code + runtime), App Server (bidirectional JSON-RPC API), and client surfaces (CLI, VS Code, web app). All surfaces share the same harness, which is why “Codex models feel better on Codex surfaces than a generic chat window.”
+
+LangGraph models the harness as an explicit state graph. Two nodes (llm_call and tool_node) connected by a conditional edge: if tool calls present, route to tool_node; if absent, route to END.
+
+LangGraph evolved from LangChain’s AgentExecutor, which was deprecated in v0.2 because it was hard to extend and lacked multi-agent support. LangChain’s Deep Agents explicitly use the term “agent harness”: built-in tools, planning (write_todos tool), file systems for context management, subagent spawning, and persistent memory.
+
+CrewAI implements a role-based multi-agent architecture: Agent (the harness around the LLM, defined by role, goal, backstory, and tools), Task (the unit of work), and Crew (the collection of agents). CrewAI’s Flows layer adds a “deterministic backbone with intelligence where it matters,” managing routing and validation while Crews handle autonomous collaboration.
+
+The scaffolding metaphor Construction scaffolding is a temporary infrastructure that enables workers to build a structure they couldn’t reach otherwise. It doesn’t do the construction. But without it, workers can’t reach the upper floors.
+
+The key insight is that scaffolding is removed when the building is complete. As models improve, harness complexity should decrease. Manus was rebuilt five times in six months, each rewrite removing complexity. Complex tool definitions became general shell execution. “Management agents” became simple structured handoffs.
+
+This points to the co-evolution principle where models are now post-trained with specific harnesses in the loop. Claude Code’s model learned to use the specific harness it was trained with. Changing tool implementations can degrade performance because of this tight coupling.
+
+The future-proofing test for harness design states that if performance scales up with more powerful models without adding harness complexity, the design is sound.
+
+Seven decisions for Harness definitions Every harness architect faces seven choices:
+
+Single-agent vs. multi-agent. Both Anthropic and OpenAI ask to maximize a single agent first. Multi-agent systems add overhead (extra LLM calls for routing, context loss during handoffs). Split only when tool overload exceeds ~10 overlapping tools or clearly separate task domains exist. ReAct vs. plan-and-execute. ReAct interleaves reasoning and action at every step (flexible but higher per-step cost). Plan-and-execute separates planning from execution. LLMCompiler reports a 3.6x speedup over sequential ReAct. Context window management strategy. Five production approaches include time-based clearing, conversation summarization, observation masking, structured note-taking, and sub-agent delegation. ACON research showed 26 to 54% token reduction while preserving 95%+ accuracy by prioritizing reasoning traces over raw tool outputs. Verification loop design. Computational verification (tests, linters) provides deterministic ground truth. Inferential verification (LLM-as-judge) catches semantic issues but adds latency. Martin Fowler’s Thoughtworks team frames this as guides (feedforward, steer before action) versus sensors (feedback, observe after action). Permission and safety architecture. Permissive (fast but risky, auto-approve most actions) versus restrictive (safe but slow, require approval for each action). The choice depends on the deployment context. Tool scoping strategy. More tools often mean worse performance. Vercel removed 80% of tools from v0 and got better results. Claude Code achieves 95% context reduction via lazy loading. The principle: expose the minimum tool set needed for the current step. Harness thickness. How much logic lives in the harness versus the model. Anthropic bets on thin harnesses and model improvement. Graph-based frameworks bet on explicit control. Anthropic regularly deletes planning steps from Claude Code’s harness as new model versions internalize that capability. The harness is the product Two products using identical models can have wildly different performance based solely on harness design. The TerminalBench evidence is clear that changing only the harness moved agents by 20+ ranking positions.
+
+The harness is not a solved problem or a commodity layer. It’s where the hard engineering lives like managing context as a scarce resource, designing verification loops that catch failures before they compound, building memory systems that provide continuity without hallucination, and making architectural bets about how much scaffolding to build versus how much to leave to the model.
+
+The field is moving toward thinner harnesses as models improve. But the harness itself isn’t going away. Even the most capable model needs something to manage its context window, execute its tool calls, persist its state, and verify its work.
+
+The next time your agent fails, don’t blame the model but rather look at the harness.
+
+THAT'S A WRAP
+
+NO-FLUFF RESOURCES TO...​Succeed in AI Engineering roles​
+
+All businesses care about impact. That’s it!
+
+Can you reduce costs? Drive revenue? Can you scale ML models? Predict trends before they happen? We have discussed several other topics (with implementations) in the past that align with such topics.
+
+Master full-stack AI engineering Here are some of them:
+
+Learn MLOps from first principles to production in this course with 18 parts →​Learn everything about MCPs in this course with 9 parts →​Learn how to build Agentic systems in this course with 14 parts. Learn how to build real-world RAG apps, evaluate, and scale them in this course. Learn sophisticated graph architectures and how to train them on graph data in this course. So many real-world NLP systems rely on pairwise context scoring. Learn scalable approaches here. Learn how to run large models on small devices using Quantization techniques. Learn how to generate prediction intervals or sets with strong statistical guarantees for increasing trust using Conformal Predictions. Learn how to identify causal relationships and answer business questions using causal inference in this course. Learn how to scale and implement ML model training in this practical guide. Learn techniques to reliably test new models in production. Learn how to build privacy-first ML systems using Federated Learning. Learn 6 techniques with implementation to compress ML models. Master full-stack AI engineering All these resources will help you cultivate key skills that businesses and companies care about the most.
+
+​Partner with US ADVERTISE TO 900k+ AI Professionals Our newsletter puts your products and services directly in front of an audience that matters, including thousands of leaders, senior data scientists, machine learning engineers, data analysts, etc., around the world.
+
+Get in touch today by replying to this email.
+
+Today’s email was brought to you by Avi Chawla and Akshay Pachaar.
+
+​Update your profile | Unsubscribe​
+
+Looking for more? Unlock our premium DS/ML resources.
+
+​
+
+© 2026 Daily Dose of Data Science
+
+Compose: New Message MinimizePop-outClose

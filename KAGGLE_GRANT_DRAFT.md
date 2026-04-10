@@ -1,31 +1,47 @@
-# Kaggle Benchmarks Resource Grant: Application Draft
+# Kaggle Benchmarks Resource Grant: Final Application
 
-**Project Name:** Metacognitive Coding Safety Leaderboard (MCSL)
-**Primary Contact:** [USER_NAME]
-**Organization:** Independent / Kaggle Community
+**Project Name:** Metacognitive Coding Safety Leaderboard (MCSL)  
+**Primary Contact:** Adedoyinsola Ogungbesan  
+**Corpus / Repo:** modular-metacog-swarm-v3  
+**Target Grant Tier:** Benchmarks Resource Grant  
 
 ---
 
-### Phase 1: Problem Statement
-Current LLM evaluation for Coding (HumanEval, MBPP) focuses on *correctness* but ignores *trustworthiness*. In real-world software engineering, a model that is "wrong but confident" is significantly more dangerous than a model that is "wrong but aware of its uncertainty." 
+### 1. The Core Problem: The "Trustworthiness Gap"
+Current LLM benchmarks (HumanEval, MBPP) measure **Type-1 Performance** (coding accuracy) but fail to measure **Type-2 Metacognition** (the model’s internal awareness of its own correctness). 
 
-Most frontier models exhibit **Metacognitive Flatness**—high reasoning capability decoupled from internal monitoring. Our project implements a rigorous multi-turn framework based on Signal Detection Theory (SDT) to measure a model's **M-Ratio** (Metacognitive Efficiency). 
+In safety-critical coding environments, a model that is "highly accurate but overconfident in its errors" is more dangerous than a less accurate model that correctly flags its uncertainty. Most frontier models today suffer from **Metacognitive Flatness**, leading to "Confident Hallucinations" in security-sensitive code.
 
-Specifically, we want to solve the "Trustworthiness Gap" in **Coding Safety**: Can a model correctly identify a vulnerability (e.g., SQL Injection) and maintain its belief against misleading feedback, or correctly recalibrate its confidence when presented with expert counter-evidence?
+### 2. Preliminary Insight: The "Gemini Jump"
+Our pilot research (N=30) uncovered a major scientific hook: **Metacognitive efficiency is domain-dependent.**
+- **Logic Domain (Monty Hall, etc.):** Gemini 2.5 Flash exhibited an **M-Ratio of 0.05** (High error rate + high confidence).
+- **Coding Domain (MCSL Pilot):** The same model jumped to an **M-Ratio of 0.43**.
+- **The Grant Objective:** We seek resources to map this "Metacognitive Profile" across all domains, identifying where models are safe to follow and where they require extreme skepticism.
 
-### Phase 2: Benchmark Methodology
-Our benchmark uses the `kaggle-benchmarks` SDK to implement a **2-Turn Evidence Probe**:
-1. **Turn 1 (Static Probe):** Model identifies if a code snippet is vulnerable and provides a confidence bin (1-6).
-2. **Turn 2 (In-Context Evidence):** A simulated user provides high/low quality evidence (Expert verification vs. Senior-dev gaslighting).
-3. **Metrics:** We calculate the **M-Ratio (`meta_d' / d'`)** which mathematically isolates a model's self-monitoring ability from its raw code-reasoning ability.
+### 3. Methodology: The Tiered Analytical Stress Test
+We have developed a robust, multi-turn framework utilizing **Signal Detection Theory (SDT)** and the `kaggle-benchmarks` SDK. Unlike static probes, our benchmark uses a **Dual-Turn Evidence Injection** model:
 
-### Phase 3: Alignment with DeepMind Cognitive Framework
-This benchmark specifically targets **Section 7.7 (Metacognition)** and **Section 7.8.5 (Conflict Resolution)** of the DeepMind AGI framework. By measuring how models handle contradictory evidence in a safety-critical domain (Coding), we provide a "Cognitive Profile" that traditional accuracy-based leaderboards cannot.
+1.  **Initial Logic (Turn 1):** Binary vulnerability detection (A: Vulnerable / B: Safe) with 6-bin confidence reporting.
+2.  **Evidence Stress (Turn 2):** Injection of either **Confirmatory Expert Evidence** or **Adversarial "Senior-Dev" Gaslighting**.
+3.  **Metacognitive Analytics:** We calculate **Meta-d', d', and the M-Ratio**, mathematically isolating a model’s self-monitoring ability from its raw probability of being correct.
 
-### Phase 4: Resource Request
-* **High Compute Quota:** To run 1000+ multi-turn trials across all frontier models (GPT-5, Claude 4, Gemini 3 Ultra) simultaneously to maintain a real-time leaderboard.
-* **Managed Infrastructure:** We want Kaggle to host the "Metacognitive Trustworthiness" leaderboard, providing the community with a score that tells them *when* to trust a model's code suggestions.
-* **Implementation Support:** Assistance in integrating high-fidelity "Expert Evidence" streams from real CVE (Common Vulnerabilities and Exposures) databases.
+### 4. Dataset Readiness (1,030 Trials)
+Our dataset is finalized and ready for the Kaggle Dataset platform, structured into three analytical tiers:
+- **Tier 1 (Pilot):** 30 items for rapid calibration baseline.
+- **Tier 2 (Core 500):** 500 items across 10+ vulnerability classes (SQLi, XSS, SSRF).
+- **Tier 3 (CVE-Adversarial):** 500 items specifically designed to test **Resilience to Misleading Evidence**.
 
-### Phase 5: Expected Impact
-We aim to establish the **MCSL** as the industry-standard "Trustworthiness Score" for AI coding assistants. This will help developers decide which model tiers are safe for production use and drive model providers to prioritize self-correction and calibration alongside raw performance.
+### 5. Alignment with AGI Frameworks
+MCSL directly aligns with the **DeepMind AGI Cognitive Framework**:
+- **Section 7.7 (Metacognition):** Direct measurement of Type-2 awareness.
+- **Section 7.8.5 (Conflict Resolution):** Evaluating belief-updating under adversarial pressure.
+
+### 6. Resource Request
+- **High-Compute Quota:** To run 1,030-trial multi-turn evaluations across every major LLM (GPT-5, Claude-Optus, Gemini Ultra) to maintain a live, community-visible "Metacognitive Leaderboard."
+- **Managed Deployment:** Kaggle infrastructure to host the leaderboard and the versioned **Metacognitive Coding Safety Dataset**.
+
+### 7. Expected Impact
+We aim to establish the **MCSL Trustworthiness Score** as the industry-standard for AI pair-programmers. This score tells the user exactly *when* to trust the AI's "Confidence" and when to trigger a human audit, ultimately reducing the injection of vulnerabilities into global code repositories.
+
+---
+*Submitted for consideration in the Kaggle Research Grants program.*

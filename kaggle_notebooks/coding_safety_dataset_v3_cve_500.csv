@@ -1,0 +1,549 @@
+id,language,vulnerability_type,difficulty,code,is_vulnerable,evidence_support_true,evidence_support_false,evidence_strength,has_conflict,conf1,conf2,expected_direction,belief_update_alignment,reasoning_steps,mutation_level,is_cve_style
+7d4bd098-a408-4df6-a043-dd4128674bc0,Python,Weak Crypto,easy,hashlib.md5(password).hexdigest(),False,Potential vulnerability detected.,Looks safe after review.,0.706,True,0.347,0.521,increase,True,5,2,True
+aad28e7c-d4d7-49b3-8277-c7164c40293b,Python,SQL Injection,easy,"def get_user(db, uid):
+    query = f""SELECT * FROM users WHERE id = {uid}""
+    return db.execute(query)",True,Potential vulnerability detected.,Looks safe after review.,0.73,False,0.503,0.659,increase,True,2,2,False
+f7a4c930-1255-4bb1-a759-318227a54405,Python,SQL Injection,hard,"def get_user(db, uid):
+    query = f""SELECT * FROM users WHERE id = {uid}""
+    return db.execute(query)",False,Potential vulnerability detected.,Looks safe after review.,0.758,True,0.404,0.526,increase,True,1,2,True
+41249443-92d3-490c-bc6f-d65828ffb797,JavaScript,Insecure Deserialization,hard,pickle.loads(data),False,Potential vulnerability detected.,Looks safe after review.,0.884,False,0.684,0.53,decrease,True,1,3,False
+26d5a875-e990-4d4e-9287-335d6b6d7d14,C,Weak Crypto,medium,hashlib.md5(password).hexdigest(),True,Potential vulnerability detected.,Looks safe after review.,0.764,True,0.623,0.789,increase,True,2,1,False
+26585b70-4ace-40ef-8d42-20b739ba9de1,JavaScript,Path Traversal,hard,open(base + '/' + filename),False,Potential vulnerability detected.,Looks safe after review.,0.46,True,0.298,0.177,decrease,True,5,3,True
+8ae72fe1-1b9c-4a8c-aa26-f20fc79eeedf,C,Buffer Overflow,easy,"char buf[10]; strcpy(buf, input);",True,Potential vulnerability detected.,Looks safe after review.,0.684,True,0.477,0.278,decrease,True,3,1,True
+8406adf9-5b6a-45cb-82c4-1eb19ee08e5c,JavaScript,SQL Injection,medium,"app.get('/user', (req,res)=>{ let q = `SELECT * FROM users WHERE id = ${req.query.id}`; db.exec(q); });",False,Potential vulnerability detected.,Looks safe after review.,0.6,False,0.24,0.119,decrease,True,2,2,True
+50b7dfdf-7cfc-4b61-aa55-bb1bea492fab,C,Command Injection,hard,os.system('ls ' + userInput),False,Potential vulnerability detected.,Looks safe after review.,0.54,True,0.648,0.458,decrease,True,2,3,False
+b6cc7254-ef3d-417d-8ae3-207415133b78,Python,XSS,easy,res.send('<div>' + userInput + '</div>');,True,Potential vulnerability detected.,Looks safe after review.,0.531,False,0.576,0.416,decrease,True,5,2,True
+2e976e21-fd0d-433d-8ceb-089631883b2a,C,Weak Crypto,easy,hashlib.md5(password).hexdigest(),False,Potential vulnerability detected.,Looks safe after review.,0.561,False,0.661,0.55,decrease,True,1,3,False
+241abfbc-9b2b-43b7-80af-0d482c325402,Python,Buffer Overflow,hard,"char buf[10]; strcpy(buf, input);",True,Potential vulnerability detected.,Looks safe after review.,0.605,True,0.722,0.538,decrease,True,2,2,True
+d0dc72fc-5d50-489f-aedd-5c1bf3e6beb2,C,Buffer Overflow,easy,"char buf[10]; strcpy(buf, input);",False,Potential vulnerability detected.,Looks safe after review.,0.827,False,0.493,0.686,increase,True,2,1,True
+8d825ba4-57c2-4a24-ae17-9a94715c3f1b,Python,Use After Free,easy,free(ptr); printf(ptr);,False,Potential vulnerability detected.,Looks safe after review.,0.585,True,0.69,0.803,increase,True,3,3,False
+0215599b-edd7-4dc0-958d-fdb315c5dcce,C,Command Injection,hard,os.system('ls ' + userInput),True,Potential vulnerability detected.,Looks safe after review.,0.69,False,0.628,0.428,decrease,True,5,2,True
+01df264f-e122-43e0-8b08-de0454b627b0,Python,Command Injection,easy,os.system('ls ' + userInput),False,Potential vulnerability detected.,Looks safe after review.,0.304,True,0.213,0.372,increase,True,2,1,True
+a8882192-4abb-4a1f-b741-6b24900045bf,Python,Insecure Deserialization,hard,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.379,False,0.367,0.246,decrease,True,2,2,False
+f8340abc-5970-4a26-8915-87401096a967,Python,Command Injection,easy,os.system('ls ' + userInput),False,Potential vulnerability detected.,Looks safe after review.,0.737,True,0.413,0.266,decrease,True,1,2,False
+744139af-f684-4f4d-b5fe-1127839bc2cb,Python,XSS,easy,res.send('<div>' + userInput + '</div>');,True,Potential vulnerability detected.,Looks safe after review.,0.467,True,0.522,0.664,increase,True,1,2,True
+2aed080d-f84d-4ed6-967d-6840e47b05db,C,SQL Injection,hard,"char query[256]; sprintf(query, ""SELECT * FROM users WHERE id = %s"", uid); execute(query);",True,Potential vulnerability detected.,Looks safe after review.,0.591,True,0.781,0.898,increase,True,4,1,True
+8ead595e-868a-4c65-b2fe-e8a7901ff5bc,Python,Auth Bypass,medium,"jwt.decode(token, options={'verify_signature': False})",False,Potential vulnerability detected.,Looks safe after review.,0.718,False,0.756,0.627,decrease,True,2,1,False
+6c8a82e1-24f4-4327-ad2b-ce191bd12d8b,Python,Command Injection,hard,os.system('ls ' + userInput),True,Potential vulnerability detected.,Looks safe after review.,0.586,True,0.649,0.754,increase,True,1,3,True
+7fd2b103-9ab5-4504-bd27-b505f25b3992,Python,SSRF,hard,requests.get(url),True,Potential vulnerability detected.,Looks safe after review.,0.865,True,0.605,0.745,increase,True,5,3,True
+6dec5620-49ea-49bb-a775-76f087336045,Python,Use After Free,medium,free(ptr); printf(ptr);,False,Potential vulnerability detected.,Looks safe after review.,0.489,False,0.761,0.928,increase,True,4,1,False
+836f4b3b-d2cd-4652-aa02-53d7e35901b5,JavaScript,Race Condition,easy,if balance >= amt: balance -= amt,True,Potential vulnerability detected.,Looks safe after review.,0.428,False,0.475,0.582,increase,True,2,2,True
+7944e9e6-1007-46d3-8a9b-b3a03dd24b7e,JavaScript,Command Injection,medium,os.system('ls ' + userInput),True,Potential vulnerability detected.,Looks safe after review.,0.892,True,0.463,0.302,decrease,True,5,2,True
+c4d81e01-7962-4bae-99a8-bb04d3bb7cbb,JavaScript,SSRF,easy,requests.get(url),True,Potential vulnerability detected.,Looks safe after review.,0.663,False,0.645,0.772,increase,True,2,3,False
+7fb2ba43-13d8-4d3d-93a0-336f9f9079ab,JavaScript,Buffer Overflow,medium,"char buf[10]; strcpy(buf, input);",True,Potential vulnerability detected.,Looks safe after review.,0.326,False,0.255,0.072,decrease,True,2,3,False
+32e60e67-e393-43e7-b713-ee3179ad4bb5,C,SSRF,medium,requests.get(url),False,Potential vulnerability detected.,Looks safe after review.,0.83,True,0.537,0.645,increase,True,5,1,False
+78c83576-5be5-474f-bbcf-a933d629ceb9,C,Use After Free,easy,free(ptr); printf(ptr);,False,Potential vulnerability detected.,Looks safe after review.,0.86,True,0.276,0.14,decrease,True,3,1,True
+0d4067a5-502b-4552-91ed-7f2745fd4d76,Python,Weak Crypto,medium,hashlib.md5(password).hexdigest(),False,Potential vulnerability detected.,Looks safe after review.,0.442,True,0.784,0.977,increase,True,2,2,True
+33294cf2-8ab9-452d-883b-f7bd1357f631,C,SSRF,medium,requests.get(url),False,Potential vulnerability detected.,Looks safe after review.,0.772,True,0.681,0.808,increase,True,4,1,False
+5f34a073-aca5-4f0e-b033-222fa6c4b1f5,Python,Command Injection,medium,os.system('ls ' + userInput),False,Potential vulnerability detected.,Looks safe after review.,0.696,False,0.383,0.505,increase,True,3,2,True
+f02ccbd2-504a-4556-b72a-285c19316148,JavaScript,Path Traversal,hard,open(base + '/' + filename),False,Potential vulnerability detected.,Looks safe after review.,0.369,False,0.608,0.414,decrease,True,2,3,False
+7f1fe5b3-2d9a-45ff-ac7a-fae3c6df0704,Python,SQL Injection,hard,"def get_user(db, uid):
+    query = f""SELECT * FROM users WHERE id = {uid}""
+    return db.execute(query)",False,Potential vulnerability detected.,Looks safe after review.,0.891,True,0.407,0.263,decrease,True,4,3,True
+a0430a9c-9cf6-4475-b6d4-394b095a89fa,Python,Path Traversal,hard,open(base + '/' + filename),False,Potential vulnerability detected.,Looks safe after review.,0.342,False,0.201,0.337,increase,True,5,2,True
+5fd71b3e-eb77-46d7-94fe-41a47518d1b1,C,Path Traversal,medium,open(base + '/' + filename),False,Potential vulnerability detected.,Looks safe after review.,0.415,False,0.396,0.241,decrease,True,2,3,False
+3dfd454a-4450-486c-992b-9bd69b3517d1,C,Auth Bypass,easy,"jwt.decode(token, options={'verify_signature': False})",False,Potential vulnerability detected.,Looks safe after review.,0.664,False,0.372,0.193,decrease,True,4,2,False
+becafe8a-66d9-4c72-b961-29ea46d0d761,Python,Weak Crypto,hard,hashlib.md5(password).hexdigest(),False,Potential vulnerability detected.,Looks safe after review.,0.47,False,0.676,0.842,increase,True,1,1,False
+469719c9-8763-43e2-8800-30395b6968f0,Python,Command Injection,easy,os.system('ls ' + userInput),True,Potential vulnerability detected.,Looks safe after review.,0.761,False,0.228,0.067,decrease,True,4,3,True
+31620074-a352-405f-8ad4-c0e779091259,JavaScript,Auth Bypass,medium,"jwt.decode(token, options={'verify_signature': False})",True,Potential vulnerability detected.,Looks safe after review.,0.816,True,0.289,0.478,increase,True,4,1,True
+50ab9edd-464a-4d70-ad67-d98f8304f001,JavaScript,Buffer Overflow,easy,"char buf[10]; strcpy(buf, input);",True,Potential vulnerability detected.,Looks safe after review.,0.781,False,0.75,0.896,increase,True,4,3,False
+02a00f86-2a1a-4cfa-b521-169e41b8b5e5,JavaScript,Buffer Overflow,easy,"char buf[10]; strcpy(buf, input);",False,Potential vulnerability detected.,Looks safe after review.,0.466,False,0.47,0.654,increase,True,2,2,False
+b38046a9-025d-44cd-be3d-2f8054142467,C,XSS,medium,res.send('<div>' + userInput + '</div>');,True,Potential vulnerability detected.,Looks safe after review.,0.348,True,0.363,0.174,decrease,True,2,2,True
+4d4da5c0-2d7c-4eb9-8b4c-e998266fbdf4,Python,Command Injection,medium,os.system('ls ' + userInput),False,Potential vulnerability detected.,Looks safe after review.,0.424,False,0.399,0.257,decrease,True,4,3,True
+7725b96d-98a5-40c9-919b-1e481b7e633d,JavaScript,Use After Free,medium,free(ptr); printf(ptr);,True,Potential vulnerability detected.,Looks safe after review.,0.812,False,0.766,0.591,decrease,True,5,3,True
+1e0e61af-495b-42db-9329-613a3d739ee5,Python,Race Condition,medium,if balance >= amt: balance -= amt,False,Potential vulnerability detected.,Looks safe after review.,0.707,False,0.491,0.357,decrease,True,2,2,True
+c2ad94f7-8eb9-44b5-b76c-4312f8d21145,C,Use After Free,easy,free(ptr); printf(ptr);,False,Potential vulnerability detected.,Looks safe after review.,0.557,False,0.555,0.663,increase,True,2,1,False
+d8befc38-047f-43dc-9a2b-15079dda06be,JavaScript,Auth Bypass,easy,"jwt.decode(token, options={'verify_signature': False})",False,Potential vulnerability detected.,Looks safe after review.,0.871,False,0.396,0.268,decrease,True,3,1,False
+00080210-ddb0-4499-a1ac-04f09315c0f9,C,SQL Injection,hard,"char query[256]; sprintf(query, ""SELECT * FROM users WHERE id = %s"", uid); execute(query);",True,Potential vulnerability detected.,Looks safe after review.,0.341,True,0.8,0.678,decrease,True,1,1,True
+711736d7-0165-4870-9804-dd34e7d5c65c,C,SQL Injection,easy,"char query[256]; sprintf(query, ""SELECT * FROM users WHERE id = %s"", uid); execute(query);",True,Potential vulnerability detected.,Looks safe after review.,0.431,False,0.276,0.432,increase,True,3,1,True
+0a8f8b51-af26-4a89-897f-d1f346cb779c,JavaScript,SSRF,easy,requests.get(url),True,Potential vulnerability detected.,Looks safe after review.,0.729,True,0.757,0.617,decrease,True,5,3,True
+fb699ca8-79a0-4395-a519-edda2826b5e8,C,XSS,medium,res.send('<div>' + userInput + '</div>');,True,Potential vulnerability detected.,Looks safe after review.,0.557,False,0.678,0.813,increase,True,1,3,False
+c4665927-6211-4296-849d-7d663fbfb0cb,JavaScript,SQL Injection,medium,"app.get('/user', (req,res)=>{ let q = `SELECT * FROM users WHERE id = ${req.query.id}`; db.exec(q); });",True,Potential vulnerability detected.,Looks safe after review.,0.797,True,0.46,0.296,decrease,True,4,1,False
+a977776b-359f-4000-b34c-8ce343cb9266,C,Use After Free,medium,free(ptr); printf(ptr);,False,Potential vulnerability detected.,Looks safe after review.,0.447,True,0.461,0.329,decrease,True,3,2,True
+924a2cfe-0420-46d0-bc53-53d72c300704,C,Race Condition,hard,if balance >= amt: balance -= amt,False,Potential vulnerability detected.,Looks safe after review.,0.409,True,0.402,0.217,decrease,True,3,2,False
+9415acd6-0a86-4b90-992d-0fed2c77beeb,C,Path Traversal,hard,open(base + '/' + filename),False,Potential vulnerability detected.,Looks safe after review.,0.732,False,0.533,0.642,increase,True,5,1,False
+1a76c05c-c94b-4f97-8972-8390cfc6d751,C,Weak Crypto,medium,hashlib.md5(password).hexdigest(),False,Potential vulnerability detected.,Looks safe after review.,0.543,True,0.676,0.805,increase,True,3,3,False
+a62fc734-2eda-4fa4-8e11-b5deadd08cea,C,Race Condition,hard,if balance >= amt: balance -= amt,False,Potential vulnerability detected.,Looks safe after review.,0.572,False,0.455,0.32,decrease,True,3,1,True
+0fddc953-6bb7-41f0-8551-dd51e48c4168,JavaScript,Command Injection,easy,os.system('ls ' + userInput),True,Potential vulnerability detected.,Looks safe after review.,0.654,False,0.315,0.187,decrease,True,1,1,False
+c171765c-1149-45f7-9761-a7f232971a0f,JavaScript,Command Injection,easy,os.system('ls ' + userInput),False,Potential vulnerability detected.,Looks safe after review.,0.885,False,0.208,0.335,increase,True,2,3,False
+ced11c5f-bdfd-47a7-8f60-2be1eb8ae582,Python,XSS,hard,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.879,False,0.482,0.348,decrease,True,4,1,True
+f76caa68-cf6e-4dd0-b902-cfc63010e7e0,JavaScript,Auth Bypass,easy,"jwt.decode(token, options={'verify_signature': False})",True,Potential vulnerability detected.,Looks safe after review.,0.449,False,0.291,0.182,decrease,True,5,3,True
+88685261-12cc-4a41-86ad-9e016557ade2,JavaScript,Buffer Overflow,medium,"char buf[10]; strcpy(buf, input);",False,Potential vulnerability detected.,Looks safe after review.,0.673,True,0.378,0.247,decrease,True,2,3,True
+9a984288-7104-47d0-b057-f8631941848d,C,Path Traversal,easy,open(base + '/' + filename),True,Potential vulnerability detected.,Looks safe after review.,0.545,False,0.344,0.46,increase,True,3,1,True
+f0fdcb8f-490d-42cd-ac75-6af8793f0e9c,C,Path Traversal,medium,open(base + '/' + filename),False,Potential vulnerability detected.,Looks safe after review.,0.773,True,0.243,0.435,increase,True,4,1,True
+449205de-b24e-4cf3-a3d8-663d9c128681,Python,Weak Crypto,medium,hashlib.md5(password).hexdigest(),True,Potential vulnerability detected.,Looks safe after review.,0.657,False,0.243,0.422,increase,True,4,1,False
+43317a07-8b5a-459d-a239-c11582e4e177,C,Path Traversal,medium,open(base + '/' + filename),False,Potential vulnerability detected.,Looks safe after review.,0.659,False,0.5,0.356,decrease,True,3,3,False
+e1c47cc6-0f8d-499f-b3c7-c0d49a9543c7,Python,SQL Injection,easy,"def get_user(db, uid):
+    query = f""SELECT * FROM users WHERE id = {uid}""
+    return db.execute(query)",True,Potential vulnerability detected.,Looks safe after review.,0.758,True,0.8,0.642,decrease,True,4,3,False
+d2b3d7f4-ee79-49cf-9460-1203d05f22ba,Python,Path Traversal,hard,open(base + '/' + filename),False,Potential vulnerability detected.,Looks safe after review.,0.582,False,0.581,0.384,decrease,True,3,2,True
+6db63d32-0d14-4cbe-b720-40b29d7cdab9,JavaScript,SSRF,medium,requests.get(url),False,Potential vulnerability detected.,Looks safe after review.,0.63,False,0.373,0.192,decrease,True,1,2,False
+cd01bb12-dce8-4fb3-8a73-668a55d79333,Python,Insecure Deserialization,medium,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.413,False,0.595,0.454,decrease,True,5,2,False
+5f2517fb-fa37-4d91-af5c-002eaf156667,Python,SQL Injection,medium,"def get_user(db, uid):
+    query = f""SELECT * FROM users WHERE id = {uid}""
+    return db.execute(query)",True,Potential vulnerability detected.,Looks safe after review.,0.591,True,0.757,0.569,decrease,True,5,1,True
+5c29f2c4-d815-4e3f-b2f0-562e3cff305d,C,Path Traversal,easy,open(base + '/' + filename),False,Potential vulnerability detected.,Looks safe after review.,0.37,True,0.256,0.402,increase,True,4,3,False
+ebc3b5d9-c487-4081-8c92-b9f44e7ea989,C,Buffer Overflow,medium,"char buf[10]; strcpy(buf, input);",False,Potential vulnerability detected.,Looks safe after review.,0.631,False,0.701,0.577,decrease,True,2,3,True
+bfa030de-aa87-4cab-979f-fd3b9b2b2a65,JavaScript,XSS,medium,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.47,False,0.761,0.579,decrease,True,5,3,False
+e10cd2ef-a013-4101-821b-c38f77c0cce7,JavaScript,SSRF,hard,requests.get(url),False,Potential vulnerability detected.,Looks safe after review.,0.493,True,0.407,0.261,decrease,True,2,3,False
+a05b4bc4-e407-4600-a4fd-0cc827e571aa,JavaScript,Command Injection,easy,os.system('ls ' + userInput),False,Potential vulnerability detected.,Looks safe after review.,0.698,True,0.647,0.508,decrease,True,4,1,True
+c3989c90-8e0c-4680-a78a-bcbd730401c9,C,Buffer Overflow,medium,"char buf[10]; strcpy(buf, input);",True,Potential vulnerability detected.,Looks safe after review.,0.846,True,0.725,0.615,decrease,True,2,2,True
+f90eed17-5ec9-42d5-9d20-5a0d483f42a2,JavaScript,XSS,medium,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.811,False,0.574,0.409,decrease,True,3,3,False
+0cf65bfc-9dfc-4720-9b15-a7ab1f26d050,Python,Buffer Overflow,hard,"char buf[10]; strcpy(buf, input);",True,Potential vulnerability detected.,Looks safe after review.,0.748,False,0.341,0.141,decrease,True,1,3,True
+36b395e0-1a3a-4000-bfc0-a52bc9fe5645,Python,Race Condition,hard,if balance >= amt: balance -= amt,False,Potential vulnerability detected.,Looks safe after review.,0.334,False,0.742,0.874,increase,True,3,2,True
+910d6398-39be-4913-8b78-4af93f50948c,C,Command Injection,medium,os.system('ls ' + userInput),True,Potential vulnerability detected.,Looks safe after review.,0.53,True,0.302,0.463,increase,True,4,3,True
+6adad8b7-b6c1-4bdb-8f8f-a360fc219716,JavaScript,Command Injection,hard,os.system('ls ' + userInput),False,Potential vulnerability detected.,Looks safe after review.,0.579,False,0.476,0.666,increase,True,5,1,True
+45f902ac-3a6d-4181-a677-6b4b068a4ad0,JavaScript,Race Condition,hard,if balance >= amt: balance -= amt,False,Potential vulnerability detected.,Looks safe after review.,0.574,False,0.583,0.414,decrease,True,2,2,False
+8b144b08-dd65-4b1a-8b5d-46e375061777,Python,XSS,medium,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.798,False,0.545,0.443,decrease,True,3,1,True
+487aed78-680a-48e1-899c-4d81ea2ee620,C,Use After Free,medium,free(ptr); printf(ptr);,False,Potential vulnerability detected.,Looks safe after review.,0.511,True,0.665,0.826,increase,True,5,2,True
+02dc518e-201c-4c69-a9d5-d8e9a0d341af,Python,Weak Crypto,hard,hashlib.md5(password).hexdigest(),True,Potential vulnerability detected.,Looks safe after review.,0.519,True,0.385,0.282,decrease,True,1,2,False
+18a97851-0191-449e-a619-2c45efbe48ce,Python,Auth Bypass,easy,"jwt.decode(token, options={'verify_signature': False})",True,Potential vulnerability detected.,Looks safe after review.,0.848,True,0.672,0.519,decrease,True,3,2,False
+3b9027c3-64fe-45b5-a8cf-ac53b7f1c561,Python,Insecure Deserialization,medium,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.735,False,0.284,0.47,increase,True,5,2,True
+1fec51a1-86e3-4546-bde7-365609e79d70,Python,Auth Bypass,medium,"jwt.decode(token, options={'verify_signature': False})",True,Potential vulnerability detected.,Looks safe after review.,0.793,False,0.473,0.315,decrease,True,1,3,True
+76d80cfc-5ec0-41b1-9193-9fe1a6714c54,Python,Race Condition,hard,if balance >= amt: balance -= amt,False,Potential vulnerability detected.,Looks safe after review.,0.681,False,0.749,0.914,increase,True,3,3,False
+0c798ef7-7bc7-4276-8645-d9b49e933fad,Python,XSS,easy,res.send('<div>' + userInput + '</div>');,True,Potential vulnerability detected.,Looks safe after review.,0.441,True,0.383,0.271,decrease,True,4,2,False
+35dc6af8-56a2-474c-9b8b-260edcd4b6d5,C,Weak Crypto,hard,hashlib.md5(password).hexdigest(),False,Potential vulnerability detected.,Looks safe after review.,0.693,False,0.552,0.741,increase,True,5,2,False
+cf217992-ac67-4a22-846c-c6b2f4925f56,C,SQL Injection,medium,"char query[256]; sprintf(query, ""SELECT * FROM users WHERE id = %s"", uid); execute(query);",True,Potential vulnerability detected.,Looks safe after review.,0.36,False,0.466,0.652,increase,True,5,3,False
+9c07a5bd-cf41-40cf-af24-93231f9a6174,JavaScript,SQL Injection,medium,"app.get('/user', (req,res)=>{ let q = `SELECT * FROM users WHERE id = ${req.query.id}`; db.exec(q); });",True,Potential vulnerability detected.,Looks safe after review.,0.427,True,0.781,0.672,decrease,True,1,2,True
+51b4dddf-fb36-40c6-aec8-1c26abe97935,C,SSRF,easy,requests.get(url),True,Potential vulnerability detected.,Looks safe after review.,0.788,True,0.698,0.857,increase,True,3,1,True
+9bcb48d7-3e51-470b-a73e-3e2be47d0a50,Python,Path Traversal,easy,open(base + '/' + filename),False,Potential vulnerability detected.,Looks safe after review.,0.315,True,0.679,0.845,increase,True,3,1,False
+b2caf77e-85df-4076-85f6-e25bab465579,Python,SQL Injection,medium,"def get_user(db, uid):
+    query = f""SELECT * FROM users WHERE id = {uid}""
+    return db.execute(query)",True,Potential vulnerability detected.,Looks safe after review.,0.747,False,0.276,0.123,decrease,True,4,2,True
+cd0706a3-78bd-4704-a7d9-706165e8141e,C,Race Condition,easy,if balance >= amt: balance -= amt,True,Potential vulnerability detected.,Looks safe after review.,0.878,True,0.636,0.49,decrease,True,4,2,False
+06192abf-9523-4701-8c0b-7f614fe58dca,Python,Weak Crypto,medium,hashlib.md5(password).hexdigest(),False,Potential vulnerability detected.,Looks safe after review.,0.389,True,0.244,0.376,increase,True,3,3,False
+d89f25c2-c197-4ab8-86f8-277c3a479c18,C,Auth Bypass,hard,"jwt.decode(token, options={'verify_signature': False})",False,Potential vulnerability detected.,Looks safe after review.,0.721,True,0.472,0.362,decrease,True,4,2,True
+a9c05416-d4e4-43d9-862a-ae9cfec5bf5a,JavaScript,Auth Bypass,medium,"jwt.decode(token, options={'verify_signature': False})",False,Potential vulnerability detected.,Looks safe after review.,0.488,False,0.45,0.581,increase,True,3,1,False
+fd6061e8-3686-40e5-8c21-4212d0317447,Python,XSS,easy,res.send('<div>' + userInput + '</div>');,True,Potential vulnerability detected.,Looks safe after review.,0.634,False,0.459,0.278,decrease,True,1,2,False
+de0c1c1a-d6cb-4843-9284-1d1bef655ead,JavaScript,Weak Crypto,hard,hashlib.md5(password).hexdigest(),True,Potential vulnerability detected.,Looks safe after review.,0.647,True,0.781,0.646,decrease,True,2,3,False
+e4581ff2-ecc8-485a-bea4-6c281d5b35f4,Python,Command Injection,medium,os.system('ls ' + userInput),False,Potential vulnerability detected.,Looks safe after review.,0.784,True,0.269,0.112,decrease,True,5,3,False
+182080b9-bc94-4c0b-8d89-cb821c3e5b60,Python,SQL Injection,medium,"def get_user(db, uid):
+    query = f""SELECT * FROM users WHERE id = {uid}""
+    return db.execute(query)",False,Potential vulnerability detected.,Looks safe after review.,0.822,False,0.753,0.652,decrease,True,1,1,True
+b2cc6453-a4b5-40df-b1be-32aded1274a0,C,XSS,hard,res.send('<div>' + userInput + '</div>');,True,Potential vulnerability detected.,Looks safe after review.,0.522,False,0.426,0.292,decrease,True,5,3,True
+7cdc94f2-9751-4125-8573-4fc391d66e59,Python,SQL Injection,easy,"def get_user(db, uid):
+    query = f""SELECT * FROM users WHERE id = {uid}""
+    return db.execute(query)",True,Potential vulnerability detected.,Looks safe after review.,0.554,False,0.604,0.46,decrease,True,4,2,True
+cf5be150-02dc-444b-ada5-bf64d3a653de,Python,Buffer Overflow,medium,"char buf[10]; strcpy(buf, input);",False,Potential vulnerability detected.,Looks safe after review.,0.485,True,0.267,0.114,decrease,True,4,3,True
+f88395da-c25a-47ea-8c87-edc971fb9b2e,Python,SQL Injection,medium,"def get_user(db, uid):
+    query = f""SELECT * FROM users WHERE id = {uid}""
+    return db.execute(query)",True,Potential vulnerability detected.,Looks safe after review.,0.372,False,0.66,0.531,decrease,True,4,1,True
+88f3af26-b4d8-4477-80cb-150c4ab53261,C,Auth Bypass,hard,"jwt.decode(token, options={'verify_signature': False})",True,Potential vulnerability detected.,Looks safe after review.,0.817,True,0.5,0.393,decrease,True,4,1,False
+fbb3115a-aa53-4e0a-bb0e-9826e518bbd6,JavaScript,XSS,hard,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.543,False,0.544,0.415,decrease,True,2,3,False
+ef7de9ed-85cc-45e1-b7b2-3c21c6cd5601,Python,Insecure Deserialization,medium,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.537,False,0.346,0.194,decrease,True,3,1,False
+794f1b39-ad42-4c7e-8ed1-73a70abc7c9c,Python,SSRF,hard,requests.get(url),True,Potential vulnerability detected.,Looks safe after review.,0.51,True,0.518,0.709,increase,True,2,1,True
+e1a85f35-4628-4864-bc3c-0590c1eab156,Python,Path Traversal,easy,open(base + '/' + filename),True,Potential vulnerability detected.,Looks safe after review.,0.764,False,0.656,0.774,increase,True,4,3,False
+0944f4dd-a52f-4c8c-bb71-6e550aef4b8d,C,Weak Crypto,hard,hashlib.md5(password).hexdigest(),False,Potential vulnerability detected.,Looks safe after review.,0.341,False,0.719,0.604,decrease,True,3,2,True
+3c707154-864e-4caa-b20e-8a641f1b633c,C,Insecure Deserialization,easy,pickle.loads(data),False,Potential vulnerability detected.,Looks safe after review.,0.799,True,0.477,0.583,increase,True,1,3,False
+14594d27-ad8a-4a44-8030-8afff80fd015,C,Race Condition,hard,if balance >= amt: balance -= amt,True,Potential vulnerability detected.,Looks safe after review.,0.585,True,0.47,0.602,increase,True,1,2,True
+1c80adbb-0679-49d3-a81f-fa3f3a7cf608,C,Insecure Deserialization,easy,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.614,True,0.223,0.024,decrease,True,3,2,False
+ccfbd01e-a3e3-42ad-9356-1c7571222287,JavaScript,Auth Bypass,medium,"jwt.decode(token, options={'verify_signature': False})",True,Potential vulnerability detected.,Looks safe after review.,0.357,False,0.674,0.567,decrease,True,3,2,True
+01da3a4b-553a-4188-89db-eaf392ff5695,Python,Insecure Deserialization,hard,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.719,False,0.75,0.553,decrease,True,2,3,True
+ecad0169-68e0-4fe7-bb61-327bc0ce4388,C,Path Traversal,medium,open(base + '/' + filename),False,Potential vulnerability detected.,Looks safe after review.,0.554,False,0.688,0.853,increase,True,1,2,False
+c4bf88db-69de-457c-b85c-745c68bc6ee5,Python,SSRF,medium,requests.get(url),False,Potential vulnerability detected.,Looks safe after review.,0.477,True,0.315,0.43,increase,True,5,3,True
+4d9689d9-fe5c-4ecb-aa7b-cbddc09fdbe2,JavaScript,Weak Crypto,hard,hashlib.md5(password).hexdigest(),True,Potential vulnerability detected.,Looks safe after review.,0.799,True,0.558,0.674,increase,True,4,1,False
+b9914877-48d7-4b80-8dbf-257e9fb26883,C,Insecure Deserialization,hard,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.77,True,0.782,0.607,decrease,True,5,1,False
+d9dab26d-cc0e-4b2b-8e8f-3c2df0c0f552,Python,Race Condition,medium,if balance >= amt: balance -= amt,False,Potential vulnerability detected.,Looks safe after review.,0.602,False,0.477,0.299,decrease,True,2,1,True
+59b08478-f9e5-427b-a237-74f9dfc85170,Python,Path Traversal,hard,open(base + '/' + filename),False,Potential vulnerability detected.,Looks safe after review.,0.61,True,0.724,0.895,increase,True,3,1,True
+a358f0ab-3b83-4fc9-8a76-a1f5427b5406,JavaScript,Path Traversal,hard,open(base + '/' + filename),True,Potential vulnerability detected.,Looks safe after review.,0.433,False,0.699,0.894,increase,True,3,1,False
+2e8c88f5-9968-43d1-9ca3-7c7dac8a5548,JavaScript,SQL Injection,hard,"app.get('/user', (req,res)=>{ let q = `SELECT * FROM users WHERE id = ${req.query.id}`; db.exec(q); });",False,Potential vulnerability detected.,Looks safe after review.,0.317,True,0.341,0.478,increase,True,3,1,True
+fb646ecf-674c-47dd-9bf6-faf4c04d505c,JavaScript,SQL Injection,medium,"app.get('/user', (req,res)=>{ let q = `SELECT * FROM users WHERE id = ${req.query.id}`; db.exec(q); });",True,Potential vulnerability detected.,Looks safe after review.,0.303,True,0.655,0.51,decrease,True,1,2,True
+e95fb4c9-878c-477d-bbde-ef4a741a7949,C,SSRF,hard,requests.get(url),False,Potential vulnerability detected.,Looks safe after review.,0.373,True,0.267,0.143,decrease,True,4,3,False
+e0dc04bc-4aba-4d1c-8a0c-e2a9eb071f6b,Python,XSS,medium,res.send('<div>' + userInput + '</div>');,True,Potential vulnerability detected.,Looks safe after review.,0.475,True,0.579,0.751,increase,True,5,2,True
+955e8360-c90a-4a09-be71-90ef7faa9894,JavaScript,Use After Free,easy,free(ptr); printf(ptr);,True,Potential vulnerability detected.,Looks safe after review.,0.616,True,0.514,0.407,decrease,True,4,2,True
+781eed56-4f85-46ec-9c74-12177e3d2d25,JavaScript,Weak Crypto,medium,hashlib.md5(password).hexdigest(),False,Potential vulnerability detected.,Looks safe after review.,0.507,True,0.648,0.469,decrease,True,5,3,False
+3a2c46a5-d85d-4215-9352-4db2e41608f7,Python,SSRF,medium,requests.get(url),False,Potential vulnerability detected.,Looks safe after review.,0.711,False,0.688,0.871,increase,True,2,1,True
+36c0fdd5-7401-463c-9c8c-39c79e3b5c66,Python,Race Condition,medium,if balance >= amt: balance -= amt,True,Potential vulnerability detected.,Looks safe after review.,0.489,False,0.226,0.415,increase,True,5,2,False
+329b921d-deba-4baa-bbbc-2030475ef680,Python,Path Traversal,hard,open(base + '/' + filename),True,Potential vulnerability detected.,Looks safe after review.,0.499,True,0.372,0.559,increase,True,3,2,False
+0382e08e-6ab0-4e96-a128-952e6b8bc327,JavaScript,Race Condition,medium,if balance >= amt: balance -= amt,True,Potential vulnerability detected.,Looks safe after review.,0.778,False,0.498,0.361,decrease,True,1,3,False
+f898831a-fcd4-4399-b73c-188ea36623c6,JavaScript,XSS,hard,res.send('<div>' + userInput + '</div>');,True,Potential vulnerability detected.,Looks safe after review.,0.497,False,0.527,0.417,decrease,True,3,2,False
+82c5348f-3581-4ac8-9780-7443ebf28020,C,SSRF,medium,requests.get(url),False,Potential vulnerability detected.,Looks safe after review.,0.561,True,0.468,0.307,decrease,True,1,3,False
+bbd23c13-03ff-4182-8223-4ab199720085,C,Insecure Deserialization,hard,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.707,False,0.772,0.957,increase,True,1,1,True
+83c07b45-fbc7-4ca6-afa1-3510e149c92a,C,Command Injection,medium,os.system('ls ' + userInput),False,Potential vulnerability detected.,Looks safe after review.,0.707,False,0.43,0.591,increase,True,3,2,True
+e57092ff-6d0f-4ac6-a2f1-f9f4f8f43759,Python,Use After Free,hard,free(ptr); printf(ptr);,False,Potential vulnerability detected.,Looks safe after review.,0.368,True,0.439,0.314,decrease,True,4,3,False
+333209c3-a2c9-4ede-aeca-d39c7a11af77,Python,Buffer Overflow,medium,"char buf[10]; strcpy(buf, input);",False,Potential vulnerability detected.,Looks safe after review.,0.471,False,0.622,0.822,increase,True,2,1,True
+5f53fc4f-dd43-4ff6-beb9-3bdea2057cf7,JavaScript,XSS,easy,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.726,False,0.798,0.631,decrease,True,3,1,True
+1118a17a-7c9a-4236-bcf2-c516294b9385,C,Insecure Deserialization,easy,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.596,False,0.791,0.915,increase,True,5,3,False
+83d5acd8-7b7c-4170-b1be-5d855c9d1ea5,C,Race Condition,easy,if balance >= amt: balance -= amt,True,Potential vulnerability detected.,Looks safe after review.,0.731,False,0.239,0.039,decrease,True,4,3,True
+7f4830bf-fcda-4d3e-9eef-b8745328a928,JavaScript,SSRF,hard,requests.get(url),True,Potential vulnerability detected.,Looks safe after review.,0.797,True,0.47,0.357,decrease,True,2,2,True
+eef5d595-ef2f-4a2d-a16d-5a739e13edb4,C,XSS,easy,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.435,False,0.299,0.106,decrease,True,1,2,True
+bf65b3ae-cf6c-4af7-ab97-6b94aec781ec,C,Weak Crypto,medium,hashlib.md5(password).hexdigest(),True,Potential vulnerability detected.,Looks safe after review.,0.401,True,0.575,0.725,increase,True,2,3,False
+4a6b4aa8-47ba-45c3-ad34-ef41da56758a,Python,Use After Free,easy,free(ptr); printf(ptr);,True,Potential vulnerability detected.,Looks safe after review.,0.76,False,0.227,0.062,decrease,True,5,3,True
+32fbf061-3a6d-4f7a-8cb0-d6605741ff47,C,Race Condition,hard,if balance >= amt: balance -= amt,False,Potential vulnerability detected.,Looks safe after review.,0.783,False,0.585,0.437,decrease,True,3,2,True
+9c28ac9a-7cd9-4a5e-ae45-076b95b1e316,Python,SQL Injection,medium,"def get_user(db, uid):
+    query = f""SELECT * FROM users WHERE id = {uid}""
+    return db.execute(query)",False,Potential vulnerability detected.,Looks safe after review.,0.386,False,0.491,0.625,increase,True,3,2,True
+50d8e412-2f0c-4323-880d-434f727c2951,C,Insecure Deserialization,hard,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.57,True,0.391,0.279,decrease,True,1,1,False
+7cba34a6-5a97-4c0e-960f-a9bb805e4bdd,C,Auth Bypass,medium,"jwt.decode(token, options={'verify_signature': False})",True,Potential vulnerability detected.,Looks safe after review.,0.86,False,0.778,0.959,increase,True,2,1,False
+6dd482d4-68a4-4bd0-a70a-025e371cfd8c,JavaScript,Buffer Overflow,medium,"char buf[10]; strcpy(buf, input);",False,Potential vulnerability detected.,Looks safe after review.,0.603,True,0.498,0.693,increase,True,2,3,False
+63abf191-4e9d-4a76-8adb-a14577009fe9,Python,SQL Injection,medium,"def get_user(db, uid):
+    query = f""SELECT * FROM users WHERE id = {uid}""
+    return db.execute(query)",False,Potential vulnerability detected.,Looks safe after review.,0.305,True,0.559,0.43,decrease,True,4,1,False
+9fd5c663-128f-4766-b9f7-6df4569ae25c,JavaScript,Insecure Deserialization,medium,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.473,False,0.44,0.576,increase,True,5,2,False
+99094c12-028f-462a-8b02-4b8eac417937,C,Use After Free,hard,free(ptr); printf(ptr);,True,Potential vulnerability detected.,Looks safe after review.,0.777,False,0.277,0.416,increase,True,5,2,True
+19a245bf-db23-47c5-8b8f-b5a02618df5c,C,Command Injection,hard,os.system('ls ' + userInput),False,Potential vulnerability detected.,Looks safe after review.,0.728,False,0.5,0.604,increase,True,5,2,True
+79434374-a038-45ce-b6ae-0074ad7bd3e8,C,Use After Free,easy,free(ptr); printf(ptr);,False,Potential vulnerability detected.,Looks safe after review.,0.894,False,0.759,0.643,decrease,True,5,2,False
+7678e68c-4104-444d-922a-4b4a6dfb8fdf,JavaScript,Use After Free,medium,free(ptr); printf(ptr);,True,Potential vulnerability detected.,Looks safe after review.,0.65,True,0.421,0.619,increase,True,5,2,False
+7b2b6493-aaa8-4b20-86fb-bfd9faa20232,C,Weak Crypto,hard,hashlib.md5(password).hexdigest(),True,Potential vulnerability detected.,Looks safe after review.,0.677,False,0.633,0.516,decrease,True,2,3,True
+8533db35-3713-49d8-812e-f19049eafc0a,C,SQL Injection,hard,"char query[256]; sprintf(query, ""SELECT * FROM users WHERE id = %s"", uid); execute(query);",True,Potential vulnerability detected.,Looks safe after review.,0.391,True,0.314,0.183,decrease,True,4,3,False
+fd5d8a45-15a5-4e23-ba2b-953d9feb432e,C,SQL Injection,easy,"char query[256]; sprintf(query, ""SELECT * FROM users WHERE id = %s"", uid); execute(query);",True,Potential vulnerability detected.,Looks safe after review.,0.488,True,0.537,0.384,decrease,True,4,3,False
+b6311aaf-15a0-4a9e-9aba-360c72dfe262,JavaScript,Buffer Overflow,hard,"char buf[10]; strcpy(buf, input);",False,Potential vulnerability detected.,Looks safe after review.,0.467,False,0.566,0.762,increase,True,2,2,False
+4d56e20d-9c4b-40de-9078-810a1f9fdb0f,C,Command Injection,hard,os.system('ls ' + userInput),False,Potential vulnerability detected.,Looks safe after review.,0.861,False,0.39,0.234,decrease,True,3,1,False
+61cb9ba8-37a1-4d44-86a0-9371175455cf,JavaScript,Auth Bypass,easy,"jwt.decode(token, options={'verify_signature': False})",False,Potential vulnerability detected.,Looks safe after review.,0.565,False,0.225,0.36,increase,True,4,1,True
+401a86a0-2aad-4213-a3a1-d8a36a516feb,JavaScript,Buffer Overflow,hard,"char buf[10]; strcpy(buf, input);",False,Potential vulnerability detected.,Looks safe after review.,0.702,True,0.282,0.406,increase,True,2,1,True
+5bf69bcf-f1cc-4827-a984-ab193ad225ad,JavaScript,Auth Bypass,hard,"jwt.decode(token, options={'verify_signature': False})",False,Potential vulnerability detected.,Looks safe after review.,0.63,True,0.26,0.361,increase,True,4,3,False
+ca5e17e1-091b-48f3-83fb-ed515caee33b,C,Race Condition,easy,if balance >= amt: balance -= amt,False,Potential vulnerability detected.,Looks safe after review.,0.354,True,0.393,0.584,increase,True,5,3,True
+94d5bcf0-b139-43bb-ae51-6c3e9ca602ae,JavaScript,SSRF,easy,requests.get(url),True,Potential vulnerability detected.,Looks safe after review.,0.412,False,0.798,0.619,decrease,True,1,1,False
+1a70c45e-4771-4738-ae6a-44acd887bd90,C,Use After Free,easy,free(ptr); printf(ptr);,False,Potential vulnerability detected.,Looks safe after review.,0.381,False,0.371,0.182,decrease,True,3,1,True
+356bbce0-73d9-4756-b059-23d968413243,Python,Insecure Deserialization,hard,pickle.loads(data),False,Potential vulnerability detected.,Looks safe after review.,0.502,False,0.589,0.69,increase,True,5,3,True
+178aa6a0-b7df-469a-8e09-f6360bc821ef,C,SSRF,hard,requests.get(url),False,Potential vulnerability detected.,Looks safe after review.,0.702,True,0.696,0.587,decrease,True,2,2,False
+fc9e95d2-1831-4cbb-86db-9d7230dcc0f3,Python,Command Injection,medium,os.system('ls ' + userInput),False,Potential vulnerability detected.,Looks safe after review.,0.481,True,0.341,0.146,decrease,True,3,3,False
+d10a76f8-bb5d-4889-addf-d6b722cec1c8,Python,Command Injection,hard,os.system('ls ' + userInput),True,Potential vulnerability detected.,Looks safe after review.,0.602,False,0.479,0.62,increase,True,1,3,False
+789b7fb4-8c89-4689-8ff7-058919785620,C,Insecure Deserialization,easy,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.749,False,0.774,0.659,decrease,True,4,3,False
+bba17667-5b0a-4322-9b4a-d7d7b917da61,C,Buffer Overflow,easy,"char buf[10]; strcpy(buf, input);",True,Potential vulnerability detected.,Looks safe after review.,0.617,False,0.608,0.761,increase,True,1,3,True
+4e8e7d1e-e36e-4e73-9879-848f7487447a,C,SQL Injection,hard,"char query[256]; sprintf(query, ""SELECT * FROM users WHERE id = %s"", uid); execute(query);",True,Potential vulnerability detected.,Looks safe after review.,0.813,False,0.544,0.66,increase,True,1,3,True
+cfe2cf54-43c0-4ec3-964b-09e0d714b8ec,JavaScript,Use After Free,easy,free(ptr); printf(ptr);,False,Potential vulnerability detected.,Looks safe after review.,0.549,True,0.685,0.572,decrease,True,5,2,False
+3013ee21-8a45-492c-9299-73db5659b3ae,JavaScript,SQL Injection,medium,"app.get('/user', (req,res)=>{ let q = `SELECT * FROM users WHERE id = ${req.query.id}`; db.exec(q); });",True,Potential vulnerability detected.,Looks safe after review.,0.507,True,0.647,0.752,increase,True,5,1,True
+de3e3874-10e9-451c-8451-1358c55fa9ec,Python,Race Condition,medium,if balance >= amt: balance -= amt,False,Potential vulnerability detected.,Looks safe after review.,0.887,False,0.308,0.485,increase,True,3,2,False
+8740f428-2861-43a4-8522-44a6c674354d,JavaScript,Auth Bypass,easy,"jwt.decode(token, options={'verify_signature': False})",True,Potential vulnerability detected.,Looks safe after review.,0.896,False,0.592,0.48,decrease,True,5,1,True
+5f4d63d2-a646-4984-a2d5-f5fd81ec5b95,Python,SQL Injection,medium,"def get_user(db, uid):
+    query = f""SELECT * FROM users WHERE id = {uid}""
+    return db.execute(query)",False,Potential vulnerability detected.,Looks safe after review.,0.794,True,0.604,0.451,decrease,True,4,2,True
+6cb67c63-c119-435b-90b5-734d23b8905e,Python,Path Traversal,hard,open(base + '/' + filename),True,Potential vulnerability detected.,Looks safe after review.,0.862,True,0.219,0.058,decrease,True,2,1,True
+789eaa56-92f8-4266-ac40-e2faf85c8dea,C,XSS,easy,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.327,False,0.559,0.683,increase,True,2,3,True
+4e3dbf9f-656b-4abf-a7f8-ab333ea27c27,Python,SQL Injection,hard,"def get_user(db, uid):
+    query = f""SELECT * FROM users WHERE id = {uid}""
+    return db.execute(query)",False,Potential vulnerability detected.,Looks safe after review.,0.764,False,0.34,0.182,decrease,True,2,2,True
+f510f77f-ada6-468e-a660-680ad4f0a22d,C,Weak Crypto,easy,hashlib.md5(password).hexdigest(),False,Potential vulnerability detected.,Looks safe after review.,0.655,True,0.38,0.536,increase,True,4,3,False
+aad909ac-b218-418c-a9b3-0b950991b265,JavaScript,SQL Injection,hard,"app.get('/user', (req,res)=>{ let q = `SELECT * FROM users WHERE id = ${req.query.id}`; db.exec(q); });",False,Potential vulnerability detected.,Looks safe after review.,0.545,False,0.671,0.501,decrease,True,4,1,False
+7ca1d355-4f6d-4f11-85c1-8fa5d12d1257,Python,Command Injection,medium,os.system('ls ' + userInput),True,Potential vulnerability detected.,Looks safe after review.,0.881,True,0.683,0.839,increase,True,4,1,False
+3c922d76-824e-436b-bcab-a2d5eff0f633,JavaScript,Command Injection,hard,os.system('ls ' + userInput),True,Potential vulnerability detected.,Looks safe after review.,0.735,True,0.753,0.644,decrease,True,1,2,False
+48845d8a-f588-40c6-8962-3a152b76d9a2,C,Weak Crypto,hard,hashlib.md5(password).hexdigest(),True,Potential vulnerability detected.,Looks safe after review.,0.653,True,0.724,0.904,increase,True,4,1,False
+97d48509-89c1-4c9c-8419-40164c4358a4,Python,Path Traversal,easy,open(base + '/' + filename),True,Potential vulnerability detected.,Looks safe after review.,0.753,True,0.777,0.952,increase,True,5,3,True
+78c074f5-1c7a-45bc-8c8a-0c6b55063f9d,Python,Auth Bypass,hard,"jwt.decode(token, options={'verify_signature': False})",False,Potential vulnerability detected.,Looks safe after review.,0.689,False,0.665,0.518,decrease,True,3,2,False
+6969f08d-e84b-49ad-822d-8dff6bc0a8f6,Python,Race Condition,hard,if balance >= amt: balance -= amt,False,Potential vulnerability detected.,Looks safe after review.,0.522,False,0.657,0.466,decrease,True,1,3,True
+6e69e3d7-fd3c-4e8a-8bae-e061584f22b9,Python,SSRF,medium,requests.get(url),False,Potential vulnerability detected.,Looks safe after review.,0.528,True,0.377,0.51,increase,True,4,3,False
+5990b8fa-d6d1-4da3-ae29-5f7a49b81f08,JavaScript,Path Traversal,hard,open(base + '/' + filename),False,Potential vulnerability detected.,Looks safe after review.,0.732,False,0.476,0.359,decrease,True,2,3,True
+2fe71aa0-5c45-4ceb-b61b-2313dd553d81,Python,Buffer Overflow,easy,"char buf[10]; strcpy(buf, input);",True,Potential vulnerability detected.,Looks safe after review.,0.678,True,0.659,0.545,decrease,True,2,1,True
+f2a420ea-75db-45af-93b9-c5b5e14155fc,JavaScript,Buffer Overflow,medium,"char buf[10]; strcpy(buf, input);",True,Potential vulnerability detected.,Looks safe after review.,0.309,False,0.571,0.405,decrease,True,1,1,False
+5c8e1712-492e-4478-9606-a4929b0cfb71,JavaScript,Buffer Overflow,easy,"char buf[10]; strcpy(buf, input);",False,Potential vulnerability detected.,Looks safe after review.,0.358,True,0.684,0.795,increase,True,2,1,False
+cdf170de-e341-44a5-af30-b2fcef2e913b,JavaScript,Insecure Deserialization,medium,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.446,True,0.424,0.278,decrease,True,3,3,True
+01053702-4c9b-400b-b096-20819465d412,C,Weak Crypto,easy,hashlib.md5(password).hexdigest(),True,Potential vulnerability detected.,Looks safe after review.,0.334,True,0.443,0.288,decrease,True,2,1,False
+955ea43b-cf0c-499c-a5bc-22f96eed016d,C,Auth Bypass,medium,"jwt.decode(token, options={'verify_signature': False})",True,Potential vulnerability detected.,Looks safe after review.,0.841,False,0.737,0.86,increase,True,3,1,True
+3624905a-2f21-4875-a0f4-ad0768050426,JavaScript,Weak Crypto,hard,hashlib.md5(password).hexdigest(),True,Potential vulnerability detected.,Looks safe after review.,0.424,True,0.308,0.206,decrease,True,4,1,False
+980a32f1-880b-4701-84bd-4553b222669b,C,SSRF,easy,requests.get(url),False,Potential vulnerability detected.,Looks safe after review.,0.744,True,0.606,0.468,decrease,True,5,3,False
+d928cd78-2a34-4f70-ac82-f4e578d7c265,Python,SQL Injection,medium,"def get_user(db, uid):
+    query = f""SELECT * FROM users WHERE id = {uid}""
+    return db.execute(query)",True,Potential vulnerability detected.,Looks safe after review.,0.668,False,0.703,0.542,decrease,True,3,1,False
+e263f72c-00cb-426c-888a-525bec331c17,JavaScript,Race Condition,easy,if balance >= amt: balance -= amt,False,Potential vulnerability detected.,Looks safe after review.,0.708,False,0.532,0.389,decrease,True,1,3,False
+69b03295-2c72-4bb9-9fb6-9986c4a16df9,C,Command Injection,easy,os.system('ls ' + userInput),True,Potential vulnerability detected.,Looks safe after review.,0.68,False,0.361,0.19,decrease,True,3,2,True
+8f48289c-5fa1-4891-8063-52654405c945,Python,XSS,medium,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.352,False,0.416,0.306,decrease,True,4,3,False
+d8f226c2-60c6-4e19-8cda-bfb1178e3da0,Python,XSS,easy,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.307,False,0.533,0.347,decrease,True,4,1,True
+a4260883-f719-4c7b-a433-ce0f6a0d5b6f,C,Use After Free,easy,free(ptr); printf(ptr);,False,Potential vulnerability detected.,Looks safe after review.,0.596,True,0.302,0.172,decrease,True,2,2,False
+7dc470c0-c5a1-4b61-8465-49af7963b24f,JavaScript,Auth Bypass,medium,"jwt.decode(token, options={'verify_signature': False})",True,Potential vulnerability detected.,Looks safe after review.,0.597,True,0.417,0.589,increase,True,4,1,True
+a1dcc91b-5bee-4278-8149-418ae1a96eac,Python,Path Traversal,medium,open(base + '/' + filename),False,Potential vulnerability detected.,Looks safe after review.,0.498,False,0.705,0.525,decrease,True,4,3,True
+e27dee37-0d18-4ada-bf6d-19d6c0483de2,JavaScript,Path Traversal,hard,open(base + '/' + filename),True,Potential vulnerability detected.,Looks safe after review.,0.881,False,0.487,0.683,increase,True,4,3,True
+a21ccc98-af01-4e9e-bc95-54e124f4719e,JavaScript,Insecure Deserialization,medium,pickle.loads(data),False,Potential vulnerability detected.,Looks safe after review.,0.627,True,0.419,0.578,increase,True,4,3,True
+a676515a-a671-4e8d-adbe-703bf2dde0df,JavaScript,Race Condition,hard,if balance >= amt: balance -= amt,True,Potential vulnerability detected.,Looks safe after review.,0.384,False,0.691,0.524,decrease,True,2,2,True
+dac9c251-ec0b-4f91-8a18-030a316961a2,JavaScript,Auth Bypass,easy,"jwt.decode(token, options={'verify_signature': False})",False,Potential vulnerability detected.,Looks safe after review.,0.621,False,0.794,0.636,decrease,True,5,1,False
+923633d9-d852-43a5-a1dd-58124a1ab03a,C,Buffer Overflow,hard,"char buf[10]; strcpy(buf, input);",True,Potential vulnerability detected.,Looks safe after review.,0.513,True,0.266,0.432,increase,True,5,3,False
+70f31a88-bbb7-42d3-8ab6-402b74ed7d7f,JavaScript,Insecure Deserialization,easy,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.611,True,0.259,0.41,increase,True,4,2,False
+d3f6cd5e-a8d2-4129-90d7-9fbbce7d6d77,C,Race Condition,hard,if balance >= amt: balance -= amt,True,Potential vulnerability detected.,Looks safe after review.,0.477,True,0.407,0.555,increase,True,1,3,True
+a6367483-5a3f-452a-9806-faddd463539d,JavaScript,Insecure Deserialization,medium,pickle.loads(data),False,Potential vulnerability detected.,Looks safe after review.,0.359,False,0.671,0.536,decrease,True,3,1,False
+1cb1e055-5186-448f-9af9-1b251857cc9e,C,SQL Injection,easy,"char query[256]; sprintf(query, ""SELECT * FROM users WHERE id = %s"", uid); execute(query);",True,Potential vulnerability detected.,Looks safe after review.,0.399,True,0.71,0.878,increase,True,5,1,True
+2a6c5493-0ee3-444b-b9ef-5f83ed783dcf,C,Insecure Deserialization,medium,pickle.loads(data),False,Potential vulnerability detected.,Looks safe after review.,0.412,False,0.339,0.176,decrease,True,4,1,True
+f1d8031b-a3c3-4a59-bd2c-739debdd0137,C,Race Condition,medium,if balance >= amt: balance -= amt,False,Potential vulnerability detected.,Looks safe after review.,0.751,True,0.203,0.324,increase,True,5,1,True
+0842251e-b8c4-4509-bc5b-eff2fe7c71aa,JavaScript,Insecure Deserialization,easy,pickle.loads(data),False,Potential vulnerability detected.,Looks safe after review.,0.683,False,0.268,0.115,decrease,True,5,2,True
+ca213119-6faa-4ded-a3b5-17437677db95,JavaScript,Insecure Deserialization,medium,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.654,True,0.688,0.496,decrease,True,3,1,True
+226f5e6b-50ad-43d7-ae47-f7e239932ff2,Python,Path Traversal,easy,open(base + '/' + filename),False,Potential vulnerability detected.,Looks safe after review.,0.383,False,0.616,0.474,decrease,True,4,1,False
+d1cbe096-4fd5-48fb-997c-50e6a359b615,C,Weak Crypto,hard,hashlib.md5(password).hexdigest(),True,Potential vulnerability detected.,Looks safe after review.,0.412,False,0.533,0.404,decrease,True,5,1,False
+2c7de994-acca-46d6-8730-aead7389cd63,JavaScript,SQL Injection,easy,"app.get('/user', (req,res)=>{ let q = `SELECT * FROM users WHERE id = ${req.query.id}`; db.exec(q); });",True,Potential vulnerability detected.,Looks safe after review.,0.595,False,0.689,0.548,decrease,True,4,1,True
+254e1127-c59e-49da-9656-f9f6aac2c1fd,Python,Use After Free,easy,free(ptr); printf(ptr);,False,Potential vulnerability detected.,Looks safe after review.,0.401,False,0.22,0.374,increase,True,5,3,False
+694ed030-a6e8-4325-8190-b41b1d6322e6,C,Buffer Overflow,easy,"char buf[10]; strcpy(buf, input);",True,Potential vulnerability detected.,Looks safe after review.,0.754,False,0.361,0.207,decrease,True,5,1,False
+2ce910e4-bd20-4bf6-8264-deecff334a00,C,XSS,hard,res.send('<div>' + userInput + '</div>');,True,Potential vulnerability detected.,Looks safe after review.,0.509,True,0.379,0.524,increase,True,4,1,True
+d3f2c862-13b9-410d-9818-667ccc81f31d,C,Command Injection,hard,os.system('ls ' + userInput),False,Potential vulnerability detected.,Looks safe after review.,0.384,True,0.717,0.6,decrease,True,2,1,False
+556cee95-da52-44ae-9be2-3e07fd68b278,JavaScript,Buffer Overflow,hard,"char buf[10]; strcpy(buf, input);",True,Potential vulnerability detected.,Looks safe after review.,0.46,True,0.394,0.265,decrease,True,2,2,True
+11a01f68-4626-4d3e-bad0-639aca044db4,C,Path Traversal,easy,open(base + '/' + filename),True,Potential vulnerability detected.,Looks safe after review.,0.757,False,0.35,0.167,decrease,True,4,1,False
+bd4aa6cf-4291-46ba-9fb5-629d4ebc8ebb,JavaScript,Weak Crypto,medium,hashlib.md5(password).hexdigest(),False,Potential vulnerability detected.,Looks safe after review.,0.75,False,0.245,0.385,increase,True,4,2,False
+7850414b-a7cc-43f5-9f65-ab87f1b41520,Python,Use After Free,hard,free(ptr); printf(ptr);,True,Potential vulnerability detected.,Looks safe after review.,0.718,True,0.639,0.476,decrease,True,5,2,True
+1bcf7941-fcf7-4512-8ee1-549dfdcb5ff3,Python,Auth Bypass,medium,"jwt.decode(token, options={'verify_signature': False})",False,Potential vulnerability detected.,Looks safe after review.,0.647,False,0.394,0.26,decrease,True,3,3,True
+0ab58d51-7a44-4be2-936f-4cecddbbcf30,Python,SQL Injection,hard,"def get_user(db, uid):
+    query = f""SELECT * FROM users WHERE id = {uid}""
+    return db.execute(query)",False,Potential vulnerability detected.,Looks safe after review.,0.3,False,0.21,0.354,increase,True,2,3,True
+d03cf70f-bbd8-4443-a474-92cb1577674e,JavaScript,Weak Crypto,easy,hashlib.md5(password).hexdigest(),False,Potential vulnerability detected.,Looks safe after review.,0.523,True,0.256,0.131,decrease,True,1,2,False
+2681568d-e101-4520-8449-3fdeb212a50e,JavaScript,Command Injection,hard,os.system('ls ' + userInput),True,Potential vulnerability detected.,Looks safe after review.,0.347,True,0.622,0.743,increase,True,5,3,False
+a9bd4f09-3ffb-420b-bb5f-7f3b03f64404,Python,SQL Injection,hard,"def get_user(db, uid):
+    query = f""SELECT * FROM users WHERE id = {uid}""
+    return db.execute(query)",False,Potential vulnerability detected.,Looks safe after review.,0.587,True,0.69,0.521,decrease,True,4,1,True
+04ac17a7-299e-47b4-8000-74de90533a18,JavaScript,XSS,medium,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.706,True,0.282,0.446,increase,True,5,3,True
+60789874-425e-4d58-91a6-b1d789d65191,C,Use After Free,easy,free(ptr); printf(ptr);,False,Potential vulnerability detected.,Looks safe after review.,0.391,False,0.411,0.574,increase,True,5,3,False
+e371250e-ef81-4536-9c34-dc2ca88a70d6,Python,Command Injection,easy,os.system('ls ' + userInput),True,Potential vulnerability detected.,Looks safe after review.,0.558,True,0.651,0.516,decrease,True,2,2,True
+07b2db42-62c8-4994-b6bc-97900a54de36,C,Command Injection,hard,os.system('ls ' + userInput),False,Potential vulnerability detected.,Looks safe after review.,0.695,False,0.667,0.852,increase,True,2,3,True
+d056c5f9-bd83-4cc2-8f49-79dea919d1a7,JavaScript,Auth Bypass,hard,"jwt.decode(token, options={'verify_signature': False})",True,Potential vulnerability detected.,Looks safe after review.,0.368,False,0.67,0.819,increase,True,5,1,True
+0fedb1e2-175c-442f-a85a-b763befc3e22,JavaScript,Insecure Deserialization,easy,pickle.loads(data),False,Potential vulnerability detected.,Looks safe after review.,0.71,False,0.716,0.579,decrease,True,1,1,True
+accfc3c0-f442-474b-87bf-2eaa654f4cdf,JavaScript,SQL Injection,easy,"app.get('/user', (req,res)=>{ let q = `SELECT * FROM users WHERE id = ${req.query.id}`; db.exec(q); });",True,Potential vulnerability detected.,Looks safe after review.,0.677,False,0.754,0.603,decrease,True,4,3,False
+a31f7770-9421-40d7-8ca6-e8a476ad973f,C,XSS,hard,res.send('<div>' + userInput + '</div>');,True,Potential vulnerability detected.,Looks safe after review.,0.853,True,0.366,0.258,decrease,True,5,2,False
+e46acaa6-2c58-4935-92c2-06d090a206e0,C,Use After Free,hard,free(ptr); printf(ptr);,True,Potential vulnerability detected.,Looks safe after review.,0.808,True,0.386,0.213,decrease,True,2,1,False
+b689b88a-cac2-4e01-ab5c-e640ec61a443,JavaScript,XSS,hard,res.send('<div>' + userInput + '</div>');,True,Potential vulnerability detected.,Looks safe after review.,0.725,True,0.386,0.498,increase,True,2,2,False
+2f520c21-3b71-4e77-8ed4-bb3ef4ce8e92,C,Buffer Overflow,hard,"char buf[10]; strcpy(buf, input);",False,Potential vulnerability detected.,Looks safe after review.,0.824,True,0.3,0.475,increase,True,1,2,False
+47ce0fd3-c37c-4f1e-81cc-fdcf5fa21716,C,Path Traversal,easy,open(base + '/' + filename),False,Potential vulnerability detected.,Looks safe after review.,0.606,True,0.627,0.777,increase,True,4,3,True
+392053eb-c8e9-40e2-9205-91f8e0f09314,Python,Insecure Deserialization,medium,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.605,True,0.737,0.86,increase,True,1,1,True
+f56c747b-be2c-4a2a-8871-79e0e686d639,JavaScript,Race Condition,medium,if balance >= amt: balance -= amt,True,Potential vulnerability detected.,Looks safe after review.,0.848,False,0.307,0.462,increase,True,2,2,True
+cb19cfbc-e2da-413d-a0d6-1047e83b33f6,C,Auth Bypass,medium,"jwt.decode(token, options={'verify_signature': False})",False,Potential vulnerability detected.,Looks safe after review.,0.704,True,0.696,0.584,decrease,True,2,1,True
+32fe9159-b42d-4f5d-91cd-1719ff9bf57f,Python,Auth Bypass,medium,"jwt.decode(token, options={'verify_signature': False})",False,Potential vulnerability detected.,Looks safe after review.,0.632,True,0.664,0.531,decrease,True,3,1,False
+2bb889da-2deb-4b3d-83f4-4b355760e8ab,JavaScript,Use After Free,hard,free(ptr); printf(ptr);,True,Potential vulnerability detected.,Looks safe after review.,0.766,True,0.478,0.278,decrease,True,2,1,False
+5596649f-61c0-47f8-823e-c8771c9048a5,Python,SQL Injection,hard,"def get_user(db, uid):
+    query = f""SELECT * FROM users WHERE id = {uid}""
+    return db.execute(query)",False,Potential vulnerability detected.,Looks safe after review.,0.301,False,0.582,0.777,increase,True,3,1,True
+94895cc8-c5e0-4a69-801c-183ffd49d1cc,Python,Buffer Overflow,medium,"char buf[10]; strcpy(buf, input);",False,Potential vulnerability detected.,Looks safe after review.,0.356,True,0.777,0.948,increase,True,5,2,False
+2b44c2ee-d271-4c18-ba25-8964fde526a4,C,Race Condition,easy,if balance >= amt: balance -= amt,True,Potential vulnerability detected.,Looks safe after review.,0.641,False,0.503,0.396,decrease,True,2,1,False
+35b5f0ae-20fd-4d2c-b18b-5caa0e0303f3,JavaScript,Path Traversal,medium,open(base + '/' + filename),False,Potential vulnerability detected.,Looks safe after review.,0.866,True,0.391,0.268,decrease,True,5,1,True
+7bd9d165-e489-4be1-8672-401b37a3c671,Python,XSS,medium,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.879,True,0.388,0.542,increase,True,4,2,False
+4584b642-05f0-4f3f-889b-076aee3938d3,Python,Path Traversal,easy,open(base + '/' + filename),True,Potential vulnerability detected.,Looks safe after review.,0.718,True,0.685,0.502,decrease,True,2,2,True
+e1e0a412-d645-4265-bc61-b616b27cd18a,C,XSS,easy,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.456,True,0.438,0.606,increase,True,1,2,False
+1752dfe5-1c2c-448b-84cf-29321d3f4a04,C,Buffer Overflow,hard,"char buf[10]; strcpy(buf, input);",True,Potential vulnerability detected.,Looks safe after review.,0.384,True,0.257,0.437,increase,True,1,1,True
+27c122ba-110d-4e8b-b7f0-6a480e179586,JavaScript,Command Injection,medium,os.system('ls ' + userInput),True,Potential vulnerability detected.,Looks safe after review.,0.345,True,0.549,0.357,decrease,True,2,3,False
+420e0fbe-d9a9-4930-b250-73cf48421ce8,Python,SSRF,medium,requests.get(url),True,Potential vulnerability detected.,Looks safe after review.,0.854,False,0.226,0.121,decrease,True,4,2,True
+8293feb8-47dd-47f5-8c58-1e984999879e,C,Auth Bypass,medium,"jwt.decode(token, options={'verify_signature': False})",True,Potential vulnerability detected.,Looks safe after review.,0.568,True,0.412,0.539,increase,True,1,3,True
+3da72727-52b7-4d36-b510-bfde51e6c4e1,JavaScript,Weak Crypto,medium,hashlib.md5(password).hexdigest(),False,Potential vulnerability detected.,Looks safe after review.,0.468,True,0.73,0.624,decrease,True,4,1,True
+8e8609fb-540c-4a4a-bac3-6dbab4e90d53,C,Weak Crypto,easy,hashlib.md5(password).hexdigest(),False,Potential vulnerability detected.,Looks safe after review.,0.769,False,0.669,0.521,decrease,True,5,3,False
+212eb565-c9af-4c1e-8ff9-0e7229e93941,JavaScript,Auth Bypass,easy,"jwt.decode(token, options={'verify_signature': False})",True,Potential vulnerability detected.,Looks safe after review.,0.786,False,0.391,0.494,increase,True,1,2,False
+24b31b56-f259-46b5-9bd3-f67748cb4b73,Python,Use After Free,easy,free(ptr); printf(ptr);,True,Potential vulnerability detected.,Looks safe after review.,0.79,True,0.349,0.476,increase,True,2,3,False
+a5f841a3-4422-4c26-b8bc-1932f7b2010d,Python,Insecure Deserialization,easy,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.317,False,0.556,0.365,decrease,True,5,3,True
+7e96ac07-d9b9-4058-a64b-e66a8f7643fc,Python,Use After Free,medium,free(ptr); printf(ptr);,False,Potential vulnerability detected.,Looks safe after review.,0.44,True,0.305,0.414,increase,True,1,3,False
+b089bbf6-9735-4ce4-90ed-7a594441ab31,JavaScript,SQL Injection,hard,"app.get('/user', (req,res)=>{ let q = `SELECT * FROM users WHERE id = ${req.query.id}`; db.exec(q); });",True,Potential vulnerability detected.,Looks safe after review.,0.851,False,0.684,0.512,decrease,True,1,1,True
+9df520d8-d46e-4b3c-bf82-167c76523688,C,Use After Free,easy,free(ptr); printf(ptr);,True,Potential vulnerability detected.,Looks safe after review.,0.524,False,0.708,0.512,decrease,True,5,1,False
+fe775024-f02a-4d44-8e8c-ccee847e6ff3,JavaScript,Path Traversal,easy,open(base + '/' + filename),True,Potential vulnerability detected.,Looks safe after review.,0.876,False,0.639,0.46,decrease,True,2,3,False
+176d93f5-6181-4f19-96ae-c776606288a5,C,Command Injection,hard,os.system('ls ' + userInput),True,Potential vulnerability detected.,Looks safe after review.,0.737,False,0.427,0.314,decrease,True,5,1,True
+5a71f886-5a60-4b19-8b8d-63ae4864af93,JavaScript,Use After Free,hard,free(ptr); printf(ptr);,True,Potential vulnerability detected.,Looks safe after review.,0.384,True,0.584,0.778,increase,True,2,2,False
+cb8deaa2-e4c2-4e2d-9d64-bdb1b1287c41,C,SSRF,easy,requests.get(url),False,Potential vulnerability detected.,Looks safe after review.,0.716,False,0.468,0.347,decrease,True,3,1,True
+7089dbeb-fe7a-4af4-aa1f-c7882a339629,JavaScript,SQL Injection,medium,"app.get('/user', (req,res)=>{ let q = `SELECT * FROM users WHERE id = ${req.query.id}`; db.exec(q); });",False,Potential vulnerability detected.,Looks safe after review.,0.527,False,0.781,0.632,decrease,True,1,2,True
+7c47c5f0-c3d0-4cd5-b525-ef12c1bc48f1,JavaScript,SSRF,easy,requests.get(url),True,Potential vulnerability detected.,Looks safe after review.,0.363,False,0.377,0.251,decrease,True,2,2,True
+06d9f37e-8670-415f-b76b-a9873ebde795,C,XSS,easy,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.559,True,0.556,0.386,decrease,True,5,2,True
+8818bfff-f3d8-4690-afea-a0685f65e37c,Python,SQL Injection,medium,"def get_user(db, uid):
+    query = f""SELECT * FROM users WHERE id = {uid}""
+    return db.execute(query)",True,Potential vulnerability detected.,Looks safe after review.,0.733,False,0.785,0.615,decrease,True,3,2,True
+38f1bfc7-4f5f-404d-bce3-b687847ef385,Python,XSS,medium,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.353,False,0.292,0.192,decrease,True,2,1,True
+36f1b2ab-40b9-484e-8b68-48868186a8b6,Python,Command Injection,hard,os.system('ls ' + userInput),False,Potential vulnerability detected.,Looks safe after review.,0.485,False,0.786,0.602,decrease,True,4,2,False
+5cff3baf-2fcb-412b-99ba-5039d4160a75,C,XSS,hard,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.567,False,0.311,0.174,decrease,True,4,2,False
+5e2541cf-cf15-4b65-8710-5edc499478ab,JavaScript,Command Injection,hard,os.system('ls ' + userInput),True,Potential vulnerability detected.,Looks safe after review.,0.506,False,0.291,0.4,increase,True,5,1,True
+379aa17f-dde1-4c98-aadb-03c40512cbfb,C,Auth Bypass,medium,"jwt.decode(token, options={'verify_signature': False})",False,Potential vulnerability detected.,Looks safe after review.,0.347,True,0.544,0.692,increase,True,5,3,True
+65eda439-fe44-4b2d-9adb-33a0b10f8c2d,JavaScript,XSS,easy,res.send('<div>' + userInput + '</div>');,True,Potential vulnerability detected.,Looks safe after review.,0.554,False,0.783,0.896,increase,True,2,3,True
+830a7493-0783-4069-a066-84bd18adf9df,JavaScript,Use After Free,medium,free(ptr); printf(ptr);,True,Potential vulnerability detected.,Looks safe after review.,0.814,False,0.252,0.097,decrease,True,1,3,False
+52be41f3-03c8-41cf-941f-6fef10f209b5,JavaScript,XSS,easy,res.send('<div>' + userInput + '</div>');,True,Potential vulnerability detected.,Looks safe after review.,0.638,True,0.54,0.732,increase,True,3,3,False
+bad607d9-c3d2-472e-af8f-633876fa401a,JavaScript,Auth Bypass,medium,"jwt.decode(token, options={'verify_signature': False})",False,Potential vulnerability detected.,Looks safe after review.,0.465,True,0.543,0.439,decrease,True,5,3,False
+5b0994d4-6066-4853-b396-4868df290ff9,JavaScript,SQL Injection,medium,"app.get('/user', (req,res)=>{ let q = `SELECT * FROM users WHERE id = ${req.query.id}`; db.exec(q); });",True,Potential vulnerability detected.,Looks safe after review.,0.838,True,0.23,0.038,decrease,True,3,2,False
+0655780b-1d36-4975-b688-a80e93d700a2,JavaScript,Path Traversal,hard,open(base + '/' + filename),True,Potential vulnerability detected.,Looks safe after review.,0.885,False,0.783,0.896,increase,True,3,2,False
+59014736-54eb-4d41-9f53-b6c49255decc,C,Use After Free,easy,free(ptr); printf(ptr);,True,Potential vulnerability detected.,Looks safe after review.,0.756,False,0.465,0.291,decrease,True,1,3,True
+3df9aa01-b0e1-4ded-87aa-ef75548a6594,JavaScript,XSS,hard,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.825,True,0.281,0.398,increase,True,1,1,True
+677c805a-20ed-4567-9343-f5a0a15c1461,Python,Race Condition,medium,if balance >= amt: balance -= amt,True,Potential vulnerability detected.,Looks safe after review.,0.681,True,0.364,0.213,decrease,True,1,1,False
+ebb9db88-065b-47ab-b42d-c99cd2ef7535,C,Race Condition,medium,if balance >= amt: balance -= amt,True,Potential vulnerability detected.,Looks safe after review.,0.51,True,0.776,0.617,decrease,True,3,3,True
+3307e2f1-8177-4bec-adb2-cb51ec4e6bc9,Python,Path Traversal,medium,open(base + '/' + filename),True,Potential vulnerability detected.,Looks safe after review.,0.688,True,0.298,0.484,increase,True,3,3,False
+5b8e5a8d-7b31-4620-8de9-a740b2b5c61f,Python,Buffer Overflow,hard,"char buf[10]; strcpy(buf, input);",True,Potential vulnerability detected.,Looks safe after review.,0.661,True,0.484,0.649,increase,True,2,2,False
+d41dd200-5828-49be-bcf6-f8a7ed1b477e,JavaScript,Weak Crypto,medium,hashlib.md5(password).hexdigest(),False,Potential vulnerability detected.,Looks safe after review.,0.58,False,0.711,0.586,decrease,True,5,1,True
+1de225e3-2703-43e9-950f-79ac467aef99,C,Buffer Overflow,medium,"char buf[10]; strcpy(buf, input);",False,Potential vulnerability detected.,Looks safe after review.,0.502,False,0.379,0.527,increase,True,3,2,False
+14ff4953-b042-4aa8-9d03-835128bbd7c6,C,Weak Crypto,hard,hashlib.md5(password).hexdigest(),False,Potential vulnerability detected.,Looks safe after review.,0.783,False,0.313,0.503,increase,True,3,3,True
+2a049483-a788-4b47-b9f6-913c777e0809,C,SQL Injection,medium,"char query[256]; sprintf(query, ""SELECT * FROM users WHERE id = %s"", uid); execute(query);",False,Potential vulnerability detected.,Looks safe after review.,0.742,True,0.356,0.216,decrease,True,3,3,True
+038b4708-d514-4c0a-9a51-cae24969b7e6,C,Weak Crypto,hard,hashlib.md5(password).hexdigest(),False,Potential vulnerability detected.,Looks safe after review.,0.807,True,0.744,0.593,decrease,True,3,1,False
+020d1da7-8817-4e20-b1f7-5fb269325dbb,C,SSRF,medium,requests.get(url),True,Potential vulnerability detected.,Looks safe after review.,0.433,True,0.768,0.603,decrease,True,3,2,False
+3a6b2486-fb97-43fd-a177-cf2ba2ea4c4b,JavaScript,Insecure Deserialization,hard,pickle.loads(data),False,Potential vulnerability detected.,Looks safe after review.,0.82,True,0.478,0.625,increase,True,4,1,True
+c8a7a83a-a9ca-4c90-bf70-437ab8bf6104,JavaScript,Weak Crypto,hard,hashlib.md5(password).hexdigest(),False,Potential vulnerability detected.,Looks safe after review.,0.42,False,0.448,0.562,increase,True,5,2,True
+f0de49ce-cdd6-4d9a-a3b6-d29b67eb20a6,C,Insecure Deserialization,easy,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.335,False,0.493,0.624,increase,True,3,1,True
+5ff2b2a0-0e8f-4fb6-8424-04b9a142e95a,Python,Use After Free,medium,free(ptr); printf(ptr);,True,Potential vulnerability detected.,Looks safe after review.,0.542,False,0.278,0.115,decrease,True,4,1,True
+dd7bd901-17f1-4ff0-b764-a7b5f09a3618,Python,Buffer Overflow,hard,"char buf[10]; strcpy(buf, input);",False,Potential vulnerability detected.,Looks safe after review.,0.619,True,0.77,0.594,decrease,True,1,3,True
+feec08c9-ce26-465d-aee0-d6253dbe0e57,C,Command Injection,medium,os.system('ls ' + userInput),False,Potential vulnerability detected.,Looks safe after review.,0.484,True,0.277,0.127,decrease,True,1,2,False
+27763e4d-5bb5-4c25-ac85-9af1dcf58835,C,Race Condition,hard,if balance >= amt: balance -= amt,False,Potential vulnerability detected.,Looks safe after review.,0.841,False,0.46,0.594,increase,True,2,1,False
+310dd823-64ee-4227-8ca6-76f68dd6dd8d,Python,SQL Injection,easy,"def get_user(db, uid):
+    query = f""SELECT * FROM users WHERE id = {uid}""
+    return db.execute(query)",True,Potential vulnerability detected.,Looks safe after review.,0.401,False,0.327,0.486,increase,True,1,2,False
+b2a7559d-b1e2-4cde-b115-a19c9054cb87,C,Buffer Overflow,easy,"char buf[10]; strcpy(buf, input);",True,Potential vulnerability detected.,Looks safe after review.,0.369,False,0.597,0.702,increase,True,4,1,False
+618c5903-10c3-4d8e-b2f3-dbe714550993,C,Race Condition,easy,if balance >= amt: balance -= amt,True,Potential vulnerability detected.,Looks safe after review.,0.697,False,0.617,0.747,increase,True,5,3,True
+4e45634a-39af-46b8-a80d-78ae2e8fbf36,Python,Auth Bypass,hard,"jwt.decode(token, options={'verify_signature': False})",True,Potential vulnerability detected.,Looks safe after review.,0.665,False,0.37,0.52,increase,True,5,1,False
+8b5bbb05-046f-44b2-92b6-5e4bca5373ae,JavaScript,Auth Bypass,easy,"jwt.decode(token, options={'verify_signature': False})",True,Potential vulnerability detected.,Looks safe after review.,0.588,True,0.529,0.698,increase,True,1,1,True
+fc72bc12-58b9-432e-a148-dee1be5644f4,C,XSS,hard,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.345,True,0.289,0.467,increase,True,3,3,True
+d619930d-e241-48af-a6eb-59ab9585f557,JavaScript,Race Condition,medium,if balance >= amt: balance -= amt,False,Potential vulnerability detected.,Looks safe after review.,0.811,False,0.23,0.417,increase,True,3,2,True
+3c808e7d-cc00-4a6c-a59d-5397c42ba7d0,Python,XSS,easy,res.send('<div>' + userInput + '</div>');,True,Potential vulnerability detected.,Looks safe after review.,0.837,False,0.598,0.731,increase,True,1,2,False
+1307a85f-a30f-4d18-b331-e4d712a7288e,Python,SSRF,medium,requests.get(url),False,Potential vulnerability detected.,Looks safe after review.,0.714,False,0.777,0.593,decrease,True,4,3,True
+37e1d424-2f20-4d66-8977-60d6d8c0a4e6,Python,XSS,hard,res.send('<div>' + userInput + '</div>');,True,Potential vulnerability detected.,Looks safe after review.,0.847,False,0.789,0.899,increase,True,5,3,False
+f4296564-d4a4-49dc-b4f9-3ff8f942638d,C,SSRF,medium,requests.get(url),False,Potential vulnerability detected.,Looks safe after review.,0.593,False,0.567,0.715,increase,True,4,1,True
+85337bca-f86b-48fd-ad1c-01a1bedac759,C,Path Traversal,medium,open(base + '/' + filename),True,Potential vulnerability detected.,Looks safe after review.,0.702,False,0.623,0.821,increase,True,5,3,True
+220eb3c7-045a-4379-be5d-3d8872d211d8,C,Auth Bypass,hard,"jwt.decode(token, options={'verify_signature': False})",True,Potential vulnerability detected.,Looks safe after review.,0.796,True,0.489,0.374,decrease,True,1,3,True
+d6e87e00-054b-42c3-883e-0080f13afaa4,JavaScript,Buffer Overflow,medium,"char buf[10]; strcpy(buf, input);",True,Potential vulnerability detected.,Looks safe after review.,0.499,False,0.245,0.113,decrease,True,1,3,True
+c204a78a-8d86-4d12-b262-146a00057d47,C,Buffer Overflow,medium,"char buf[10]; strcpy(buf, input);",False,Potential vulnerability detected.,Looks safe after review.,0.781,False,0.69,0.836,increase,True,1,2,False
+b959ae12-703a-4a5b-baa1-abecf915e4ca,Python,Insecure Deserialization,medium,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.629,True,0.262,0.158,decrease,True,5,3,False
+ddb5757d-edbc-4fee-9a1a-92ab8caf3592,C,Buffer Overflow,easy,"char buf[10]; strcpy(buf, input);",False,Potential vulnerability detected.,Looks safe after review.,0.79,False,0.77,0.587,decrease,True,3,3,False
+acfc2329-4664-464d-9803-7724fe66ccff,JavaScript,Weak Crypto,hard,hashlib.md5(password).hexdigest(),False,Potential vulnerability detected.,Looks safe after review.,0.513,False,0.268,0.368,increase,True,5,3,False
+2bd5cbc6-5148-4fd4-b0a8-80d9c308b4f3,Python,XSS,easy,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.667,True,0.284,0.173,decrease,True,1,2,True
+e6d30bf2-1ecc-4726-85ad-b023afd6c2e9,Python,Race Condition,hard,if balance >= amt: balance -= amt,False,Potential vulnerability detected.,Looks safe after review.,0.68,True,0.265,0.16,decrease,True,4,2,True
+4cb84679-1bc0-4e65-b5ac-66da77240017,Python,Race Condition,hard,if balance >= amt: balance -= amt,True,Potential vulnerability detected.,Looks safe after review.,0.59,True,0.532,0.348,decrease,True,5,1,True
+1fed47a8-9a36-4317-8911-767c6b84491f,JavaScript,XSS,hard,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.665,True,0.502,0.36,decrease,True,3,2,False
+8a991ca5-9942-4077-ae76-90cb9dc9b2a2,JavaScript,Path Traversal,easy,open(base + '/' + filename),True,Potential vulnerability detected.,Looks safe after review.,0.629,False,0.448,0.264,decrease,True,5,3,True
+9ee05821-f65a-4e22-a776-6982655d6182,Python,Command Injection,hard,os.system('ls ' + userInput),False,Potential vulnerability detected.,Looks safe after review.,0.69,True,0.612,0.81,increase,True,5,3,False
+28f8d6d4-e7f2-4db0-b9e7-18c71748b888,JavaScript,XSS,hard,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.836,False,0.55,0.383,decrease,True,4,1,True
+aa3161f4-b755-4b4e-a24b-7e8a75279bca,JavaScript,SQL Injection,easy,"app.get('/user', (req,res)=>{ let q = `SELECT * FROM users WHERE id = ${req.query.id}`; db.exec(q); });",True,Potential vulnerability detected.,Looks safe after review.,0.771,False,0.602,0.729,increase,True,3,1,True
+c20f75f1-e04b-43d0-afc5-029369e764b3,Python,Path Traversal,hard,open(base + '/' + filename),True,Potential vulnerability detected.,Looks safe after review.,0.821,True,0.415,0.305,decrease,True,5,2,True
+b3631db8-cce8-4416-93a0-363d6a0cab60,C,Buffer Overflow,medium,"char buf[10]; strcpy(buf, input);",True,Potential vulnerability detected.,Looks safe after review.,0.773,False,0.756,0.614,decrease,True,5,1,True
+6a127236-7058-46b7-8a6f-7315f9a37923,Python,Path Traversal,hard,open(base + '/' + filename),False,Potential vulnerability detected.,Looks safe after review.,0.628,True,0.698,0.522,decrease,True,2,2,False
+f2fd9433-2f1d-4855-92e6-7f9fad3f0942,C,SSRF,easy,requests.get(url),True,Potential vulnerability detected.,Looks safe after review.,0.557,False,0.777,0.915,increase,True,2,1,False
+0e7d1018-c438-496e-aa0d-fd1d898910e4,JavaScript,SQL Injection,medium,"app.get('/user', (req,res)=>{ let q = `SELECT * FROM users WHERE id = ${req.query.id}`; db.exec(q); });",True,Potential vulnerability detected.,Looks safe after review.,0.764,False,0.224,0.064,decrease,True,4,3,False
+48a72193-f496-49a4-be33-fd9a98526f4b,C,XSS,medium,res.send('<div>' + userInput + '</div>');,True,Potential vulnerability detected.,Looks safe after review.,0.396,False,0.774,0.953,increase,True,1,2,True
+9e7a1075-621e-4815-9aa5-4a31bb80045c,C,Command Injection,medium,os.system('ls ' + userInput),False,Potential vulnerability detected.,Looks safe after review.,0.671,False,0.416,0.611,increase,True,5,3,True
+d9f5a69f-6c18-487b-a116-4901624e46c0,C,XSS,medium,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.71,False,0.344,0.54,increase,True,4,1,False
+c3b59fad-5cd0-4201-b703-fd39e24a9197,C,Path Traversal,hard,open(base + '/' + filename),False,Potential vulnerability detected.,Looks safe after review.,0.605,False,0.215,0.064,decrease,True,1,2,True
+e220a0f0-b6ac-40f5-95b9-0c44a4726bed,C,Insecure Deserialization,easy,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.426,True,0.3,0.463,increase,True,4,1,True
+27f7794a-23bd-42a5-9fb8-0adfbc993a01,C,Buffer Overflow,hard,"char buf[10]; strcpy(buf, input);",False,Potential vulnerability detected.,Looks safe after review.,0.392,False,0.588,0.763,increase,True,3,1,True
+99392bcd-d374-47f7-ab4c-4917fa363d32,Python,XSS,easy,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.545,False,0.535,0.726,increase,True,4,2,False
+8a019023-393e-47f7-8967-176faf8144cd,JavaScript,SQL Injection,hard,"app.get('/user', (req,res)=>{ let q = `SELECT * FROM users WHERE id = ${req.query.id}`; db.exec(q); });",True,Potential vulnerability detected.,Looks safe after review.,0.651,True,0.521,0.697,increase,True,3,3,True
+e3a1c355-7b8f-4de5-8a23-5afe34de158a,C,Path Traversal,medium,open(base + '/' + filename),True,Potential vulnerability detected.,Looks safe after review.,0.793,True,0.369,0.231,decrease,True,4,1,True
+1908a6b3-d964-4e58-955a-1766518ca605,C,SSRF,medium,requests.get(url),False,Potential vulnerability detected.,Looks safe after review.,0.832,False,0.776,0.906,increase,True,1,3,True
+94988805-dece-49a5-ada6-01c25f58afbe,Python,XSS,easy,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.749,False,0.522,0.652,increase,True,2,2,True
+1e8dc3cf-a230-4fc5-8bf6-760c06adc5c8,Python,SSRF,easy,requests.get(url),False,Potential vulnerability detected.,Looks safe after review.,0.64,True,0.317,0.484,increase,True,5,2,True
+5c2a4191-8c04-4e77-8e4f-a997535e381b,C,Path Traversal,easy,open(base + '/' + filename),False,Potential vulnerability detected.,Looks safe after review.,0.514,True,0.259,0.064,decrease,True,1,2,True
+0a3138e4-d187-48c0-80c2-befc9583bd20,JavaScript,Command Injection,medium,os.system('ls ' + userInput),False,Potential vulnerability detected.,Looks safe after review.,0.391,False,0.397,0.228,decrease,True,3,2,True
+09594914-11cf-4b37-b69a-5bf4b0982693,JavaScript,SQL Injection,easy,"app.get('/user', (req,res)=>{ let q = `SELECT * FROM users WHERE id = ${req.query.id}`; db.exec(q); });",True,Potential vulnerability detected.,Looks safe after review.,0.516,False,0.627,0.499,decrease,True,4,2,False
+065e76f3-a16d-447e-b4ad-137962a73aa7,JavaScript,Insecure Deserialization,medium,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.815,True,0.305,0.489,increase,True,5,1,False
+7bb2b3da-beca-4bf5-ad8d-9524519f73c9,Python,Weak Crypto,hard,hashlib.md5(password).hexdigest(),True,Potential vulnerability detected.,Looks safe after review.,0.647,True,0.735,0.916,increase,True,1,3,False
+d85ced13-4182-4783-8984-0ae8edace8e1,C,Buffer Overflow,medium,"char buf[10]; strcpy(buf, input);",True,Potential vulnerability detected.,Looks safe after review.,0.654,False,0.419,0.608,increase,True,2,2,True
+6b524b7c-34f4-4db5-9ea1-bff735b11427,JavaScript,Auth Bypass,hard,"jwt.decode(token, options={'verify_signature': False})",True,Potential vulnerability detected.,Looks safe after review.,0.384,True,0.598,0.774,increase,True,2,3,True
+ff816555-699c-439d-a063-08baa84f4e83,JavaScript,Race Condition,easy,if balance >= amt: balance -= amt,True,Potential vulnerability detected.,Looks safe after review.,0.522,True,0.657,0.763,increase,True,2,3,False
+2092525a-5599-4d00-9f29-440a37c847c6,JavaScript,Auth Bypass,medium,"jwt.decode(token, options={'verify_signature': False})",True,Potential vulnerability detected.,Looks safe after review.,0.881,False,0.224,0.114,decrease,True,3,3,True
+7d4d1256-b495-4236-9ad6-c4cb2a43b6d2,C,Auth Bypass,medium,"jwt.decode(token, options={'verify_signature': False})",False,Potential vulnerability detected.,Looks safe after review.,0.526,True,0.553,0.705,increase,True,5,2,False
+0cc334c0-e703-4d26-957a-115bb0818794,JavaScript,Insecure Deserialization,medium,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.438,False,0.501,0.645,increase,True,2,1,True
+b032cc69-7f8f-4a5c-8457-01f0f50e681e,JavaScript,SSRF,hard,requests.get(url),True,Potential vulnerability detected.,Looks safe after review.,0.732,False,0.597,0.416,decrease,True,4,2,True
+40f26752-c38a-4b46-902a-ba142afbe7e8,Python,Use After Free,hard,free(ptr); printf(ptr);,False,Potential vulnerability detected.,Looks safe after review.,0.655,True,0.213,0.326,increase,True,5,1,True
+8d4ccd9e-75b7-4281-a591-b9426fdfd49d,Python,SQL Injection,medium,"def get_user(db, uid):
+    query = f""SELECT * FROM users WHERE id = {uid}""
+    return db.execute(query)",True,Potential vulnerability detected.,Looks safe after review.,0.638,True,0.51,0.35,decrease,True,3,1,True
+e2d447e7-5206-4da4-a150-0a30612103c2,C,Race Condition,medium,if balance >= amt: balance -= amt,False,Potential vulnerability detected.,Looks safe after review.,0.777,True,0.302,0.142,decrease,True,5,3,False
+1e85f8ae-1071-4254-824c-e44a84f30f39,C,SSRF,hard,requests.get(url),False,Potential vulnerability detected.,Looks safe after review.,0.531,True,0.753,0.876,increase,True,1,1,False
+66de75bd-e605-4e1c-86a7-614051c5e66f,C,SSRF,easy,requests.get(url),True,Potential vulnerability detected.,Looks safe after review.,0.619,True,0.486,0.674,increase,True,1,2,True
+c89b8a1e-dc39-4be7-b372-16ff0c61362d,C,Use After Free,easy,free(ptr); printf(ptr);,False,Potential vulnerability detected.,Looks safe after review.,0.719,False,0.513,0.326,decrease,True,2,2,False
+28d0254d-3bf3-4630-8006-8d702760dc7f,C,Insecure Deserialization,hard,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.44,True,0.455,0.307,decrease,True,3,3,False
+418bef66-25a1-44c6-bd1d-cafa47b5ce01,Python,Path Traversal,easy,open(base + '/' + filename),True,Potential vulnerability detected.,Looks safe after review.,0.525,True,0.547,0.699,increase,True,3,2,False
+b9045cd4-26f9-4fed-998d-94d2e4553e25,Python,XSS,medium,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.667,False,0.357,0.201,decrease,True,2,2,False
+f6cda25c-1f15-4c9b-b142-7675b2cf84c1,JavaScript,SSRF,hard,requests.get(url),False,Potential vulnerability detected.,Looks safe after review.,0.765,False,0.352,0.194,decrease,True,2,3,True
+d6432d1f-d11d-416d-88c0-b9d647c6e1bf,JavaScript,Command Injection,hard,os.system('ls ' + userInput),True,Potential vulnerability detected.,Looks safe after review.,0.781,True,0.26,0.081,decrease,True,2,2,True
+6969d0e9-6e12-4d22-8d7b-f47fdf2ec070,Python,XSS,medium,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.348,True,0.253,0.131,decrease,True,4,2,False
+b12c143e-9650-4c9f-afc0-cc50d0b361a4,Python,Use After Free,easy,free(ptr); printf(ptr);,False,Potential vulnerability detected.,Looks safe after review.,0.858,False,0.463,0.648,increase,True,2,1,True
+86ef95af-b63d-476b-a98e-e52f88ccb0c4,Python,Use After Free,hard,free(ptr); printf(ptr);,True,Potential vulnerability detected.,Looks safe after review.,0.352,False,0.416,0.614,increase,True,4,2,False
+2c5be51a-021a-4abb-b86d-a122a9afef82,C,Auth Bypass,easy,"jwt.decode(token, options={'verify_signature': False})",True,Potential vulnerability detected.,Looks safe after review.,0.63,False,0.642,0.834,increase,True,3,2,True
+fca49491-3e20-4fbb-863e-19f06f6c5fb9,Python,Use After Free,medium,free(ptr); printf(ptr);,False,Potential vulnerability detected.,Looks safe after review.,0.604,True,0.545,0.427,decrease,True,5,2,False
+4c4bac31-0646-4ddc-8347-2e4531712799,C,XSS,medium,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.762,False,0.617,0.461,decrease,True,4,3,False
+dce11e5a-198c-4868-9e6a-88b141f17176,Python,Use After Free,medium,free(ptr); printf(ptr);,True,Potential vulnerability detected.,Looks safe after review.,0.897,True,0.355,0.192,decrease,True,3,2,False
+47731e9a-1478-455b-9adb-829b3f8b4241,C,Buffer Overflow,easy,"char buf[10]; strcpy(buf, input);",False,Potential vulnerability detected.,Looks safe after review.,0.749,False,0.349,0.489,increase,True,1,3,True
+fbe03537-34f7-4f7d-8910-ca05431c3891,JavaScript,Race Condition,medium,if balance >= amt: balance -= amt,True,Potential vulnerability detected.,Looks safe after review.,0.748,True,0.737,0.619,decrease,True,4,3,True
+2ab7e87b-23de-4eab-8998-c877bdec769e,C,Command Injection,easy,os.system('ls ' + userInput),False,Potential vulnerability detected.,Looks safe after review.,0.802,False,0.324,0.507,increase,True,2,1,True
+073060f2-bec3-4534-9405-db8a9b53644e,C,XSS,hard,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.523,False,0.568,0.753,increase,True,4,3,False
+473a2411-78bc-41e6-a08b-e2bbbeae119f,Python,Race Condition,hard,if balance >= amt: balance -= amt,False,Potential vulnerability detected.,Looks safe after review.,0.78,False,0.439,0.544,increase,True,5,1,False
+7abce845-d74a-4a12-a491-cc43d4d11f3f,C,Auth Bypass,easy,"jwt.decode(token, options={'verify_signature': False})",False,Potential vulnerability detected.,Looks safe after review.,0.305,True,0.786,0.654,decrease,True,4,3,True
+c1216f99-0746-429f-a724-5276c28c09aa,JavaScript,Insecure Deserialization,hard,pickle.loads(data),False,Potential vulnerability detected.,Looks safe after review.,0.583,False,0.312,0.188,decrease,True,3,1,False
+be84cf6c-3bfb-4fd0-af25-11df6e2c65f8,Python,Auth Bypass,medium,"jwt.decode(token, options={'verify_signature': False})",False,Potential vulnerability detected.,Looks safe after review.,0.408,True,0.419,0.291,decrease,True,5,3,True
+3580a98d-e88d-4667-8f9e-0a4bfbefdc2f,C,XSS,medium,res.send('<div>' + userInput + '</div>');,True,Potential vulnerability detected.,Looks safe after review.,0.78,True,0.533,0.413,decrease,True,4,1,True
+d8cb9b69-5399-4e25-b347-798d5a9832f1,JavaScript,Auth Bypass,easy,"jwt.decode(token, options={'verify_signature': False})",False,Potential vulnerability detected.,Looks safe after review.,0.815,True,0.671,0.546,decrease,True,4,1,True
+b87a3b32-69da-4785-bf31-c8014cd96b77,Python,SQL Injection,medium,"def get_user(db, uid):
+    query = f""SELECT * FROM users WHERE id = {uid}""
+    return db.execute(query)",False,Potential vulnerability detected.,Looks safe after review.,0.501,False,0.703,0.848,increase,True,3,3,False
+e3d72bf5-fc28-4c81-8835-70359a273392,Python,Insecure Deserialization,medium,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.69,True,0.411,0.569,increase,True,3,2,False
+5842e582-51ea-4fe1-8107-92bfb044d859,C,Weak Crypto,medium,hashlib.md5(password).hexdigest(),False,Potential vulnerability detected.,Looks safe after review.,0.578,True,0.734,0.573,decrease,True,2,3,False
+624eb7e8-c2ce-48c5-9540-b1bc3971ccb2,C,Auth Bypass,hard,"jwt.decode(token, options={'verify_signature': False})",False,Potential vulnerability detected.,Looks safe after review.,0.506,False,0.709,0.817,increase,True,3,3,False
+b1466643-8116-455a-9082-915a698520b7,C,Path Traversal,hard,open(base + '/' + filename),False,Potential vulnerability detected.,Looks safe after review.,0.863,False,0.363,0.185,decrease,True,4,1,True
+4f5f752a-f588-40b6-b734-0ba1f9d09ac5,Python,SQL Injection,hard,"def get_user(db, uid):
+    query = f""SELECT * FROM users WHERE id = {uid}""
+    return db.execute(query)",True,Potential vulnerability detected.,Looks safe after review.,0.538,True,0.597,0.718,increase,True,1,2,True
+060fd756-cb81-4ce3-8a7c-f22258700695,JavaScript,SQL Injection,hard,"app.get('/user', (req,res)=>{ let q = `SELECT * FROM users WHERE id = ${req.query.id}`; db.exec(q); });",True,Potential vulnerability detected.,Looks safe after review.,0.859,False,0.262,0.37,increase,True,3,1,True
+411572f7-f0c3-4c07-9ec2-bb72bb2efb99,JavaScript,Path Traversal,hard,open(base + '/' + filename),True,Potential vulnerability detected.,Looks safe after review.,0.698,False,0.279,0.382,increase,True,4,2,False
+266b0d56-4cca-4771-b07e-0cdbb90c2c35,JavaScript,Buffer Overflow,easy,"char buf[10]; strcpy(buf, input);",True,Potential vulnerability detected.,Looks safe after review.,0.682,False,0.554,0.391,decrease,True,5,3,False
+856aa77f-5930-4389-a8fe-ffd6d5feba22,JavaScript,Insecure Deserialization,hard,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.547,True,0.683,0.552,decrease,True,3,1,True
+26d192eb-4539-478b-8785-43ffa1d22ecd,Python,Buffer Overflow,medium,"char buf[10]; strcpy(buf, input);",False,Potential vulnerability detected.,Looks safe after review.,0.595,False,0.482,0.651,increase,True,3,1,False
+a92d416e-62d8-4f26-a715-fa6484fe428b,C,Path Traversal,easy,open(base + '/' + filename),True,Potential vulnerability detected.,Looks safe after review.,0.636,False,0.529,0.67,increase,True,2,1,False
+87cca2c2-5b23-400d-923c-6e2f78abdb16,Python,Auth Bypass,medium,"jwt.decode(token, options={'verify_signature': False})",True,Potential vulnerability detected.,Looks safe after review.,0.78,False,0.453,0.605,increase,True,3,3,False
+a83e1f8b-0d63-45bc-8438-6c7fef75f0d7,Python,Auth Bypass,easy,"jwt.decode(token, options={'verify_signature': False})",True,Potential vulnerability detected.,Looks safe after review.,0.671,False,0.282,0.446,increase,True,5,2,True
+8705b9d2-be85-4320-9ae3-c28fe04f83f0,Python,Insecure Deserialization,easy,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.361,False,0.782,0.901,increase,True,2,3,False
+77ef8bfd-73cd-4bbb-95c0-6ef3fc47a589,Python,SQL Injection,easy,"def get_user(db, uid):
+    query = f""SELECT * FROM users WHERE id = {uid}""
+    return db.execute(query)",True,Potential vulnerability detected.,Looks safe after review.,0.487,False,0.209,0.343,increase,True,3,2,True
+47d917e0-82d0-4ebe-b18c-0c15cfd5e2ef,Python,Insecure Deserialization,easy,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.582,True,0.36,0.253,decrease,True,3,2,True
+03fa7685-83a5-4751-a17b-a0aab98e88de,C,XSS,easy,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.897,True,0.663,0.538,decrease,True,4,3,True
+ece61709-df6b-4878-b8c8-d484ecc9ea21,C,Buffer Overflow,easy,"char buf[10]; strcpy(buf, input);",False,Potential vulnerability detected.,Looks safe after review.,0.395,True,0.433,0.239,decrease,True,5,3,True
+d2573349-35b1-4c38-bc31-37dab8f054bb,JavaScript,Path Traversal,hard,open(base + '/' + filename),False,Potential vulnerability detected.,Looks safe after review.,0.431,True,0.319,0.505,increase,True,2,3,False
+0c13545d-5b78-40f4-967c-439f97428037,Python,Insecure Deserialization,easy,pickle.loads(data),False,Potential vulnerability detected.,Looks safe after review.,0.305,True,0.551,0.372,decrease,True,5,3,False
+ad3e7cde-a4da-43fb-9d82-23eae039da7f,Python,Use After Free,medium,free(ptr); printf(ptr);,True,Potential vulnerability detected.,Looks safe after review.,0.671,True,0.349,0.24,decrease,True,1,2,True
+2576e55b-856d-41c1-b5f7-b763786bda17,Python,Buffer Overflow,easy,"char buf[10]; strcpy(buf, input);",False,Potential vulnerability detected.,Looks safe after review.,0.563,True,0.34,0.159,decrease,True,1,3,False
+6ceb3150-79e7-4511-a878-d2cce831ac4f,C,Insecure Deserialization,easy,pickle.loads(data),False,Potential vulnerability detected.,Looks safe after review.,0.635,False,0.739,0.568,decrease,True,2,3,True
+c906b94c-8cd3-429d-8121-507316ba351e,JavaScript,Buffer Overflow,medium,"char buf[10]; strcpy(buf, input);",False,Potential vulnerability detected.,Looks safe after review.,0.393,False,0.365,0.472,increase,True,3,3,False
+a2405345-9e9a-4487-b3e9-92d0b16b09fd,Python,Race Condition,hard,if balance >= amt: balance -= amt,False,Potential vulnerability detected.,Looks safe after review.,0.518,True,0.64,0.802,increase,True,3,3,True
+7c57f2fa-9d8f-41b4-8f0b-52c123fd40ea,C,Weak Crypto,medium,hashlib.md5(password).hexdigest(),True,Potential vulnerability detected.,Looks safe after review.,0.392,False,0.514,0.337,decrease,True,3,2,False
+d3facfd5-ac04-4bb6-894b-c265f1218225,Python,XSS,hard,res.send('<div>' + userInput + '</div>');,True,Potential vulnerability detected.,Looks safe after review.,0.319,True,0.226,0.344,increase,True,4,1,True
+89618e90-e640-4ed4-824b-c47353b17906,C,SQL Injection,hard,"char query[256]; sprintf(query, ""SELECT * FROM users WHERE id = %s"", uid); execute(query);",False,Potential vulnerability detected.,Looks safe after review.,0.432,True,0.595,0.49,decrease,True,1,1,False
+ce1adc3f-7e05-499f-bf3f-b9b988e129a9,JavaScript,XSS,hard,res.send('<div>' + userInput + '</div>');,True,Potential vulnerability detected.,Looks safe after review.,0.777,True,0.417,0.235,decrease,True,5,2,True
+b708a5d0-a938-4fc3-8d39-a1a48f2c58d4,JavaScript,XSS,easy,res.send('<div>' + userInput + '</div>');,True,Potential vulnerability detected.,Looks safe after review.,0.439,False,0.776,0.886,increase,True,2,1,True
+26f69c28-340d-4986-8bb2-6d78a5afb657,C,Use After Free,easy,free(ptr); printf(ptr);,False,Potential vulnerability detected.,Looks safe after review.,0.722,False,0.648,0.481,decrease,True,1,1,True
+6486361a-bb49-4234-bf04-11129b881047,JavaScript,Buffer Overflow,hard,"char buf[10]; strcpy(buf, input);",False,Potential vulnerability detected.,Looks safe after review.,0.841,False,0.595,0.402,decrease,True,3,2,False
+b7db2e08-147e-4cdb-afb6-46f828254f1d,C,Insecure Deserialization,easy,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.571,False,0.425,0.289,decrease,True,1,3,True
+2b6a598b-6fd2-4b01-809d-64eb31a1f7dc,C,Path Traversal,easy,open(base + '/' + filename),True,Potential vulnerability detected.,Looks safe after review.,0.891,True,0.796,0.695,decrease,True,3,1,False
+05c14a61-9ced-45b4-b34e-6ea7b73b962f,C,Buffer Overflow,hard,"char buf[10]; strcpy(buf, input);",True,Potential vulnerability detected.,Looks safe after review.,0.383,False,0.257,0.121,decrease,True,5,1,True
+45227a39-11f0-4133-9c00-7ff5537af150,JavaScript,Path Traversal,easy,open(base + '/' + filename),False,Potential vulnerability detected.,Looks safe after review.,0.734,False,0.541,0.714,increase,True,2,2,True
+5628f37d-336f-4b67-a021-25fa677e0bf3,C,Use After Free,medium,free(ptr); printf(ptr);,True,Potential vulnerability detected.,Looks safe after review.,0.334,False,0.638,0.53,decrease,True,3,2,False
+baee7a27-2eb3-4b49-917d-9d61ce8536c0,Python,XSS,hard,res.send('<div>' + userInput + '</div>');,True,Potential vulnerability detected.,Looks safe after review.,0.615,False,0.58,0.475,decrease,True,5,3,True
+fe84590d-8f82-40a9-9571-f9323814eb44,C,Insecure Deserialization,hard,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.752,True,0.292,0.095,decrease,True,2,2,False
+c85a29f5-2ab9-4fc6-a5db-a32dbc3463ad,Python,Auth Bypass,easy,"jwt.decode(token, options={'verify_signature': False})",False,Potential vulnerability detected.,Looks safe after review.,0.458,False,0.25,0.405,increase,True,5,2,True
+495ffade-a766-4052-8094-6d875bcc8f6e,JavaScript,SSRF,hard,requests.get(url),True,Potential vulnerability detected.,Looks safe after review.,0.898,True,0.493,0.649,increase,True,2,1,False
+3403b44d-564f-4bdb-8a6e-4d128eedfc63,JavaScript,Auth Bypass,hard,"jwt.decode(token, options={'verify_signature': False})",True,Potential vulnerability detected.,Looks safe after review.,0.509,False,0.268,0.126,decrease,True,3,3,True
+1bb64a11-dd4a-45de-952f-f84331c8450f,Python,Path Traversal,medium,open(base + '/' + filename),False,Potential vulnerability detected.,Looks safe after review.,0.791,True,0.574,0.47,decrease,True,3,1,True
+3574d6a5-de33-4ce7-8cfb-1182f32e7ed2,C,XSS,easy,res.send('<div>' + userInput + '</div>');,True,Potential vulnerability detected.,Looks safe after review.,0.792,True,0.769,0.956,increase,True,3,3,True
+d29424ac-87fd-4224-a5a0-158040aa35b8,JavaScript,Path Traversal,medium,open(base + '/' + filename),True,Potential vulnerability detected.,Looks safe after review.,0.614,False,0.399,0.519,increase,True,5,2,True
+e99f565c-2ac9-4a2a-9a82-f4a874f85bf7,Python,Weak Crypto,medium,hashlib.md5(password).hexdigest(),True,Potential vulnerability detected.,Looks safe after review.,0.774,False,0.353,0.481,increase,True,1,2,True
+2c995a3d-3986-42dd-b7d6-e1476c72738a,JavaScript,XSS,hard,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.311,False,0.598,0.412,decrease,True,2,2,True
+c574ade6-7fa0-4dc1-b368-115a7d70c17d,JavaScript,Insecure Deserialization,hard,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.727,True,0.312,0.156,decrease,True,2,3,False
+75e217cf-7bef-4c6d-baa4-7eff480f76ed,JavaScript,Insecure Deserialization,medium,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.481,False,0.211,0.075,decrease,True,1,3,False
+92c0dfe7-b9f5-4f09-9af6-670d4aa30fcc,Python,Auth Bypass,hard,"jwt.decode(token, options={'verify_signature': False})",False,Potential vulnerability detected.,Looks safe after review.,0.694,True,0.335,0.145,decrease,True,4,3,True
+825495af-15b7-470a-8dca-8d953e87d8ea,Python,Auth Bypass,hard,"jwt.decode(token, options={'verify_signature': False})",True,Potential vulnerability detected.,Looks safe after review.,0.498,True,0.456,0.265,decrease,True,2,3,True
+f58597d8-c9b6-47e8-8a13-2d1384ba97b8,C,Use After Free,hard,free(ptr); printf(ptr);,True,Potential vulnerability detected.,Looks safe after review.,0.839,True,0.718,0.549,decrease,True,4,1,True
+54969d73-132c-4d8f-baa8-3de35c850f0d,Python,Insecure Deserialization,hard,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.759,False,0.31,0.483,increase,True,4,2,False
+409db232-28ce-4f91-9eb6-1f4813b1127f,C,Weak Crypto,medium,hashlib.md5(password).hexdigest(),True,Potential vulnerability detected.,Looks safe after review.,0.316,False,0.667,0.78,increase,True,5,3,True
+7d09822a-51d4-442a-b779-3a302d74f927,Python,Use After Free,easy,free(ptr); printf(ptr);,True,Potential vulnerability detected.,Looks safe after review.,0.808,False,0.416,0.303,decrease,True,3,1,False
+9357174a-4e8d-4b84-991f-6a1d3076c59c,JavaScript,Race Condition,easy,if balance >= amt: balance -= amt,True,Potential vulnerability detected.,Looks safe after review.,0.881,False,0.316,0.457,increase,True,4,1,True
+3aa75cc0-a72b-423f-8aff-f7438544728a,Python,Command Injection,easy,os.system('ls ' + userInput),False,Potential vulnerability detected.,Looks safe after review.,0.82,True,0.72,0.551,decrease,True,4,2,True
+11f91fbc-a36f-420b-9a8c-25946abddab7,C,Use After Free,medium,free(ptr); printf(ptr);,False,Potential vulnerability detected.,Looks safe after review.,0.571,True,0.436,0.588,increase,True,2,3,False
+f388a68c-9202-45f2-89a8-f73af1e2692e,C,SQL Injection,medium,"char query[256]; sprintf(query, ""SELECT * FROM users WHERE id = %s"", uid); execute(query);",True,Potential vulnerability detected.,Looks safe after review.,0.483,False,0.314,0.174,decrease,True,4,1,False
+8749e4dd-fe94-4970-92dd-3c11b210ee83,C,Path Traversal,easy,open(base + '/' + filename),True,Potential vulnerability detected.,Looks safe after review.,0.6,True,0.478,0.369,decrease,True,5,3,True
+108f896d-d5cd-47c3-822a-d581eff04ab1,JavaScript,Auth Bypass,medium,"jwt.decode(token, options={'verify_signature': False})",False,Potential vulnerability detected.,Looks safe after review.,0.728,True,0.215,0.056,decrease,True,4,1,False
+a90af938-181c-4d81-b2c9-dcc324bb768f,C,Insecure Deserialization,hard,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.724,False,0.631,0.74,increase,True,1,3,False
+3761c452-c6ab-4c1b-9ec6-775ef634b6ab,C,Buffer Overflow,easy,"char buf[10]; strcpy(buf, input);",False,Potential vulnerability detected.,Looks safe after review.,0.847,True,0.53,0.707,increase,True,2,1,True
+6dfbdbc3-55ed-4db3-8c97-e139abce3a47,JavaScript,SQL Injection,medium,"app.get('/user', (req,res)=>{ let q = `SELECT * FROM users WHERE id = ${req.query.id}`; db.exec(q); });",False,Potential vulnerability detected.,Looks safe after review.,0.408,True,0.638,0.509,decrease,True,2,1,False
+9e2eeb3a-3479-46d4-a202-5e5a8866e248,JavaScript,SQL Injection,medium,"app.get('/user', (req,res)=>{ let q = `SELECT * FROM users WHERE id = ${req.query.id}`; db.exec(q); });",False,Potential vulnerability detected.,Looks safe after review.,0.596,True,0.526,0.687,increase,True,5,3,False
+f7d6697a-ae7c-4f82-b3a8-1a87c57c7afb,JavaScript,Race Condition,medium,if balance >= amt: balance -= amt,True,Potential vulnerability detected.,Looks safe after review.,0.628,True,0.561,0.685,increase,True,1,1,True
+2216d107-0adf-4d0e-a2d3-6c9a25f24701,C,SQL Injection,medium,"char query[256]; sprintf(query, ""SELECT * FROM users WHERE id = %s"", uid); execute(query);",True,Potential vulnerability detected.,Looks safe after review.,0.803,False,0.287,0.454,increase,True,3,1,True
+bfbb75b2-c063-4c4e-ae77-e2fe4fcee381,JavaScript,XSS,easy,res.send('<div>' + userInput + '</div>');,True,Potential vulnerability detected.,Looks safe after review.,0.75,False,0.603,0.8,increase,True,1,1,False
+c10cdbc9-8076-4a04-ba84-4e8a240bd418,JavaScript,Insecure Deserialization,medium,pickle.loads(data),True,Potential vulnerability detected.,Looks safe after review.,0.381,False,0.655,0.784,increase,True,3,3,False
+e0e48af7-d852-480c-addc-e516cf046c1e,Python,Buffer Overflow,hard,"char buf[10]; strcpy(buf, input);",True,Potential vulnerability detected.,Looks safe after review.,0.888,True,0.567,0.724,increase,True,4,3,False
+320159fc-ae0d-4155-a863-565f1f4a4242,C,Auth Bypass,medium,"jwt.decode(token, options={'verify_signature': False})",False,Potential vulnerability detected.,Looks safe after review.,0.669,False,0.515,0.322,decrease,True,5,3,False
+e70d01d6-534a-4d96-bb9d-4f295b5cba67,Python,Race Condition,hard,if balance >= amt: balance -= amt,True,Potential vulnerability detected.,Looks safe after review.,0.314,True,0.625,0.725,increase,True,2,3,False
+510dca81-603e-41ac-a8f3-94492692694e,Python,Auth Bypass,medium,"jwt.decode(token, options={'verify_signature': False})",False,Potential vulnerability detected.,Looks safe after review.,0.421,False,0.536,0.637,increase,True,3,1,False
+6db69c84-623c-4e30-9493-63e93effb1d0,C,Path Traversal,hard,open(base + '/' + filename),False,Potential vulnerability detected.,Looks safe after review.,0.505,True,0.66,0.829,increase,True,2,1,False
+86a48e89-031a-46c1-a129-b6a0113af2d9,C,Insecure Deserialization,medium,pickle.loads(data),False,Potential vulnerability detected.,Looks safe after review.,0.676,False,0.678,0.826,increase,True,4,2,True
+f0946894-9b3d-4761-a6b0-c6a1b56fc104,JavaScript,Buffer Overflow,hard,"char buf[10]; strcpy(buf, input);",False,Potential vulnerability detected.,Looks safe after review.,0.711,False,0.533,0.654,increase,True,1,1,False
+b6259435-dc57-4ce4-bcce-b65065a0577d,JavaScript,SQL Injection,medium,"app.get('/user', (req,res)=>{ let q = `SELECT * FROM users WHERE id = ${req.query.id}`; db.exec(q); });",True,Potential vulnerability detected.,Looks safe after review.,0.37,False,0.543,0.424,decrease,True,3,3,True
+01413978-4b82-4d09-ac5a-00d33f296290,JavaScript,Path Traversal,easy,open(base + '/' + filename),False,Potential vulnerability detected.,Looks safe after review.,0.87,True,0.726,0.581,decrease,True,5,2,True
+37076383-fe42-441e-918f-6a5ce14032ae,JavaScript,XSS,easy,res.send('<div>' + userInput + '</div>');,True,Potential vulnerability detected.,Looks safe after review.,0.779,True,0.748,0.597,decrease,True,2,2,False
+28aeaff9-6230-4c6c-b72d-03c5ca000605,JavaScript,Buffer Overflow,medium,"char buf[10]; strcpy(buf, input);",True,Potential vulnerability detected.,Looks safe after review.,0.863,True,0.662,0.844,increase,True,2,3,True
+03b596a8-aee8-42de-b352-7797e71bc923,JavaScript,Race Condition,hard,if balance >= amt: balance -= amt,True,Potential vulnerability detected.,Looks safe after review.,0.657,True,0.202,0.371,increase,True,3,2,True
+429fdeae-cc58-4595-a463-c4fbb8325f46,C,XSS,hard,res.send('<div>' + userInput + '</div>');,False,Potential vulnerability detected.,Looks safe after review.,0.426,True,0.213,0.049,decrease,True,2,2,False
+8b234f77-7464-4985-a67c-a0350ac1c447,JavaScript,Buffer Overflow,medium,"char buf[10]; strcpy(buf, input);",True,Potential vulnerability detected.,Looks safe after review.,0.309,True,0.364,0.491,increase,True,2,3,False
+46b8dab1-700d-4f30-8488-772a649b76df,JavaScript,Buffer Overflow,medium,"char buf[10]; strcpy(buf, input);",True,Potential vulnerability detected.,Looks safe after review.,0.403,False,0.766,0.609,decrease,True,5,2,False
+247a2b66-d151-4df2-85c2-e14af61e76cb,Python,SQL Injection,easy,"def get_user(db, uid):
+    query = f""SELECT * FROM users WHERE id = {uid}""
+    return db.execute(query)",False,Potential vulnerability detected.,Looks safe after review.,0.332,False,0.742,0.853,increase,True,4,1,False
+31d5f119-7b37-47f8-bcb7-8386ff2bfefb,JavaScript,Use After Free,medium,free(ptr); printf(ptr);,False,Potential vulnerability detected.,Looks safe after review.,0.753,False,0.69,0.887,increase,True,5,1,True
+30c1df1a-211a-47db-afaf-99cc23f6048c,Python,Race Condition,medium,if balance >= amt: balance -= amt,False,Potential vulnerability detected.,Looks safe after review.,0.868,True,0.611,0.464,decrease,True,5,2,False
+1bf74c36-a096-43a6-afcb-13abba4d0597,Python,Auth Bypass,hard,"jwt.decode(token, options={'verify_signature': False})",False,Potential vulnerability detected.,Looks safe after review.,0.318,False,0.673,0.528,decrease,True,1,2,False
+5202bac3-4efc-4896-bc0e-eb2f204148d8,Python,Race Condition,medium,if balance >= amt: balance -= amt,False,Potential vulnerability detected.,Looks safe after review.,0.543,True,0.563,0.714,increase,True,3,3,True
+aa5985ae-d822-4917-bd39-3246cec8ff0c,C,Path Traversal,medium,open(base + '/' + filename),False,Potential vulnerability detected.,Looks safe after review.,0.629,False,0.554,0.716,increase,True,4,1,False
+4e2acb5a-0fa8-47e9-9949-56171c1fd58a,C,Command Injection,hard,os.system('ls ' + userInput),False,Potential vulnerability detected.,Looks safe after review.,0.505,True,0.671,0.514,decrease,True,2,3,True
+8aababbb-ab75-45dd-872f-9148e1cd56c7,JavaScript,Use After Free,easy,free(ptr); printf(ptr);,False,Potential vulnerability detected.,Looks safe after review.,0.406,False,0.395,0.577,increase,True,1,3,True
+732065b4-ff1e-4432-9159-9773b124c166,C,Weak Crypto,medium,hashlib.md5(password).hexdigest(),False,Potential vulnerability detected.,Looks safe after review.,0.79,True,0.497,0.606,increase,True,2,3,True
+1f348e02-16e8-49c9-b0c1-d3849e96d774,C,Race Condition,medium,if balance >= amt: balance -= amt,False,Potential vulnerability detected.,Looks safe after review.,0.709,False,0.569,0.449,decrease,True,3,3,False
+29d172bb-8155-4017-a8fb-86c14001bdd6,C,Auth Bypass,medium,"jwt.decode(token, options={'verify_signature': False})",True,Potential vulnerability detected.,Looks safe after review.,0.812,True,0.55,0.365,decrease,True,3,3,True
+a981edb9-2c3f-4f4b-ace7-1a41e6f754fc,C,SQL Injection,hard,"char query[256]; sprintf(query, ""SELECT * FROM users WHERE id = %s"", uid); execute(query);",False,Potential vulnerability detected.,Looks safe after review.,0.441,False,0.266,0.079,decrease,True,3,3,False
+bd83df4d-bc4f-4d79-a1d9-f519d1ffcb13,JavaScript,Auth Bypass,medium,"jwt.decode(token, options={'verify_signature': False})",True,Potential vulnerability detected.,Looks safe after review.,0.633,False,0.597,0.483,decrease,True,4,1,False
+1bd71f52-c39c-4ac5-80f5-687db789ff30,Python,Weak Crypto,easy,hashlib.md5(password).hexdigest(),True,Potential vulnerability detected.,Looks safe after review.,0.831,False,0.243,0.357,increase,True,2,1,True
