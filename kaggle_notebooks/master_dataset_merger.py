@@ -1,5 +1,6 @@
 import pandas as pd
 import os
+import csv
 import uuid
 
 # --- Configuration ---
@@ -7,7 +8,7 @@ DIR = 'kaggle_notebooks/'
 V1_FILE = f'{DIR}coding_safety_dataset.csv'
 V2_FILE = f'{DIR}coding_safety_dataset_500.csv'
 V3_FILE = f'{DIR}coding_safety_dataset_v3_cve_500.csv'
-MASTER_OUTPUT = f'{DIR}mcsb_master_v2.csv'
+MASTER_OUTPUT = f'{DIR}mcsb_master_v3.csv'
 
 def normalize_v1(df):
     """Normalize the Pilot dataset."""
@@ -27,7 +28,8 @@ def normalize_v3(df):
     """Normalize the Advanced CVE dataset."""
     # 1. Map ID and Answer
     df['task_id'] = df['id']
-    df['answer'] = df['is_vulnerable'].map({True: 'A', False: 'B'})
+    # Handle string-based booleans from robust loader
+    df['answer'] = df['is_vulnerable'].apply(lambda x: 'A' if str(x).lower() == 'true' else 'B')
     
     # 2. Select default injection strings if missing
     if 'inject2' not in df.columns:
@@ -45,30 +47,47 @@ def normalize_v3(df):
     
     df['tier'] = 'Tier 3: CVE Adversarial'
     
-    # 3. Strip result leaks!
-    leaks = ['conf1', 'conf2', 'expected_direction', 'belief_update_alignment']
+    # 3. Strip result leaks (but keep expected_direction — needed for alignment scoring)
+    leaks = ['conf1', 'conf2', 'belief_update_alignment']
     df = df.drop(columns=[c for c in leaks if c in df.columns])
     
     return df
 
+def robust_csv_load(path):
+    """Uses csv.DictReader to correctly handle quoting and multi-line fields."""
+    records = []
+    with open(path, 'r', encoding='utf-8', errors='ignore', newline='') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            records.append(row)
+    df = pd.DataFrame(records)
+    # Clean column names (strip whitespace/quotes)
+    df.columns = [c.strip().strip('"').strip("'") for c in df.columns]
+    print(f"   📂 {path}: {len(df)} records, columns: {list(df.columns)}")
+    return df
+
+
 def run_merge():
     print("🧹 Starting Master Dataset Merge...")
     
-    # Load
-    v1 = pd.read_csv(V1_FILE)
-    v2 = pd.read_csv(V2_FILE)
-    v3 = pd.read_csv(V3_FILE)
+    # Load with robustness
+    v1 = robust_csv_load(V1_FILE)
+    v2 = robust_csv_load(V2_FILE)
+    v3 = robust_csv_load(V3_FILE)
+    print(f"   📥 Loaded counts: V1={len(v1)}, V2={len(v2)}, V3={len(v3)}")
     
     # Normalize
     v1 = normalize_v1(v1)
     v2 = normalize_v2(v2)
     v3 = normalize_v3(v3)
+    print(f"   🏷️  Normalized counts: V1={len(v1)}, V2={len(v2)}, V3={len(v3)}")
     
     # Combine
     # Columns we want to keep (The "Spec" Columns)
     spec_cols = [
         'task_id', 'code', 'language', 'vulnerability_type', 'difficulty', 
-        'prompt1', 'inject2', 'answer', 'has_conflict', 'evidence_strength', 'tier'
+        'prompt1', 'inject2', 'answer', 'has_conflict', 'evidence_strength',
+        'tier', 'expected_direction'
     ]
     
     # Any extra columns from V3 that are valuable but not in spec
