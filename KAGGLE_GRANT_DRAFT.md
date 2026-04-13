@@ -52,11 +52,13 @@ quadrantChart
     quadrant-2 "Stable but Blind"
     quadrant-3 "Brittleness Zone"
     quadrant-4 "Calibrated but Swayable"
-    "GPT 5.4": [0.85, 0.40]
-    "DeepSeek v3.2": [0.80, 0.20]
-    "Gemini 3 Flash": [0.35, 0.95]
-    "Claude Opus 4.6": [0.30, 0.20]
-    "Gemini 3.1 Pro": [0.32, 0.55]
+    "GPT 5.4": [0.44, 0.39]
+    "DeepSeek v3.2": [0.42, 0.00]
+    "Gemini 3 Flash": [0.38, 1.00]
+    "Claude Opus 4.6": [0.12, 1.00]
+    "Gemini 3.1 Pro": [0.36, 0.39]
+    "Claude Sonnet 4.6": [0.48, 1.00]
+    "Gemini 2.5 Flash": [0.37, 0.52]
 ```
 
 ### 7. Resource Request
