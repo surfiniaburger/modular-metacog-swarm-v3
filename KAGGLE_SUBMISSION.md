@@ -107,8 +107,8 @@ This reveals a fundamental gap in current training and evaluation paradigms. Gen
 ---
 
 ## Organizational Affiliations
-Independent Research  
-(Optionally: Kaggle / Open Benchmark Initiative)
+In-Varia Research  
+Independent Research Unit (AI Systems & Epistemic Trust)
 
 ---
 
