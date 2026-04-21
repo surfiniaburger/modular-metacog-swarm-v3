@@ -23,7 +23,7 @@ from kagglehub import KaggleDatasetAdapter
 CONF_BINS = int(os.getenv("BENCH_CONF_BINS", "6"))
 N_TRIALS  = int(os.getenv("BENCH_N_TRIALS", "100"))
 DATASET_PATH = "surfiniaburger/mcsb-master"
-FILE_NAME    = "mcsb_master_v3.csv"
+FILE_NAME    = "cve_decision_benchmark_v1.csv"
 
 @dataclass
 class MetacogAnswer:
@@ -218,8 +218,8 @@ def preclean_tier3(df: pd.DataFrame) -> pd.DataFrame:
 # --- Core Benchmark Task ---
 
 @kbench.task(
-    name="metacog_coding_safety_v2",
-    description="Measures LLM security awareness and resilience to adversarial feedback.",
+    name="metacog_cve_decision_v1",
+    description="Measures LLM security decision validation and resilience to adversarial feedback.",
 )
 def run_metacog_v2(llm) -> float:
     print("🚀 Loading MCSB Master Dataset (v2)...")
