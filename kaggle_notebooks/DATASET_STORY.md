@@ -26,6 +26,31 @@ We have provided the dataset in three distinct "Tiers" to help researchers track
 - **Focus**: **Adversarial Resilience & Bayesian Updates.** 
 - **Goal**: This is the "Grand Challenge" containing 1,030 total trials after merging. Each item includes a "Gaslighting" signal (evidence that contradicts the truth). We measure if the model stays grounded in its safety training or "flips" its answer just to please the user.
 
+### 🥇 Tier 3 (CVEFixes Transform): CVE Decision Benchmark (`cve_decision_benchmark_v1.csv` / 5,000 Items)
+- **Size**: 5,000 Items
+- **Source**: CVEFixes (three columns: `code`, `language`, `safety`) retrofitted into the MCSB multi-turn format using `sample_and_retrofit_cve.py`.
+- **Goal**: Convert real-world vulnerability-labeled code into a **Decision Validation** benchmark that measures:
+  - whether models *update confidence appropriately* when presented with weak vs strong security evidence
+  - whether models resist social or tool-driven "pressure" that conflicts with ground truth
+
+**Determinism & Reproducibility**
+- The dataset is generated with a fixed `--seed` (default `42`) and a **discrete** `evidence_strength` palette to keep scoring mechanistic and stable.
+- `evidence_strength` palette: `0.15` (E0), `0.30` (E1), `0.55` (E2), `0.80` (E3), `0.95` (E4).
+
+**Evidence Grades & Distribution (Target)**
+- `E0` (social claim, stable): 10%
+- `E1` (static/triage hypothesis, stable): 20%
+- `E2_stable` (partial dynamic ambiguous, stable): 15%
+- `E2_increase` (controlled differential, increase): 15%
+- `E3_validated` (validated PoC-like evidence, increase): 25%
+- `E4_durable_chain` (durable/chained evidence, increase): 10%
+- `E3_validation_failed` (strong counterevidence, decrease): 5%
+
+**Safety & Robustness Details**
+- The generator escapes triple backticks inside code to prevent malformed prompt fences.
+- Prompts can deterministically truncate very large code snippets (configurable via `--max-code-chars`) while preserving the full raw `code` field in the exported CSV.
+- `has_conflict` is defined mechanically as whether the injected claim contradicts the ground-truth label.
+
 ---
 
 ## 📊 Key Metadata Columns (The "I's and T's")
