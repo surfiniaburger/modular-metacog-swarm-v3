@@ -308,7 +308,9 @@ def sample_and_retrofit(
     lang_counts: Counter = Counter()
     vulnerable_count = 0
     safe_count = 0
-    target_per_class = sample_size // 2
+    # Enforce (near) balance while still supporting odd n deterministically.
+    target_vulnerable = sample_size // 2
+    target_safe = sample_size - target_vulnerable
 
     # Use a buffered reader to handle NULs and large files.
     with open(input_path, "rb") as f:
@@ -321,7 +323,7 @@ def sample_and_retrofit(
                 row = next(reader)
             except StopIteration:
                 break
-            except Exception:
+            except csv.Error:
                 continue
 
             count += 1
@@ -344,9 +346,9 @@ def sample_and_retrofit(
                 continue
 
             # Class balancing
-            if safety == "vulnerable" and vulnerable_count >= target_per_class:
+            if safety == "vulnerable" and vulnerable_count >= target_vulnerable:
                 continue
-            if safety == "safe" and safe_count >= target_per_class:
+            if safety == "safe" and safe_count >= target_safe:
                 continue
 
             # Language diversity cap (avoid one language dominating).
@@ -383,10 +385,10 @@ def sample_and_retrofit(
 
     if not samples:
         raise RuntimeError("No samples produced. Check input CSV format and filters.")
-    if vulnerable_count < target_per_class or safe_count < target_per_class:
+    if vulnerable_count < target_vulnerable or safe_count < target_safe:
         raise RuntimeError(
-            f"Could not meet class-balance target. Needed {target_per_class} per class, "
-            f"got vulnerable={vulnerable_count}, safe={safe_count}. "
+            f"Could not meet class-balance target. Needed vulnerable={target_vulnerable} and "
+            f"safe={target_safe}, got vulnerable={vulnerable_count}, safe={safe_count}. "
             "This usually indicates strict filters or parser issues; try increasing --lang-cap "
             "or raising --max-code-chars, or inspect CVEFixes.csv integrity."
         )
