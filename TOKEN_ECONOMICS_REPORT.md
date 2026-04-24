@@ -15,15 +15,16 @@ This report presents a decision-theoretic analysis of Large Language Model (LLM)
 ## 1. Audit Registry: Pricing & Token Usage
 Data based on a full run of the **MCSB v2 Dataset (1,030 binary trials)**. Rates are audited as of April 2026.
 
-| Model | Input Tokens | Output Tokens | Total Cost (1,030 trials) | CVT ($ / correct trial) |
-| :--- | :--- | :--- | :--- | :--- |
-| **Claude Opus 4.7** | 1,251,184 | 129,166 | **$9.48** | $0.0144 |
-| **Claude Opus 4.6** | 877,240 | 73,422 | **$6.22** | $0.0094 |
-| **GPT-5.4 Standard**| 223,974 | 68,133 | **$1.58** | $0.0021 |
-| **Gemini 3.1 Pro** | 154,717 | 42,367 | **$0.82** | $0.0011 |
-| **GPT-5.4 Mini** | 214,132 | 53,635 | **$0.40** | $0.0006 |
-| **DeepSeek V3.2** | 207,925 | 40,402 | **$0.075** | **$0.00013** |
-| **Gemini 3 Flash** | 153,228 | 34,064 | **$0.18** | $0.00026 |
+| Model | Total Cost (1,030 trials) | CVT ($ / correct) | **CVT (milli-dollars)** |
+| :--- | :--- | :--- | :--- |
+| **Claude Opus 4.7** | **$9.48** | $0.0144 | **14.40 mCVT** |
+| **Claude Opus 4.6** | **$6.22** | $0.0094 | **9.40 mCVT** |
+| **GPT-5.4 Standard** | **$1.58** | $0.0021 | **2.10 mCVT** |
+| **Gemini 3.1 Pro** | **$0.82** | $0.0011 | **1.10 mCVT** |
+| **GPT-5.4 Mini** | **$0.40** | $0.0006 | **0.60 mCVT** |
+| **DeepSeek V3.1** | **$0.076** | $0.00013 | **0.13 mCVT** |
+| **DeepSeek V3.2** | **$0.075** | $0.00013 | **0.13 mCVT** |
+| **Gemini 3 Flash** | **$0.18** | $0.00026 | **0.26 mCVT** |
 
 *Audit Reference: `public/data/pricing_archive.json`*
 
@@ -44,7 +45,21 @@ LLMs with Chain-of-Thought (CoT) capabilities generate significantly more output
 
 ---
 
-## 3. The "Efficiency Frontier" Analysis
+## 3. Methodology & Heuristic Logic
+To decompose raw token usage into cognitive categories, the following decision-theoretic heuristics are applied:
+
+### The "Eight-Decile" Reasoning Baseline
+We assume a **Baseline reasoning-to-answer ratio of 0.8**. In the MCSB adversarial context, 80% of generated output is categorized as internal monologue (Chain-of-Thought), while 20% is allocated to the final adjudicated decision.
+
+### The Metacognitive Efficiency Factor ($\eta$)
+We define $\eta$ as a function of the model's **M-Ratio**: 
+$$\eta = \text{clamp}(0.2, \frac{\text{M-Ratio}}{2}, 1.0)$$
+- **High Sensitivity ($\eta \to 1.0$)**: Models with superior error-monitoring (high M-Ratio) exhibit "Efficient Reasoning," where the majority of the monologue is credited as productive cognitive work.
+- **Low Sensitivity ($\eta \to 0.2$)**: Models with weak error-monitoring are penalized for "Correction Waste"—the portion of the monologue that represents fruitless reasoning loops or uncalibrated corrections.
+
+---
+
+## 4. The "Efficiency Frontier" Analysis
 
 ### The 126x Disruption
 The data reveals a stark division in the LLM economy. **DeepSeek V3.2** and **Gemini 3 Flash** have pushed the cost of "Verified Truth" to near-zero ($0.07 - $0.18 for 1,000+ complex trials). In contrast, the **Claude Opus** family represents a "Luxury Frontier" where users pay a ~10,000% premium for elite reasoning capabilities.
