@@ -1,184 +1,67 @@
-### A.1 From Benchmark Metrics to Economic Evaluation
+# Metacognitive Token Economics: Verified Truth & The Efficiency Frontier
+*Appendix A: Economic Efficiency Analysis (MCSB v2 Framework)*
 
-MCSB v2 evaluates epistemic robustness and metacognitive performance under adversarial conditions. However, real-world deployment introduces an additional constraint: **token cost**.
+---
+
+### A.1 From Benchmark Metrics to Economic Evaluation
+MCSB v2 evaluates epistemic robustness and metacognitive performance under adversarial conditions. However, real-world deployment introduces an additional constraint: **token cost**. 
 
 In practical systems, models are evaluated not only by correctness but by the **cost required to obtain correct outputs**. To capture this, we extend the benchmark with cost-normalized metrics that relate behavioral performance to economic efficiency.
 
----
-
 ### A.2 Cost of Verified Truth (CVT)
+We define the primary economic metric as the expected monetary cost required to obtain one correct answer:
+$$CVT = \frac{(\text{Total Cost} / \text{Number of Trials})}{\text{Accuracy}}$$
 
-We define the primary economic metric as:
-
-**CVT = (Total Cost / Number of Trials) / Accuracy**
-
-where:
-
-* Total Cost is the aggregate token cost over all trials
-* Accuracy is the probability of a correct response under adversarial evaluation
-
-**Interpretation:**
-CVT represents the expected monetary cost required to obtain one correct answer.
-
----
+*Interpretation: CVT represents the monetary investment required per unit of verified truth.*
 
 ### A.3 Trust Score (MCSB v2)
+The Trust Score is the primary evaluation metric of MCSB v2. It aggregates performance across three tiers of increasing epistemic difficulty:
+- **Tier 1 (Pilot)**: Sanity checks and parsing validity ($w_1 = 0.2$)
+- **Tier 2 (Core)**: Standard reasoning and calibration tasks ($w_2 = 0.5$)
+- **Tier 3 (Adversarial)**: Robustness under misleading evidence ($w_3 = 0.3$)
 
-The Trust Score is the primary evaluation metric of MCSB v2. It aggregates performance across multiple tiers designed to capture increasing levels of epistemic difficulty.
+$$\text{Trust Score} = 0.2 \cdot T_1 + 0.5 \cdot T_2 + 0.3 \cdot T_3$$
 
-#### Tier Structure
-
-The benchmark consists of three tiers:
-
-* Tier 1 (Pilot): sanity checks and parsing validity
-* Tier 2 (Core): standard reasoning and calibration tasks
-* Tier 3 (Adversarial): robustness under misleading or contradictory evidence
-
-Each tier produces a **Tier Trust Contribution**, denoted T₁, T₂, T₃.
-
----
-
-#### Definition
-
-The overall Trust Score is defined as a weighted sum:
-
-Trust Score = w₁·T₁ + w₂·T₂ + w₃·T₃
-
-where:
-
-* w₁ = 0.2 (Pilot)
-* w₂ = 0.5 (Core)
-* w₃ = 0.3 (Adversarial)
-* w₁ + w₂ + w₃ = 1
+### A.4 Trust-Weighted Cost of Verified Truth ($CVT_{trust}$)
+This represents the expected cost to obtain a **reliably correct** answer, accounting for both correctness and adversarial robustness.
+$$CVT_{trust} = \frac{(\text{Total Cost} / \text{Number of Trials})}{\text{Trust Score}}$$
+*Rationale: $CVT_{trust}$ penalizes models that are accurate but brittle, favoring those that maintain consistent epistemic behavior under stress.*
 
 ---
 
-#### Tier Trust Contribution
+### A.5 Audit Registry: The Penny Standard
+Results are computed over a full run of the **MCSB v2 dataset (N = 1,030 trials)**. Pricing is predicated on April 2026 API rates.
 
-Each tier contribution Tᵢ ∈ [0,1] is computed as a composite function of:
-
-* Predictive performance (e.g., balanced accuracy)
-* Calibration quality (e.g., Brier score, ECE)
-* Metacognitive sensitivity (e.g., Type-2 AUC, M-Ratio)
-* Robustness signals (e.g., directional alignment, confidence shift behavior)
-
-This aggregation is normalized such that higher values correspond to more reliable and stable behavior within the tier.
-
----
-
-#### Example (Empirical)
-
-For a representative model:
-
-* T₁ = 0.9413
-* T₂ = 0.7725
-* T₃ = 0.5274
-
-The resulting Trust Score is:
-
-Trust Score = 0.2×0.9413 + 0.5×0.7725 + 0.3×0.5274 = 0.7327
+| Model | Total Cost ($) | Trust Score | CVT (cents ¢) | **$CVT_{trust}$ (cents ¢)** |
+| :--- | :--- | :--- | :--- | :--- |
+| **Claude Opus 4.7** | $9.48 | 0.6405 | 1.44 ¢ | **1.44 ¢** |
+| **Claude Opus 4.6** | $6.22 | 0.6482 | 0.94 ¢ | **0.94 ¢** |
+| **GPT-5.4 Standard** | $1.58 | 0.7327 | 0.21 ¢ | **0.21 ¢** |
+| **Gemini 3.1 Pro** | $0.82 | 0.7102 | 0.11 ¢ | **0.11 ¢** |
+| **GPT-5.4 Mini** | $0.40 | 0.6305 | 0.06 ¢ | **0.06 ¢** |
+| **DeepSeek V3.1** | $0.076 | 0.5673 | 0.013 ¢ | **0.013 ¢** |
+| **DeepSeek V3.2** | $0.075 | 0.5429 | 0.013 ¢ | **0.013 ¢** |
+| **Gemini 3 Flash** | $0.18 | 0.6721 | 0.026 ¢ | **0.026 ¢** |
 
 ---
 
-#### Interpretation
-
-* High T₂ with low T₃ → strong baseline reasoning, weak adversarial robustness
-* High T₃ → stable belief updating under adversarial evidence
-* The weighting scheme emphasizes Core performance while preserving sensitivity to adversarial failure modes
-
----
-
-### A.4 Trust-Weighted Cost of Verified Truth
-
-We define the primary economic metric as:
-
-CVT_trust = (Total Cost / Number of Trials) / Trust Score
-
-This represents the expected cost required to obtain a **reliably correct** answer, accounting for both correctness and adversarial robustness.
-
----
-
-#### Rationale
-
-Raw accuracy treats all correct predictions equally. The Trust Score instead prioritizes:
-
-* Stability under distribution shift
-* Alignment of confidence updates
-* Resistance to adversarial perturbation
-
-As a result, CVT_trust penalizes models that are accurate but unreliable, and favors models that maintain consistent epistemic behavior under stress.
-
----
-
-### A.5 Metacognitive Efficiency Factor
-
-We introduce a scalar efficiency factor, denoted η ∈ [0, 1], representing how effectively a model converts reasoning tokens into correct decisions.
-
-* High η → reasoning is informative and contributes to correctness
-* Low η → reasoning contains a higher fraction of unproductive or misdirected computation
-
-In this analysis, η is treated as a function of empirical metacognitive performance (e.g., M-Ratio), providing a linkage between behavioral metrics and cost efficiency.
-
----
-
-### A.6 Efficiency Variation Across Models
-
-We observe substantial variation in CVT across evaluated models, exceeding two orders of magnitude.
-
-Lower-cost models (e.g., DeepSeek V3.2, Gemini 3 Flash) achieve significantly lower CVT values compared to higher-cost frontier models. This indicates that models differ not only in capability, but in the cost required to reliably extract correct outputs.
-
----
+### A.6 Metacognitive Efficiency Factor ($\eta$)
+We introduce a scalar efficiency factor, $\eta \in [0, 1]$, representing how effectively a model converts reasoning tokens into correct decisions.
+- **High $\eta$**: Reasoning is informative and contributes to correctness.
+- **Low $\eta$**: Reasoning contains a higher fraction of unproductive/misdirected computation.
 
 ### A.7 Alignment–Efficiency Trade-off
-
-Comparisons across model versions suggest a trade-off between adversarial robustness and economic efficiency:
-
-Example: Opus 4.6 → Opus 4.7
-
-* Directional Alignment improves under adversarial conditions
-* Token usage increases
-* Metacognitive efficiency decreases
-
-This results in a higher cost of verified truth (CVT), despite improved robustness under adversarial conditions.
-
-**Implication:**
-In this instance, improvements in adversarial stability are associated with reduced internal efficiency, leading to increased cost per reliable decision.
-
----
+We observe a critical trade-off at the frontier (e.g., **Opus 4.7**). While adversarial robustness (T3) improves, token usage increases and $\eta$ decreases.
+*Implication: Improvements in adversarial stability often reduce internal efficiency, increasing the cost per reliable decision.*
 
 ### A.8 The Metacognitive Dividend
-
-We define the *Metacognitive Dividend* as the reduction in expected token cost resulting from effective error monitoring.
-
-A model realizes this dividend when it:
-
-1. Detects likely errors early
-2. Adjusts or terminates reasoning appropriately
-3. Avoids extended incorrect reasoning trajectories
-
-Higher metacognitive sensitivity increases the likelihood of such behavior, leading to lower expected cost.
+We define the *Metacognitive Dividend* as the reduction in expected token cost resulting from effective error monitoring (e.g., detecting errors early and terminating reasoning trajectories). High metacognitive sensitivity ($M-Ratio$) increases the likelihood of realizing this dividend.
 
 ---
 
 ### A.9 Implications for Deployment
-
-These results suggest that model selection should consider:
-
-* Accuracy under adversarial conditions
-* Calibration quality
-* Cost-normalized performance (CVT)
-* Efficiency of belief updating
-
-In high-volume settings, improvements in metacognitive efficiency can yield substantial cost reductions.
+Model selection should prioritize models that are both **epistemically robust** and **cost-efficient under uncertainty**. In high-volume settings, improvements in metacognitive efficiency can yield substantial cumulative cost reductions.
 
 ---
-
-### A.10 Summary
-
-The economic analysis complements the main benchmark findings:
-
-* Reliability is not solely determined by accuracy or calibration
-* Metacognitive performance influences cost efficiency
-* Adversarial robustness and economic efficiency are partially independent
-
-Effective deployment requires models that are both **epistemically robust** and **cost-efficient under uncertainty**.
+**License**: Apache 2.0
+**Contact**: ade@in-varia.com
