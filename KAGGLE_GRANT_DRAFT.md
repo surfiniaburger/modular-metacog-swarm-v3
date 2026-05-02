@@ -7,12 +7,12 @@
 
 ---
 
-### 1. The Core Problem: The "Trustworthiness Gap"
-Current LLM benchmarks (HumanEval, MBPP) measure **Type-1 Performance** (coding accuracy) but fail to measure **Type-2 Metacognition** (the model’s internal awareness of its own correctness). 
+### 1. The Core Problem: The Autonomous Defense Gap
+Threat actors are actively leveraging general-purpose AI to compress attack timelines, moving from vulnerability discovery to exploitation at a scale and velocity that challenges traditional security operations. To counter these automated threats, Google is pioneering autonomous defensive agents like **Big Sleep** and **CodeMender** to proactively identify and remediate zero-day flaws before they can be weaponized.
 
-In safety-critical coding environments, a model that is "highly accurate but overconfident in its errors" is more dangerous than a less accurate model that correctly flags its uncertainty. Most frontier models today suffer from **Metacognitive Flatness**, leading to "Confident Hallucinations" in security-sensitive code.
+However, deploying autonomous agents at machine speed introduces a critical risk: **Confident Hallucinations**. Current benchmarks (HumanEval, MBPP) measure Type-1 Performance (accuracy) but fail to measure **Type-2 Metacognition** (the agent's internal awareness of its own correctness). In a machine-speed threat landscape, an autonomous agent that is "highly accurate but overconfident in its errors" is infinitely more dangerous than a less accurate model that correctly triggers a human escalation. Most frontier models today suffer from **Metacognitive Flatness**, rendering them unsafe for unsupervised autonomous cyber defense.
 
-### 2. Preliminary Insight: The "Gemini Jump"
+### 2. Preliminary Insight: The "Gemini Jump" (Gemini 3.1 Pro)
 Our pilot research (N=30) uncovered a major scientific hook: **Metacognitive efficiency is domain-dependent.**
 - **Logic Domain (Monty Hall, etc.):** Gemini 2.5 Flash exhibited an **M-Ratio of 0.05** (High error rate + high confidence).
 - **Coding Domain (MCSL Pilot):** The same model jumped to an **M-Ratio of 0.43**.
@@ -36,7 +36,7 @@ MCSL directly aligns with the **DeepMind AGI Cognitive Framework**:
 - **Section 7.7 (Metacognition):** Direct measurement of Type-2 awareness.
 - **Section 7.8.5 (Conflict Resolution):** Evaluating belief-updating under adversarial pressure.
 
-### 6. Preliminary Results: The "Gemini 3 Paradox"
+### 6. Preliminary Results: The "Gemini 3.1 Pro Paradox"
 Recent 1,030-trial evaluations have exposed a profound discovery we call the **Metacognitive Chasm**:
 - **The Harmonious Sage**: **Gemini 3 Flash Preview** achieved a near-perfect **M-Ratio of 1.018** in standard coding tasks (Tier 2).
 - **The Total Collapse**: The moment adversarial pressure is applied (Tier 3), its metacognitive awareness collapses to **0.000**. Its internal monitor is "Adversarially Fragile."
@@ -66,7 +66,7 @@ quadrantChart
 - **Managed Deployment:** Kaggle infrastructure to host the leaderboard and the versioned **Metacognitive Coding Safety Dataset**.
 
 ### 8. Expected Impact
-We aim to establish the **MCSL Trustworthiness Score** as the industry-standard for AI pair-programmers. This score tells the user exactly *when* to trust the AI's "Confidence" and when to trigger a human audit, ultimately reducing the injection of vulnerabilities into global code repositories.
+We aim to establish the **MCSL Trustworthiness Score** as the mathematical gating mechanism for deploying AI agents in high-stakes environments. This score provides exactly what the machine-speed threat landscape requires: a certified threshold that dictates *when* an autonomous agent (like CodeMender or Big Sleep) can be trusted to act independently, and when it must escalate to human responders. By quantifying "Cost of Verified Truth (CVT)", we enable security teams to deploy AI defenses at scale without assuming catastrophic metacognitive risk.
 
 ---
 *Submitted for consideration in the Kaggle Research Grants program.*
