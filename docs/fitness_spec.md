@@ -27,6 +27,7 @@ Related reading:
 **Artifact set** (minimum):
 - `run_record.json`: immutable run configuration + hashes
 - `cassette.*`: recorded external effects (LLM I/O, agent turns, tool outputs)
+- `attempts.jsonl`: per-attempt log (accepted + rejected) with reasons (required for true B1)
 - `training_corpus.jsonl`: accepted samples (the product)
 - `metrics.json`: computed metrics used for acceptance gates (optional but recommended)
 
@@ -47,7 +48,7 @@ Make the pipeline **repeatable** so refactors are safe, failures are diagnosable
 ### Fitness tests
 **A1. Record → Replay Identity**
 - Run once in `record` mode, then run the same `run_id` in `replay` mode.
-- Output: `training_corpus.jsonl` is **byte-identical**.
+- Output: `training_corpus.jsonl` is **byte-identical under canonical serialization** (or equivalent under a declared normalization rule).
 
 **A2. Zero Provider Calls During Replay**
 - In `replay`, any attempt to call an LLM provider or remote agent without a cassette entry is a hard failure.
@@ -61,7 +62,7 @@ Make the pipeline **repeatable** so refactors are safe, failures are diagnosable
 - effective model identifiers for each module (judge/generator/debater/GEPA/verifier)
 - all generation parameters that affect outputs (temperature, top_p, max_tokens, response_format, etc.)
 - seed selection inputs (seed file hash, sampling method, RNG seeds)
-- code version identifiers (git commit / repo hash) and dependency locks when available
+- code version identifiers (git commit / repo hash) and dependency locks (e.g., `uv.lock` hash + Python version)
 
 ### Stop condition (“A is done”)
 A is done when:
@@ -83,9 +84,13 @@ Every accepted sample in `training_corpus.jsonl` must contain:
 - `verifier_report`: structured output from an independent verifier when applicable (or `"not_applicable"`)
 - `support_level`: `"supported" | "unsupported" | "inconclusive"`
 
+**Acceptance policy (Phase B default)**:
+- `training_corpus.jsonl` contains only *accepted* samples and, by default in Phase B, acceptance requires `support_level == "supported"`.
+- `attempts.jsonl` contains *all attempts* (accepted + rejected) and is the source of truth for attempt-based rates (e.g., B1).
+
 ### Fitness tests
 **B1. Unsupported Predicate Rate**
-- Measure: `unsupported_predicate_rate = unsupported / total_attempts`.
+- Measure: `unsupported_predicate_rate = unsupported_attempts / total_attempts` computed from `attempts.jsonl`.
 - Target: below a pre-set threshold on a held-out seed set (choose threshold upfront; e.g., <20%).
 
 **B2. Anchor Adequacy**
